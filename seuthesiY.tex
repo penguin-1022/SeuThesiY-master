@@ -1,0 +1,40 @@
+\documentclass[algorithmlist, figurelist,tablelist, nomlist, engineering, AutoFakeBold]{config/seuthesiY}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+
+%===============================================================================
+% 采用的编译方式为  XELATEX -→  BIBER -→    XELATEX -→    XELATEX
+% 为了加快字体的缓存效率 需要在命令行运行 fc-cache
+% 对于学位论文需要标注【硕博】
+%===============================================================================
+
+% %biblatex宏包的参考文献数据源加载方式
+\addbibresource[location=local]{config/seuthesiY.bib}
+
+\begin{document}
+\input{chapter/abstract.tex}
+
+\mainmatter
+
+\input{chapter/Intro.tex}
+
+\input{chapter/background.tex}
+
+\input{chapter/Dataset.tex}
+
+\input{chapter/experiment.tex}
+
+\input{chapter/system.tex}
+
+\input{chapter/expectation.tex}
+
+\backmatter
+%打印参考文献表
+\thesisbib
+
+\appendix
+
+\end{document}

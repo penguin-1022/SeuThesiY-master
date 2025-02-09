@@ -1,0 +1,132 @@
+{
+    "latex-workshop.latex.tools": [
+        // {
+        //     "name": "latexmk",
+        //     "command": "latexmk",
+        //     "args": [
+        //         "-pdfxe",
+        //         "--shell-escape",
+        //         "-pvc",
+        //         "-cd",
+        //         "-time",
+        //         "%DOCFILE%"
+        //     ]
+        // },
+        {
+            "name": "xelatex",
+            "command": "xelatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "%DOCFILE%"
+            ]
+        },
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOCFILE%"
+            ]
+        },
+        {
+            "name": "makeindex",
+            "command": "makeindex",
+            "args": [
+                "%DOCFILE%.nlo",
+                "-s",
+                "nomencl.ist",
+                "-o",
+                "%DOCFILE%.nls"
+            ]
+        },
+        {
+            "name": "biber",
+            "command": "biber",
+            "args": [
+                "%DOCFILE%"
+            ]
+        }
+    ],
+
+    "latex-workshop.latex.recipes": [
+        // {
+        //     "name": "latexmk",
+        //     "tools": [
+        //         "latexmk"
+        //     ]
+        // },
+        {
+            "name": "xelatex",
+            "tools": [
+                "xelatex"
+            ]
+        },
+        {
+            "name": "xe->mkind->bib->xe*2",
+            "tools": [
+                "xelatex",
+                "makeindex",
+                "biber",
+                "xelatex",
+                "xelatex"
+            ]
+        },
+        {
+            "name": "pdf->mkind->bib->pdf*2",
+            "tools": [
+                "pdflatex",
+                "makeindex",
+                "biber",
+                "pdflatex",
+                "pdflatex"
+            ]
+        },
+        {
+            "name": "xe->bib->xe->xe",
+            "tools": [
+                "xelatex",
+                "biber",
+                "xelatex",
+                "xelatex"
+            ]
+        },
+        {
+            "name": "pdflatex",
+            "tools": [
+                "pdflatex"
+            ]
+        },
+        {
+            "name": "pdf->bib->pdf->pdf",
+            "tools": [
+                "pdflatex",
+                "biber",
+                "pdflatex",
+                "pdflatex"
+            ]
+        }
+    ],
+    "latex-workshop.view.pdf.viewer": "external",
+    "latex-workshop.view.pdf.external.viewer.command": "F:/Program Files/SumatraPDF/SumatraPDF.exe", // 注意修改路径
+    "latex-workshop.view.pdf.external.viewer.args": [
+        "%PDF%"
+    ],
+    "latex-workshop.view.pdf.external.synctex.command": "F:/Program Files/SumatraPDF/SumatraPDF.exe", // 注意修改路径
+    "latex-workshop.view.pdf.external.synctex.args": [
+        "-forward-search",
+        "%TEX%",
+        "%LINE%",
+        "-reuse-instance",
+        "-inverse-search",
+        "code \"C:\\Program Files\\Microsoft VS Code\\resources\\app\\out\\cli.js\" -r -g \"%f:%l\"", // 注意修改路径
+        "%PDF%",
+    ],
+    "latex-workshop.latex.recipe.default": "lastUsed",
+    "files.autoGuessEncoding": true,
+    "workbench.colorTheme": "Tomorrow Night Blue",
+}
