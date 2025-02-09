@@ -1,3 +1,5 @@
+# Jensen Jia 毕业论文专用目录，用于跨设备协作进度
+
 <img src="./figures/seu-color-logo.png" align="right" width="150"/>
 
 ## SeuThesiY
