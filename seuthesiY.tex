@@ -4,6 +4,19 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{multirow}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{enumitem}
+
+\lstset{
+    basicstyle=\ttfamily,        % 代码字体
+    keywordstyle=\bfseries,      % 关键词加粗
+    columns=fullflexible,        % 适应文本宽度
+    frame=single,                % 加框
+    breaklines=true,             % 自动换行
+    postbreak=\hbox{$\hookrightarrow$}, % 换行符
+    xleftmargin=10pt,            % 左边距
+}
 
 %===============================================================================
 % 采用的编译方式为  XELATEX -→  BIBER -→    XELATEX -→    XELATEX
