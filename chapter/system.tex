@@ -1,8 +1,180 @@
 \chapter{问答系统的构建}
-\section{回答集编程}
-\subsection{语法}
-项（terms）是ASP程序中最基本的元素，原子
-\subsection{语义}
-\subsection{求解器}
-\section{GLIP}
-\section{大语言模型}
+\section{需求分析}
+本系统旨在基于本文提出的神经符号框架，构建一个视觉问答系统，既能利用深度学习技术对图像进行特征提取，用LLM对自然语言进行语义解析，又能通过ASP
+求解器实现推理，同时为用户提供友好、直观的前端交互界面。
+
+\subsection{功能需求}
+核心功能上，需要实现以下几个功能：（1）用户输入与对话处理。系统需要能够支持文本输入、图像输入，未来远期可以考虑加入语音输入。此外，提供自动补全、拼写检查等输入辅助功能，
+以改善用户的输入体验。（2）实时对话回复。系统能够通过Dspy的SDK，发起对本地LLM的调用，而LLM能够实时处理用户的问题，返回高质量的回答。另外，要能够支持多轮对话，
+能够保持上下文关联，具有记忆功能。（3）对话历史记录。系统需要能够自动保存用户每次的对话记录，以供用户查看。（4）帐户与认证。系统需要支持用户注册、登录
+、账号设置等功能。（5）数据统计与反馈。系统需要收集交互数据（如访问量、对话时长、常见问题等），供后续模型优化使用。另外，要提供用户反馈入口，支持用户评价回复质量。
+
+辅助功能方面，主要围绕以下几点：（1）响应式设计。前端能够自适应桌面、平板和手机等不同设备。（2）辅助说明。提供FAQ、帮助文档
+和使用指南，方便用户进行查阅。（3）安全与异常处理。能够对恶意输入、不符合规范的输入进行拦截和提示。
+\subsection{非功能需求}
+非功能需求主要聚焦于以下几个方面：（1）性能需求。系统需要能够在较短时间内完成对用户问题的回答，如果确实因为某些原因导致无法及时回答，需要能够给出合理的提示，
+例如“正在思考...”等。另外，各个微服务应支持高并发访问，保证系统能够承受一定规模的大流量访问。（2）可拓展性。对系统要按照主要功能来进行拆分，形成若干个微服务，
+并且各个微服务之间要能够相互独立，实现松耦合。当系统需要进行拓展时，只需要增加新的微服务，而不需要对原有的微服务进行修改。（3）可维护性。代码和文档需要保持清晰，
+易于理解和修改，特别是对于接口文档，要使用Swagger等工具进行规范化管理，以便于后续的维护和拓展。另外，要提供清晰的日志记录、监控报警机制，使用一些监控
+工具，如Prometheus、Grafana等，对系统的运行状态进行监控，及时发现问题并解决。（4）安全性。用户的数据传输和存储需要进行加密，对于用户的隐私数据，例如
+手机号、密码等，需要进行脱敏处理，以保证用户的隐私安全。此外，对登录、注册等操作，需要进行身份验证和权限控制，防止恶意攻击。（5）可用性和用户体验。
+在整体外观上，系统需要提供简洁友好的用户图形界面，降低使用门槛。
+
+\section{架构设计}
+\subsection{总体架构}
+对本系统的总体架构设计如图\ref{fig:overall_architecture}所示。
+
+后端部分采用微服务架构设计，包括视觉场景理解服务、语义解析服务、符号推理服务、迭代反馈服务、答案生成服务、
+用户交互服务、日志与监控服务、数据存储服务等。各微服务之间通过API网关进行通信，API网关负责请求的路由、负载均衡、安全认证、限流等功能。
+
+具体到各个
+微服务的主要职能如下：（1）视觉场景理解服务负责对用户上传的图片进行目标检测，并使用预定义的谓词，使用ASP程序来表示场景中的物体的相关信息；（2）
+语义解析服务负责将用户的自然语言问题转化为ASP规则，以便于后续的推理；（3）符号推理服务负责对ASP规则进行推理，得到问题的答案；（4）迭代反馈服务
+负责对ASP规则进行修正；（5）答案生成服务负责将符号推理服务输出的以ASP谓词表示的答案转化成自然语言；（6）用户交互服务负责提供用户接口，
+接收用户的输入，调用其他服务，返回结果；（7）日志与监控服务负责记录系统的运行日志，监控系统的运行状态，及时发现问题并解决；（8）数据存储服务负责
+存储系统的数据，包括用户的信息、对话记录、ASP规则等。
+
+前端部分，对UI界面的开发，选择Element UI框架，其具有丰富多样的按钮、输入框等搭建网页所需的元素，开发快捷方便。同时，使用Axios
+向后端发送请求，实现前后端的数据交互。使用Vue构建组件化的前端页面，方便代码的维护和拓展。Vue Router用于实现前端路由，实现页面的跳转。Vuex用于实现状态管理，方便组件之间的数据传递。
+
+在中间件上，系统引入了Sentinel进行流量控制，对系统的流量进行监控，实现限流、熔断等功能。RocketMQ用于实现消息队列，实现微服务之间的异步通信。
+Redisson用于实现分布式锁，保证系统的并发安全。
+\begin{figure}[htbp]
+    \centering
+    \includegraphics{figures/system_architecture-crop.pdf}
+    \caption{系统总体架构}
+    \label{fig:overall_architecture}
+\end{figure}
+\subsection{接口设计}
+接口设计总体按照服务划分，每个服务提供一个接口供其它服务调用。接口之间的数据传输采用JSON格式，采用RESTful API设计风格。
+具体的接口设计方案见表\ref{}。
+\
+
+\subsection{安全设计}
+安全设计主要聚焦数据存储加密、用户认证。
+
+\subsection{数据库设计}
+设置User、Rule、Log、Dialog以上四个数据库。下面，对这四个数据库的职责及内设表进行介绍。
+
+User数据库主要用于存储用户、角色、权限、会话信息等。内部包含如下表：（1）用户表users，用于存储用户信息 ；
+（2）用户组表roles，用于存储用户组信息；（3）用户组关系表user\_roles用于存储用户与用户组之间关系；（4）用户状态表user\_session，用于存储会话或者登录状态记录。
+
+Rule数据库专门用于存储ASP规则及其相关信息。内部包含rules表和rule\_conditions表。rules表为主规则表，rule\_conditions表为规则条件表。具体表字段见
+表\ref{tab:rule}。
+\begin{table}[htbp]
+    \centering
+    \renewcommand{\arraystretch}{1.3} % 调整行间距
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{字段名称} & \textbf{数据类型} & \textbf{说明} \\ 
+        \hline
+        rule\_id & INT AUTO\_INCREMENT PRIMARY KEY & 规则唯一标识 \\ 
+        \hline
+        rule\_name & VARCHAR(255) & 规则名称 \\ 
+        \hline
+        rule\_head & VARCHAR(255) & 规则若论部分 \\ 
+        \hline
+        priority & INT & 优先级 \\ 
+        \hline
+        status & ENUM('active', 'inactive') & 状态标识 \\ 
+        \hline
+        description & TEXT & 描述或备注 \\ 
+        \hline
+        created\_at & DATETIME DEFAULT CURRENT\_TIMESTAMP & 创建时间 \\ 
+        \hline
+        updated\_at & DATETIME DEFAULT CURRENT\_TIMESTAMP ON UPDATE CURRENT\_TIMESTAMP & 更新时间 \\ 
+        \hline
+    \end{tabular}
+    }
+    \caption{rule表字段设置及说明}
+    \label{tab:rule}
+\end{table}
+\begin{table}[htbp]
+    \centering
+    \renewcommand{\arraystretch}{1.3} % 调整行间距
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{字段名称} & \textbf{数据类型} & \textbf{说明} \\ 
+        \hline
+        condition\_id & INT AUTO\_INCREMENT PRIMARY KEY & 条件唯一标识 \\ 
+        \hline
+        rule\_id & INT & 外键，关联到主规则表 \\ 
+        \hline
+        condition\_text & VARCHAR(255) & 单个条件表达式，例如"X > 10" \\ 
+        \hline
+        sequence & INT & 条件顺序号，用于保持条件排列 \\ 
+        \hline
+        created\_at & DATETIME DEFAULT CURRENT\_TIMESTAMP & 创建时间 \\ 
+        \hline
+        updated\_at & DATETIME DEFAULT CURRENT\_TIMESTAMP ON UPDATE CURRENT\_TIMESTAMP & 更新时间 \\ 
+        \hline
+    \end{tabular}
+    }
+    \caption{rule\_condition表字段设置及说明}
+    \label{tab:rule_conditions}
+\end{table}
+
+Log数据库存储系统运行日志、错误日志、操作记录等信息。其内部包含如下表：（1）系统日志表system\_logs，用于记录系统一般日志；（2）错误日志表error\_logs，用于记录错误信息；
+（3）审计日志表audit\_logs，用于记录关键操作审计日志。
+
+Dialog数据库存储所有用户与系统的对话记录。其内部包含如下表：（1）对话主表dialogs，用于记录每个对话的基本信息；（2）对话消息表dialog\_messages，用于
+存储对话中用户发出的消息与LLM给出的每条回复。
+
+\section{功能展示}
+开发的前端页面如图\ref{fig:welcome-page}所示，采用了模仿ChatGPT的网页样式。
+用户可在其中自行选择模型，包括本文中微调后的模型、OpenAI的GPT系列模型、Google的Gemini系列模型、Meta的Llama系列模型
+以及阿里巴巴的QWen系列模型，默认选用本文的微调后模型。用户可以在下方的菜单栏中，点击第二个按钮，以上传图片。同时，历史对话也会在左侧栏中予以显示。在
+输入框旁，也添加了语音输入按钮，点击后系统将会调用百度的语音识别API，为用户提供语音输入服务。
+
+上传图片并提出问题、系统给予答复后的效果如图\ref{fig:question}所示。用户发送的文本和图片将会在同一个消息框内显示。用户要求系统重新生成回复，或者引用系统的某条回复，以让系统能够更加贴合用户的语境。
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/frontend-welcome-page.png}
+    \caption{新对话页面}
+    \label{fig:welcome-page}
+\end{figure}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/question.png}
+    \caption{上传图片并提问后的效果}
+    \label{fig:question}
+\end{figure}
+
+
+\section{集成测试}
+\subsection{测试环境}
+系统的部署运行环境的硬件配置如下：（1）CPU为Intel Core i9-13900K；（2）内存为128GB；（3）显卡为3张NVIDIA GeForce RTX 3090并联，显存均为24GB；（4）操作系统为Ubuntu 20.04 LTS；
+开发工具为IntelliJ IDEA、IntelliJ Pycharm和Microsoft Visual Studio Code。
+\subsection{功能测试}
+
+\subsection{非功能测试}
+非功能性需求中，需要通过测试以量化评估的主要为性能需求。因此，本文通过压力测试，对系统的性能进行评估。
+本文使用JMeter工具进行压力测试。JMeter是一种开源的压力测试工具，它可以用于对Web应用程序、FTP服务器、数据库等进行性能测试。JMeter可以模拟多个用户同时访问服务器，以此来测试服务器的性能。
+此外，使用SkyWalking对整个应用进行性能监控。图\ref{fig:SkyWalking}为SkyWalking对本系统中语义解析服务的监控面板，在其中可以直观监测服务的平均响应时间、成功率、每分钟调用数等信息。
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/SkyWalking.png}
+    \caption{上传图片并提问后的效果}
+    \label{fig:SkyWalking}
+\end{figure}
+
+本文使用第三章中构造的数据集作为测试数据，测试的接口为用户交互接口。在开发各个接口时，已经在各个接口上设置了监控埋点。在SkyWalking中，能够看到各个接口的
+调用次数，以及接口的响应时间等信息。即便是只对某一个接口发起模拟请求，进行压力测试，也可以通过SkyWalking来查看其它所有相关接口的相关参数。
+用户交互接口处于整个调用链路的起点，对其进行压测，能够观测到整个VQA系统在执行一次任务时，所有相关接口的情况，故对其进行压测。
+
+首先，确定压测目标。本系统作为一个原型系统，拟定的用户群体规模上限在20人左右，则可以假设并发用户数目标为15人。通过对ChatGPT、DeepSeek、豆包等现有的
+聊天机器人的使用的观察，发现目前普遍限制同一用户在同一时刻只能进行一个对话，若在原有对话仍在生成答案的同时，切换到新对话，将会导致原有对话的生成中断。
+所以，本原型系统在压测目标上，设置每个用户的线程数都为1。
+对以上各个接口，压测时长设置为30分钟。各用户线程加载，选用阶梯式加载的方式，随着时间推移，逐步增加并发用户数，以便观察系统在压力逐步增大时的性能变化。
+
+其次，执行压测。在压测过程中，实时监控接口的性能指标，包括响应时间、吞吐量和错误率，同时监控系统的CPU使用率、内存使用率。
+
+最终测试结果见表\ref{}。在15个并发用户下，系统响应整体较快，能满足大多数用户对视觉问答的需要。TPS表现整体稳定，错误率也比较低。总体而言，
+压测结果表明，该系统能够满足其作为原型系统的要求，符合设计预期。
+\begin{table}
+
+\end{table}
+\section{本章小结}

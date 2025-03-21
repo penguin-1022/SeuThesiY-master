@@ -16,15 +16,39 @@
 \committeechair{翟玉庆}
 \reviewer{倪庆剑}{张祥}
 \department{东南大学计算机科学与工程学院}{School of Computer Science and Engineering}
-% \seuthesisthanks{本课题的研究获郭靖-黄蓉降龙基金、杨过-小龙女黯然销魂基金以及郭襄的倚天基金资助}
 \makebigcover
 \makecover
-\begin{abstract}{多模态，回答集编程，视觉问答}
-    灵犀一指是一种非常厉害的武功。
+\begin{abstract}{多模态，回答集编程，视觉问答，空间推理}
+    目前，视觉语言模型已在视觉问答、图片描述生成等方面表现出不错的效果，但它们通常在空间推理方面表现不佳，特别是在不完全可见场景下，对空间关系的理解、推理能力较差。
+    回答集编程（Answer Set Programming, ASP）是一种形式化的知识表示和推理方法，已有一些研究表明其在理解空间关系和进行空间推理方面，具有较强的能力。
+    视觉问答的神经符号系统使用深度学习技术进行感知，生成输入图像和问题的逻辑符号表示，然后使用ASP进行推理，并做出相应回答。相比单独的视觉语言模型，视觉问答的神经符号
+    系统在空间推理方面更加出色。然而，现有的考察模型的空间推理能力的视觉问答数据集，存在问题设计较为简单、对象类型和属性单一、问题的语言表达缺乏多样性等问题。
+    此外，现有的神经符号系统泛化能力较差，编写、维护提示词的过程过于复杂，开发难度相对较高，且对新场景下的问题需要人为设计额外规则，
+    可拓展性较差。为了解决这些问题，本文构建了一个视觉问答数据集，并提出了一种神经符号框架。本文的主要工作如下：
+\begin{enumerate}[itemsep=0pt]
+    \item 构造了一个视觉问答数据集，该数据集基于CLEVR数据集构建，从推理所需步数、对象类型和属性、问题的语言表达的多样性和模糊性等方面着手，
+    增加了数据集的难度，可以更好地考察模型在解决复杂空间推理任务方面的能力。
+    \item 设计了一种神经符号框架，实现ASP求解器与大语言模型的系统集成。该框架基于DSPy开发，融合了DSPy自动化提示生成和优化过程的显著优势，架构上包含反馈循环、提示和基于ASP的验证等模块，
+增强了视觉问答系统在解决空间推理问题方面的能力。
+    \item 基于本文所设计的神经符号框架，设计并实现了一个视觉问答领域的神经符号系统。
+\end{enumerate}
+
+通过上述工作，本文提出的神经符号框架在提升大语言模型的空间推理能力方面，
+尤其是在处理复杂和不完全可见场景的问题时，展现出良好的性能和适应性。
+    
 \end{abstract}
 
-\begin{englishabstract}{kung fu, theory, fundamental kung fu, powerful fingers}
-    powerful fingers is a kind of powerful kung fu.
+\begin{englishabstract}{Multi-modal, Answer Set Programming, Visual Question Answering, Spatial Reasoning}
+    Currently, large language models (LLMs) have demonstrated exceptional capabilities across various tasks. However, they often perform poorly in spatial reasoning, particularly when dealing with partially visible scenes. Answer Set Programming (ASP) is a formal method for knowledge representation and reasoning that has been shown to significantly enhance the spatial reasoning abilities of LLMs.
+Neural-symbolic methods utilize deep learning techniques to perceive and generate logical symbolic representations of input images and questions, subsequently employing ASP for reasoning. This approach has proven effective in improving the spatial reasoning capabilities of LLMs. However, existing neural-symbolic methods often suffer from limited generalization, complex prompt engineering and maintenance processes, and relatively high development difficulty. Additionally, they require manual design of extra rules for new scenarios, resulting in poor scalability.
+To address these issues, this paper proposes a novel neural-symbolic framework. The main contributions are as follows:
+\begin{enumerate}[itemsep=0pt]
+    \item Construction of a Visual Question Answering (VQA) Dataset: Based on the CLEVR dataset, we expanded the complexity by introducing image occlusion, partial visibility, object interactions, noise interference, and more intricate reasoning tasks. This enhanced dataset aims to assess the model's performance in complex spatial reasoning tasks.
+    \item Design of a Neural-Symbolic Framework: We developed a system integrating an ASP solver with a large language model. Built upon DSPy, the framework leverages DSPy's advantages in automated prompt generation and optimization. The architecture includes feedback loops, prompts, and ASP-based validation modules, thereby enhancing the VQA system's ability to address spatial reasoning problems.
+    \item Implementation of a VQA System: Utilizing the proposed neural-symbolic framework, we designed and implemented a VQA system.
+\end{enumerate}
+
+Through these efforts, the proposed neural-symbolic framework demonstrates strong performance and adaptability in enhancing the spatial reasoning capabilities of LLMs, especially when handling complex and partially visible scenes.
 \end{englishabstract}
 
 \setnomname{术语与符号约定}

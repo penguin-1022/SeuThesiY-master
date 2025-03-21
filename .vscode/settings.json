@@ -61,6 +61,15 @@
         //     ]
         // },
         {
+            "name": "xe->bib->xe->xe",
+            "tools": [
+                "xelatex",
+                "biber",
+                "xelatex",
+                "xelatex"
+            ]
+        },
+        {
             "name": "xelatex",
             "tools": [
                 "xelatex"
@@ -84,15 +93,6 @@
                 "biber",
                 "pdflatex",
                 "pdflatex"
-            ]
-        },
-        {
-            "name": "xe->bib->xe->xe",
-            "tools": [
-                "xelatex",
-                "biber",
-                "xelatex",
-                "xelatex"
             ]
         },
         {
@@ -128,5 +128,5 @@
     ],
     "latex-workshop.latex.recipe.default": "lastUsed",
     "files.autoGuessEncoding": true,
-    "workbench.colorTheme": "Tomorrow Night Blue",
+    "workbench.colorTheme": "GitHub Dark Dimmed",
 }
