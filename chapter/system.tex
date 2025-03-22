@@ -47,7 +47,21 @@ Redisson用于实现分布式锁，保证系统的并发安全。
 \end{figure}
 \subsection{接口设计}
 接口设计总体按照服务划分，每个服务提供一个接口供其它服务调用。接口之间的数据传输采用JSON格式，采用RESTful API设计风格。
-具体的接口设计方案见表\ref{}。
+具体的接口设计方案见表\ref{tab:api_list}。
+\begin{table}
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{|l|l|l|l|}
+        \hline
+        \textbf{方法} & \textbf{URL} & \textbf{请求参数名及其类型与作用} & \textbf{备注} \\
+        \hline
+        POST & /api/object\_detection & image（图片，通过文件上传提供）、text\_prompt（文本提示，用于指导模型检测与文本相关对象） & 视觉场景理解服务接口 \\
+        \hline
+    \end{tabular}
+    }
+    \label{tab:api_list}
+    \caption{主要接口列表}
+\end{table}
 
 \subsection{安全设计}
 安全设计主要聚焦数据存储加密和传输安全，以确保系统的安全性和数据的机密性，防止数据泄露和未授权访问。
@@ -167,19 +181,16 @@ Redis作为分布式缓存的理由，是因为其支持丰富的数据结构、
 \end{figure}
 
 \section{集成测试}
-\subsection{测试环境}
 系统的部署运行环境的硬件配置如下：（1）CPU为Intel Core i9-13900K；（2）内存为128GB；（3）显卡为3张NVIDIA GeForce RTX 3090并联，显存均为24GB；（4）操作系统为Ubuntu 20.04 LTS；
 开发工具为IntelliJ IDEA、IntelliJ Pycharm和Microsoft Visual Studio Code。
-\subsection{功能测试}
 
-\subsection{非功能测试}
-非功能性需求中，需要通过测试以量化评估的主要为性能需求。因此，本文通过压力测试，对系统的性能进行评估。
+前述需求中，需要通过测试以量化评估的主要为性能需求。因此，本文通过压力测试，对系统的性能进行评估。
 本文使用JMeter工具进行压力测试。JMeter是一种开源的压力测试工具，它可以用于对Web应用程序、FTP服务器、数据库等进行性能测试。JMeter可以模拟多个用户同时访问服务器，以此来测试服务器的性能。
 此外，使用SkyWalking对整个应用进行性能监控。图\ref{fig:SkyWalking}为SkyWalking对本系统中语义解析服务的监控面板，在其中可以直观监测服务的平均响应时间、成功率、每分钟调用数等信息。
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth]{figures/SkyWalking.png}
-    \caption{上传图片并提问后的效果}
+    \caption{链路监控面板}
     \label{fig:SkyWalking}
 \end{figure}
 
@@ -203,17 +214,17 @@ Redis作为分布式缓存的理由，是因为其支持丰富的数据结构、
         \hline
         \textbf{参数} & \textbf{指标} & \textbf{参数} & \textbf{指标} \\
         \hline
-        平均响应时间 & 320ms & 90\%响应时间 & 300ms \\
-        \hline
-        \textbf{参数} & \textbf{指标} & \textbf{参数} & \textbf{指标} \\
+        平均响应时间 & 5.1s & 90\%响应时间 & 300ms \\
         \hline
         TPS & 12 & 错误率 & 0.5\% \\
-        \hline
-        \textbf{参数} & \textbf{指标} & \textbf{参数} & \textbf{指标} \\
         \hline
         CPU使用率 & 60\% & 内存使用率 & 55\% \\
         \hline
     \end{tabular}
     \label{tab:test_result}
+    \caption{压力测试结果}
 \end{table}
 \section{本章小结}
+本章设计并实现了以面向空间推理领域的神经符号系统框架为核心的VQA系统，首先从功能需求和非功能需求的角度展开，明确了实现VQA系统所需的工作重点。
+然后介绍了系统的整体架构，并对系统的数据库、安全方面做了具体介绍。最后，对系统的主要功能进行了展示，并对系统进行压力测试，证明了系统
+的实际应用效果以及对可用性。
