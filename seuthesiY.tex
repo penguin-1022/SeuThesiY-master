@@ -9,6 +9,7 @@
 \usepackage{enumitem}
 \usepackage{array}
 \usepackage{graphicx}
+\usepackage{makecell}
 
 \lstset{
     basicstyle=\ttfamily,        % 代码字体
@@ -50,7 +51,10 @@
 
 %打印参考文献表
 \thesisbib
-
+%附录
 \appendix
+\input{chapter/appendix.tex}
+%致谢
+\input{chapter/acknowledgement.tex}
 
 \end{document}

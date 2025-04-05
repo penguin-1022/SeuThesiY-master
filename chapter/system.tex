@@ -39,7 +39,7 @@
 
 在中间件上，系统引入了Sentinel进行流量控制，对系统的流量进行监控，实现限流、熔断等功能。RocketMQ用于实现消息队列，实现微服务之间的异步通信。
 Redisson用于实现分布式锁，保证系统的并发安全。
-\begin{figure}[htbp]
+\begin{figure}[!h]
     \centering
     \includegraphics{figures/system_architecture-crop.pdf}
     \caption{系统总体架构}
@@ -81,7 +81,7 @@ User数据库主要用于存储用户、角色、权限、会话信息等。内�
 
 Rule数据库专门用于存储ASP规则及其相关信息。内部包含rules表和rule\_conditions表。rules表为主规则表，rule\_conditions表为规则条件表。具体表字段见
 表\ref{tab:rule}。
-\begin{table}[htbp]
+\begin{table}[htb]
     \centering
     \renewcommand{\arraystretch}{1.3} % 调整行间距
     \resizebox{\textwidth}{!}{
@@ -110,7 +110,7 @@ Rule数据库专门用于存储ASP规则及其相关信息。内部包含rules�
     \caption{rule表字段设置及说明}
     \label{tab:rule}
 \end{table}
-\begin{table}[htbp]
+\begin{table}[htb]
     \centering
     \renewcommand{\arraystretch}{1.3} % 调整行间距
     \resizebox{\textwidth}{!}{
@@ -214,11 +214,11 @@ Redis作为分布式缓存的理由，是因为其支持丰富的数据结构、
         \hline
         \textbf{参数} & \textbf{指标} & \textbf{参数} & \textbf{指标} \\
         \hline
-        平均响应时间 & 5.1s & 90\%响应时间 & 300ms \\
+        平均响应时间 & 5.1s & 90\%响应时间 & 4.9s \\
         \hline
         TPS & 12 & 错误率 & 0.5\% \\
         \hline
-        CPU使用率 & 60\% & 内存使用率 & 55\% \\
+        CPU使用率 & 60.9\% & 内存使用率 & 56.8\% \\
         \hline
     \end{tabular}
     \label{tab:test_result}

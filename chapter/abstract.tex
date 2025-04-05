@@ -3,7 +3,7 @@
 \UDC{000}            %《国际十进分类法UDC》的类号
 \secretlevel{公开}    %学位论文密级分为"公开"、"内部"、"秘密"和"机密"四种
 \studentid{222171}   %学号要完整，前面的零不能省略。
-\title{基于回答集编程的}{基于回答集编程}{视觉问答技术研究与实现}{视觉问答技术研究与实现}{Research and implementation of visual question answering technology }{based on answer set programming}
+\title{面向空间推理领域的}{面向空间推理领域的}{神经符号框架的设计与实现}{神经符号框架的设计与实现}{Research and implementation of visual question answering technology }{based on answer set programming}
 \author{贾梁}{Jia Liang}
 \advisor{张志政}{副教授}{Zhang Zhizheng}{Associate Prof.}
 % \coadvisor{张志政}{副教授}{Zhang Zhizheng}{Associate Prof.} % 没有% 可以不填
@@ -19,36 +19,26 @@
 \makebigcover
 \makecover
 \begin{abstract}{多模态，回答集编程，视觉问答，空间推理}
-    目前，视觉语言模型已在视觉问答、图片描述生成等方面表现出不错的效果，但它们通常在空间推理方面表现不佳，特别是在不完全可见场景下，对空间关系的理解、推理能力较差。
-    回答集编程（Answer Set Programming, ASP）是一种形式化的知识表示和推理方法，已有一些研究表明其在理解空间关系和进行空间推理方面，具有较强的能力。
-    视觉问答的神经符号系统使用深度学习技术进行感知，生成输入图像和问题的逻辑符号表示，然后使用ASP进行推理，并做出相应回答。相比单独的视觉语言模型，视觉问答的神经符号
-    系统在空间推理方面更加出色。然而，现有的考察模型的空间推理能力的视觉问答数据集，存在问题设计较为简单、对象类型和属性单一、问题的语言表达缺乏多样性等问题。
-    此外，现有的神经符号系统泛化能力较差，编写、维护提示词的过程过于复杂，开发难度相对较高，且对新场景下的问题需要人为设计额外规则，
-    可拓展性较差。为了解决这些问题，本文构建了一个视觉问答数据集，并提出了一种神经符号框架。本文的主要工作如下：
+空间推理能力是智能机器人等具身人工智能的重要基础。CLEVR数据集作为空间推理领域的经典数据集，能够较好地模拟夹取、移动物体等情境，从而对智能体的空间推理能力进行有效评估。然而，CLEVR数据集生成的图像均基于完整场景，回答问题所需的信息直接可见，因而无法充分考察模型在处理部分可见场景问题上的能力。近年来，视觉语言模型（Visual Language Model, VLM）在空间推理任务上取得了一定成果，但已有研究表明，当面对部分可见场景时，其回答准确率显著下降，这一不足限制了其在机器人领域的进一步应用。与此同时，回答集编程（Answer Set Programming, ASP）作为一种符号型知识表示与推理方法，已在公理化及缺省的空间关系表示与推理方面表现出较强能力。通过利用深度学习技术对感知信息进行处理，生成输入图像与问题的逻辑符号表示，并结合ASP进行推理与解答的方法，相较于单纯依赖深度学习的视觉语言模型，在空间推理任务中取得了更为优异的表现。然而，现有神经符号框架在ASP规则的自动拓展方面存在不足，需要依赖人工干预进行规则扩充，从而增加了开发人员的工作量。
+    
+为了解决上述问题，本文构建了一个视觉问答数据集，并提出了一种面向空间推理领域的神经符号框架。本文主要工作如下：
 \begin{enumerate}[itemsep=0pt]
-    \item 构造了一个视觉问答数据集，该数据集基于CLEVR数据集构建，从推理所需步数、对象类型和属性、问题的语言表达的多样性和模糊性等方面着手，
-    增加了数据集的难度，可以更好地考察模型在解决复杂空间推理任务方面的能力。
-    \item 设计了一种面向空间推理领域的神经符号框架，实现ASP求解器与大语言模型的系统集成。该框架基于DSPy开发，融合了DSPy自动化提示生成和优化过程的显著优势，架构上包含反馈循环、提示和基于ASP的验证等模块，
-增强了视觉问答系统在解决空间推理问题方面的能力。
-    \item 基于本文设计的神经符号框架，设计并实现了一个视觉问答领域的神经符号系统。
+\item 数据集构建：在原有CLEVR数据集的基础上，本文新增部分可见场景的问题，从而构建了一个能够更全面考察模型空间推理能力的视觉问答数据集。
+\item 神经符号框架设计：基于DSPy开发平台，本文提出的框架融合了DSPy在自动化提示生成和优化过程中的优势，其整体架构包括视觉场景理解、语义解析、规则蒸馏与迭代反馈等模块。相较于现有框架，本文新增的规则蒸馏模块在ASP求解器进行推理前调用大语言模型，通过利用ASP知识库中的先验知识对语义解析与视觉场景理解生成的ASP规则进行补充，并在经过一致性检验后将新获得的知识保存至知识库，从而实现了ASP规则的自动拓展能力。
 \end{enumerate}
 
-通过上述工作，本文提出的神经符号框架在提升视觉语言模型的空间推理能力方面，
-尤其是在处理复杂和不完全可见场景的问题时，展现出良好的性能和适应性。
-    
+通过对比实验，本文将所提出的神经符号方法与直接提示视觉语言模型的方法进行了比较。实验结果显示，在三种大语言模型上，神经符号方法在回答部分可见场景问题时的准确率平均提升了12.3\%，充分验证了该方法在提升大语言模型空间推理能力及跨模型迁移性方面的有效性。此外，消融实验结果表明，规则蒸馏模块对整体框架的问答准确率具有显著促进作用。最后，基于所设计的神经符号框架，本文实现了一个自动规划的课程教学演示问答原型系统，为教师开展机器人空间推理演示教学提供了有效支持。
 \end{abstract}
 
 \begin{englishabstract}{Multi-modal, Answer Set Programming, Visual Question Answering, Spatial Reasoning}
-Currently, visual language models (VLMs) have demonstrated promising performance in tasks like visual question answering and image caption generation. However, they often exhibit deficiencies in spatial reasoning, particularly in understanding and inferring spatial relationships within partially observable scenes.
-Answer Set Programming (ASP), a formal knowledge representation and reasoning method, has shown strong capabilities in comprehending spatial relations and performing spatial reasoning according to prior research. Neurosymbolic systems for visual question answering employ deep learning for perception to generate logical symbolic representations of input images and questions, then utilize ASP for reasoning and response generation. Compared to standalone VLMs, such neurosymbolic systems demonstrate superior spatial reasoning capabilities. Nevertheless, existing visual question answering datasets for evaluating spatial reasoning suffer from oversimplified problem designs, limited object types/attributes, and lack diversity in linguistic expressions.
-Moreover, current neurosymbolic systems face challenges including poor generalization, overcomplicated prompt engineering/maintenance processes, high development complexity, and limited scalability requiring manual rule design for new scenarios. To address these issues, this paper constructs a novel VQA dataset and proposes an enhanced neurosymbolic framework. Our main contributions are:
+Currently, visual language models have achieved promising results in tasks such as visual question answering and image captioning; however, they often perform poorly in spatial reasoning—particularly in scenarios where scenes are only partially visible—resulting in inadequate understanding and inference of spatial relationships. Answer Set Programming (ASP) is a formal method for knowledge representation and reasoning, and several studies have demonstrated its strong capability in comprehending spatial relationships and conducting spatial reasoning. In the neural-symbolic system for visual question answering, deep learning techniques are used for perception to generate logical symbolic representations of input images and questions; ASP is then employed for reasoning to produce the corresponding answers. Compared with standalone visual language models, this neural-symbolic system exhibits superior performance in spatial reasoning. Nevertheless, existing visual question answering datasets that assess spatial reasoning ability suffer from issues such as overly simplistic question designs, limited diversity in object types and attributes, and a lack of varied linguistic expression in questions. Furthermore, current neural-symbolic systems generally exhibit poor generalization, with the process of writing and maintaining prompt templates being overly complex, resulting in relatively high development difficulty. They also require manually designed additional rules for new scenarios, which limits their scalability. To address these issues, this thesis constructs a visual question answering dataset and proposes a neural-symbolic framework specifically oriented toward spatial reasoning. The main contributions of this work are as follows:
 \begin{enumerate}[itemsep=0pt]
-    \item We develop a VQA dataset based on CLEVR, significantly increasing complexity through multi-step reasoning requirements, diversified object types/attributes, and enhanced linguistic diversity/ambiguity in question formulations. This dataset better evaluates models' capabilities in handling sophisticated spatial reasoning tasks.
-    \item We propose a spatial reasoning-oriented neurosymbolic framework integrating ASP solvers with large language models (LLMs). Developed based on DSPy, this framework leverages DSPy's automatic prompt generation/optimization advantages. Its architecture incorporates feedback loops, prompt engineering modules, and ASP-based verification mechanisms, substantially enhancing spatial reasoning performance in VQA systems.
-    \item Building upon this framework, we implement a neurosymbolic system for visual question answering that demonstrates improved capability in solving complex spatial reasoning problems through systematic integration of perception and reasoning components.
+\item A visual question answering dataset is constructed based on the CLEVR dataset. This dataset enhances the difficulty by considering factors such as the number of reasoning steps required, the diversity of object types and attributes, and the variability and ambiguity of question language. This allows for a more rigorous evaluation of a model’s capability in tackling complex spatial reasoning tasks.
+\item A neural-symbolic framework tailored for spatial reasoning is designed, achieving system integration between an ASP solver and a large language model. Developed on the DSPy platform, the framework leverages DSPy’s notable advantages in automated prompt generation and optimization. Architecturally, it comprises modules for visual scene understanding, semantic parsing, rule distillation, and iterative feedback, thereby enhancing the visual question answering system’s ability to address spatial reasoning problems.
+\item ased on the proposed neural-symbolic framework, a neural-symbolic system for visual question answering is designed and implemented.
 \end{enumerate}
 
-Through these efforts, the proposed neural-symbolic framework demonstrates strong performance and adaptability in enhancing the spatial reasoning capabilities of VLMs, especially when handling complex and partially visible scenes.
+Through these contributions, the proposed neural-symbolic framework demonstrates strong performance and adaptability in enhancing the spatial reasoning capabilities of visual language models, particularly in handling complex and partially observable scenarios.
 \end{englishabstract}
 
 \setnomname{术语与符号约定}

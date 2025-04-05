@@ -1,0 +1,149 @@
+\chapter{附录}
+\section{SRASP数据集示例例}
+\subsection{环境}
+\label{appendix:environment}
+生成的每个场景都需要满足其对应环境中的所有约束。以下是SRASP中所有环境共享的通用规则，所有规则均以ASP表示：
+\begin{lstlisting}
+1. property(color, gray). property(color, red).
+2. property(color, blue). property(color, green).
+3. property(color, brown). property(color, purple).
+4. property(color, cyan). property(color, yellow).
+5. property(shape, cube). property(shape, cylinder).
+6. property(shape, sphere). property(shape, cone).
+7. property(size, small). property(size, medium).
+8. property(size, large).
+9. property(material, rubber).
+property(material, metal).
+10. region(0). region(1). region(2). region(3).
+11. right_R(0, 0). right_R(0, 1). right_R(0, 2).
+right_R(0, 3).
+12. right_R(1, 1). right_R(1, 3).
+13. right_R(2, 0). right_R(2, 1). right_R(2, 2).
+right_R(2, 3).
+14. right_R(3, 1). right_R(3, 3).
+15. left_R(R1, R2) :- right_R(R2, R1).
+16. front_R(0, 0). front_R(0, 1). front_R(0, 2).
+front_R(0, 3).
+17. front_R(1, 0). front_R(1, 1). front_R(1, 2).
+front_R(1, 3).
+18. front_R(2, 2). front_R(2, 3).
+19. front_R(3, 2). front_R(3, 3).
+20. behind_R(R1, R2) :- front_R(R2, R1).
+21. sameProperty(X1, X2, P) :- hasProperty(X1,P,V),}
+22. hasProperty(X2,P,V), X1!=X2.
+23. same_color(X,Y):- sameProperty(X, Y, color).
+24. same_size(X,Y):- sameProperty(X, Y, size).
+25. same_shape(X,Y):- sameProperty(X, Y, shape).
+26. same_material(X,Y):- sameProperty(X, Y, material).
+27. 1{hasProperty(X, color, V) :
+28. property(color, V)}1 :- object(X).
+29. 1{hasProperty(X, material, V) :
+30. property(material, V)}1 :- object(X).
+31. 1{hasProperty(X, shape, V) :
+32. property(shape, V)}1 :- object(X).
+33. 1{hasProperty(X, size, V) :
+34. property(size, V)}1 :- object(X).
+35.1{at(X, R): region(R)}1 :- object(X).
+36.:- sameProperty(X1, X2, color),
+37. sameProperty(X1, X2, material),
+38. sameProperty(X1, X2, size)},
+39. sameProperty(X1, X2, shape),
+40. object(X1), object(X2), X1!=X2.
+41.exceed_region_capacity(R) :42. #count{X: object(X), at(X, R)} >= 4, region(R).
+43:- exceed_region_capacity(_).
+\end{lstlisting}
+以上通用规则对应的自然语言含义如下：
+\begin{lstlisting}
+1-9. 对象必须具有四个属性维度：颜色、形状、尺寸、材质。
+1-4. 颜色属性取值范围（8种）：灰色、红色、蓝色、绿色、棕色、紫色、青色、黄色。
+5-6. 形状属性取值范围（4种）：立方体、圆柱体、球体、圆锥体。
+7-8. 尺寸属性取值范围（3级）：小、中、大。
+9. 材质属性取值范围（2种）：橡胶、金属。
+10. 场景划分为四个空间区域，编号为0、1、2、3。
+11. 当对象A位于区域0时，其右侧对象B的合法区域：0/1/2/3。
+12. 当对象A位于区域1时，其右侧对象B的合法区域：1/3。
+13. 当对象A位于区域2时，其右侧对象B的合法区域：0/1/2/3。
+14. 当对象A位于区域3时，其右侧对象B的合法区域：1/3。
+15. 方位对称性规则：若对象A在对象B右侧，则对象B必在对象A左侧。
+16. 当对象A位于区域0时，其前方对象B的合法区域：0/1/2/3。
+17. 当对象A位于区域1时，其前方对象B的合法区域：0/1/2/3。
+18. 当对象A位于区域2时，其前方对象B的合法区域：2/3。
+19. 当对象A位于区域3时，其前方对象B的合法区域：2/3。
+20. 方位对称性规则：若对象A在对象B前方，则对象B必在对象A后方。
+27-28. 颜色属性强制单值约束：每个对象必须且只能具有一个颜色值。
+29-30. 材质属性强制单值约束：每个对象必须且只能具有一个材质值。
+31-32. 形状属性强制单值约束：每个对象必须且只能具有一个形状值。
+33-34. 尺寸属性强制单值约束：每个对象必须且只能具有一个尺寸值。
+35. 空间位置强制单值约束：每个对象必须且只能被分配至一个区域。
+36-40. 对象差异性原则：任意两个对象不得在所有四个属性（颜色/形状/尺寸/材质）上完全一致。
+41-43. 区域容量限制：每个空间区域最多容纳3个对象。
+\end{lstlisting}
+以下用ASP表示的约束，用来表示图\ref{}所示场景所属的特定环境。
+\begin{lstlisting}
+44. object(0..4).
+45. :- object(X), at(X, 0),
+hasProperty(X, size, large).
+46. :- object(X), at(X, 0),
+hasProperty(X, shape, cylinder).
+47. :- object(X), at(X, 0),
+hasProperty(X, shape, cone).
+48. :- object(X), at(X, 1),
+hasProperty(X, size, small).
+49. :- object(X), at(X, 1),
+hasProperty(X, shape, cone).
+50. :- object(X), at(X, 1),
+hasProperty(X, material, rubber).
+51. :- object(X), at(X, 1),
+hasProperty(X, shape, cube).
+52. :- object(X), at(X, 2),
+not hasProperty(X, size, medium).
+53. :- object(X), at(X, 2),
+not hasProperty(X, material, metal).
+54. :- object(X), at(X, 2),
+hasProperty(X, material, rubber).
+55. :- object(X), at(X, 2),
+hasProperty(X, shape, sphere).
+56. :- object(X), at(X, 2),
+hasProperty(X, shape, cube).
+57. :- object(X), at(X, 3),
+hasProperty(X, size, small).
+58 :- object(X), at(X, 3),
+not hasProperty(X, material, metal),
+59. not hasProperty(X, color, blue).
+60. :- #count{X1, X2: sameProperty(X1, X2, shape),
+61. object(X1), object(X2), at(X1, 3), at(X2, 2),
+62. hasProperty(X1, color, yellow),
+63. hasProperty(X2, color, yellow)} >= 4.
+64. :- #count{X1, X2: sameProperty(X1, X2, color),
+65. object(X1), object(X2),
+66. at(X1, 0), at(X2, 3)} >= 2.
+\end{lstlisting}
+以下是对前述的规则的逐行解释：
+\begin{lstlisting}
+44. 场景中共存在5个对象。
+45. 区域0内禁止存在大尺寸对象。
+46. 区域0内禁止存在圆柱形对象。
+47. 区域0内禁止存在圆锥形对象。
+48. 区域1内禁止存在小尺寸对象。
+49. 区域1内禁止存在圆锥形对象。
+50. 区域1内禁止存在橡胶材质对象。
+51. 区域1内禁止存在立方体对象。
+52. 区域2内所有对象必须为中尺寸。
+53. 区域2内所有对象必须为金属材质。
+54. 区域2内禁止存在橡胶材质对象。
+55. 区域2内禁止存在球形对象。
+56. 区域2内禁止存在立方体对象。
+57. 区域3内禁止存在小尺寸对象。
+58-59. 区域3内所有对象必须满足以下条件之一：金属材质或者蓝色外观。
+60-63. 区域3与区域2内黄色对象组合规则：相同形状的黄色对象配对组数≤1。
+64-66. 区域0与区域3联合约束： 具有相同颜色的对象配对组数 =0（严格禁止）。
+\end{lstlisting}
+
+\subsection{问题}
+
+\subsection{回答集}
+
+\subsection{推理步骤}
+
+\section{数据集统计}
+\subsection{问题模板分布}
