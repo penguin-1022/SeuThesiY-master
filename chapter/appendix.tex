@@ -1,8 +1,8 @@
 \chapter{附录}
-\section{SRASP数据集示例例}
+\section{POVQAD数据集示例}
 \subsection{环境}
 \label{appendix:environment}
-生成的每个场景都需要满足其对应环境中的所有约束。以下是SRASP中所有环境共享的通用规则，所有规则均以ASP表示：
+生成的每个场景都需要满足其对应环境中的所有约束。以下是POVQAD中所有环境共享的通用规则，所有规则均以ASP表示：
 \begin{lstlisting}
 1. property(color, gray). property(color, red).
 2. property(color, blue). property(color, green).
@@ -138,12 +138,3 @@ not hasProperty(X, material, metal),
 60-63. 区域3与区域2内黄色对象组合规则：相同形状的黄色对象配对组数≤1。
 64-66. 区域0与区域3联合约束： 具有相同颜色的对象配对组数 =0（严格禁止）。
 \end{lstlisting}
-
-\subsection{问题}
-
-\subsection{回答集}
-
-\subsection{推理步骤}
-
-\section{数据集统计}
-\subsection{问题模板分布}
