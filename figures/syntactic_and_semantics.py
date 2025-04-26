@@ -4,8 +4,8 @@ plt.rcParams['font.sans-serif'] = ['Microsoft YaHei']
 # 定义数据点（示例数据，需要根据你的图调整）
 points = {
     "ChatGPT-4o": (1, 0.71, 'pink', 'o'),
-    "LLaMa3 8B": (0.58, 0.39, 'blue', '^'),
-    "LLaMa3 70B": (0.77, 0.68, 'blue', 'v'),
+    "LLaMA3 8B": (0.58, 0.39, 'blue', '^'),
+    "LLaMA3 70B": (0.77, 0.68, 'blue', 'v'),
     "DeepSeek-Coder 1.3B": (0.41, 0.37, 'purple', '*'),
     "微调后模型": (0.89, 0.88, 'magenta', 'd'),
 }

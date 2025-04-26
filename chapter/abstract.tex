@@ -18,7 +18,7 @@
 \department{东南大学计算机科学与工程学院}{School of Computer Science and Engineering}
 \makebigcover
 \makecover
-\begin{abstract}{多模态，回答集编程，视觉问答，空间推理，神经符号方法}
+\begin{abstract}{回答集编程，视觉问答，空间推理，神经符号方法}
 积木世界是人工智能研究、教学、实验、评估的重要场景，能够模拟实际应用中物体间的空间关系。
 积木世界VQA要求视觉语言模型（Visual Language Model, VLM）具备空间推理能力，但已有研究表明，当面对部分可见场景时，
 其回答准确率显著下降。目前，通过结合神经网络和符号推理形成的神经符号模型，利用深度学习将视觉信息转化为逻辑符号，
@@ -39,17 +39,19 @@ CLEVR是空间推理的经典数据集，然而CLEVR中问题涉及的物体属�
 \item 规则自动补充的神经符号VQA框架（Rule Complement Neuro-Symbolic Pipeline, RCNSP）设计。
 RCNSP借鉴现有神经符号VQA框架的架构，新增规则蒸馏模块，
 实现在ASP求解器进行推理前调用微调后的大语言模型自动对规则进行补充。
-实验表明，在DeepSeek、Llama3、ChatGPT-4o三种大语言模型上，使用RCNSP比直接向VLM提问的准确率平均提升16.5\%，
+实验表明，在DeepSeek、LLaMA3、ChatGPT-4o三种大语言模型上，使用RCNSP比直接向VLM提问的准确率平均提升16.5\%，
 比现有的神经符号VQA框架的准确率平均提升8.9\%，表明通过规则蒸馏能有效提升神经符号方法在部分可见场景中基于空间推理VQA中的效能。
-\item 设计实现了一个VQA课堂演示原型系统。在RCNSP框架和POVQAD数据集基础上，设计实现了VQA原型系统，
-该系统支持在针对用户的VQA任务进行空间推理时展示推理的中间步骤和逻辑链条，能够为开展相关研究实验和人工智能课堂教学提供辅助。
+\item 设计实现了一个积木世界VQA原型系统。在RCNSP框架和POVQAD数据集基础上，设计实现了一个
+积木世界VQA原型系统。
+该系统模拟了在自动规划课程的授课场景下，由教师向系统提出积木世界的空间推理问题，系统进行解答并展示推理的中间步骤和逻辑链条，
+为教师向学生展示智能体如何理解外部环境信息并进行推理提供了便利。
 初步测试表明该系统在CPU为Intel Core i9-11900K，内存128G，显卡为3张RTX 3090并联的硬件环境下，并发量为38，
-90\%响应时间为6.9秒，能够满足课堂教学场景下的用户需要。
+90\%响应时间为6.9秒，能够满足自动规划课程教学场景下的用户需要。
 \end{enumerate}
 
 \end{abstract}
 
-\begin{englishabstract}{Multi-modal, Answer Set Programming, Visual Question Answering, Spatial Reasoning, Neuro-symbolic Method}
+\begin{englishabstract}{Answer Set Programming, Visual Question Answering, Spatial Reasoning, Neuro-symbolic Method}
 The block world is an important scenario for artificial intelligence research, education, experimentation, and evaluation, as it can simulate the spatial relationships between objects in real-world applications. Block world VQA requires Visual Language Models (VLMs) to possess spatial reasoning abilities; however, previous studies have shown that when faced with partially observable scenes, the answer accuracy significantly decreases. Currently, neuro-symbolic models that combine neural networks with symbolic reasoning—by using deep learning to transform visual information into logical symbols and then employing symbolic reasoning for problem solving—have demonstrated superior performance in spatial reasoning tasks compared to VLMs that rely solely on deep learning. Given that Answer Set Programming (ASP) is a symbolic reasoning method characterized by non-monotonic inference and efficient solvers, ASP-based neuro-symbolic VQA frameworks are highly anticipated. Nevertheless, the current framework designs still rely on manually expanded ASP rules, making it challenging to effectively address spatial reasoning VQA tasks in partially observable scenes.
 
 To tackle the above issues, this work is conducted from three aspects: constructing a VQA dataset for spatial reasoning in partially observable block worlds, designing a neuro-symbolic VQA approach with automatic rule supplementation, and developing a prototype VQA classroom demonstration system. The specific contributions are as follows:
@@ -67,7 +69,7 @@ thereby more effectively evaluating a model’s ability to answer spatial reason
 The RCNSP framework builds on the architecture of existing neuro-symbolic VQA frameworks by introducing 
 a rule distillation module. This module automatically supplements the rules using a fine-tuned large language 
 model before the ASP solver performs reasoning. Experiments show that, across three large language models—DeepSeek, 
-Llama3, and ChatGPT-4o—RCNSP achieves an average accuracy improvement 
+LLaMA3, and ChatGPT-4o—RCNSP achieves an average accuracy improvement 
 of 16.5\% over directly querying VLMs and an 8.9\% increase over existing neuro-symbolic VQA frameworks. 
 These results indicate that rule distillation can effectively enhance the performance of neuro-symbolic methods 
 in spatial reasoning VQA tasks under partial observability.
