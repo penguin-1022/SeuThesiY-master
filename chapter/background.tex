@@ -190,7 +190,7 @@ S, S ∩ body^−(r) = \emptyset$，则集合$ S $满足体部。若 $S $满足�
     \end{align*}
 \end{example}
 下面通过分析说明集合$S=\{ p, q\}$对程序$P$的可满足性。
-\begin{enumerate}[label=(\arabic*),itemsep=0pt,parsep=0pt]
+\begin{enumerate}[itemsep=0pt,parsep=0pt]
     \item 因为$p\in S$，所以文字$p$与文字$q$均满足$S$；
     \item 因为$S \cap head(r_1) = \{ p \} \neq \emptyset$，所以$S$满足$head(r_1), S \models r_1$；
     \item 因为$body^+(r_2) \subsetneq S$，所以$S$不满足$body(r_2)$，所以$S \models r_2$；
@@ -206,7 +206,7 @@ S, S ∩ body^−(r) = \emptyset$，则集合$ S $满足体部。若 $S $满足�
 \begin{definition}[简单逻辑程序回答集\cite{}]
     假设$P$是简单逻辑程序，程序$P$的回答集是$S \subseteq Lit(P)$ 满足：
 
-    \begin{enumerate}[label=(\arabic*),itemsep=0pt,parsep=0pt]
+    \begin{enumerate}[itemsep=0pt,parsep=0pt]
         \item 对于程序$P$中的每一条规则$l_0 \leftarrow l_1,...,l_m$，如果$l_1,...,l_m \in S$，那么$l_0 \in S$。
         \item $S \subseteq Lit(P)$且不存在$ S$ 的任何子集也满足程序 $P$ 的每一个规则，即 $S $是满足程序$ P$的最小集合；
         \item 如果 $S$ 包含互补的文字，那么 $S = Lit(P)$；
@@ -226,7 +226,7 @@ S, S ∩ body^−(r) = \emptyset$，则集合$ S $满足体部。若 $S $满足�
     \end{align*}
     程序$P_4$可能的回答集有四个：$S_1 = \emptyset, S_2 = \{ p(a) \}, S_3 = \{ p(b) \}, S_4 = 
     \{ p(a), p(b) \}$, 根据回答集的定义依次验证：
-    \begin{enumerate}[label=(\arabic*),itemsep=0pt,parsep=0pt]
+    \begin{enumerate}[itemsep=0pt,parsep=0pt]
         \item $P^{S_1} = \{ p(a) \leftarrow .\} \cup \{ p(b) \leftarrow . \} \cup \{ \leftarrow p(b) .\}$，事实$(p(b) \leftarrow .)$
     与约束$(\leftarrow p(b).)$同时在$P^{S_1}$中出现，因此$S_1$不是$P^{S_1}$的回答集，所以$S_1$不是$P$的回答集。
         \item $P^{S_2} = \{ p(a) \leftarrow .\} \cup \{ \leftarrow p(b) .\}$，而$S_2 \models ((p(a) \leftarrow .))$且
