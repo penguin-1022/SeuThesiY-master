@@ -13,7 +13,7 @@ RCNSP框架的架构设计方案如图\ref{fig:pipeline}所示。框架的整体
 可读性较差，普通用户难以理解，因此需要将其翻译为自然语言形式进行输出。
 
 RCNSP参考了Wang等人提出的神经符号框架\cite{wang2024dspy}的设计方案，在此基础上进行了改进，主要变动在于以下两方面：
-\begin{enumerate}[itemsep=0pt,parsep=0pt]
+\begin{enumerate}[nosep]
 \item 支持多模态输入。Wang等人提出的框架，是基于StepGame、SparQA这样的文本空间推理数据集而设计并进行实验的，不能支持图像输入，
 不能完成空间推理VQA任务。RCNSP中，引入了视觉场景理解模块，能够对积木世界图像进行处理，生成场景的ASP表示，以便后续推理使用。
 \item 添加规则蒸馏模块。Wang等人提出的框架中，只是对规则中的错误进行修复
@@ -36,7 +36,7 @@ RCNSP中引入了规则蒸馏模块，其核心思想是将LLM中蕴含的知识
 本文的规则蒸馏与传统意义上对模型进行压缩蒸馏的方法不同，本文强调的是将LLM中“隐式的知识”显式地提取为
 ASP规则。其本质是：将LLM中蕴含的知识，转换为可执行、可解释的ASP规则，用于拓展已有的一组规则。
 该方法结合了以下两个关键理念：
-\begin{enumerate}[itemsep=0pt,parsep=0pt]
+\begin{enumerate}[nosep]
 \item \textbf{启发式拓展}：以经迭代反馈修正后得到的ASP规则和视觉场景理解模块生成的ASP规则为基础，当发现这些ASP规则无法解答某个问题时，引导LLM生成新的规则。
 \item \textbf{以数据为指导而非训练为导向}：不训练模型，而是以示例为提示，向LLM提出规则生成任务。
 \end{enumerate}
@@ -51,7 +51,7 @@ ASP规则。为了减轻开发人员的负担，本文添加了规则蒸馏模�
 负责将Clingo的输出ASP语句翻译为自然语言形式。
 
 LLM在整个框架中的作用有以下四点：
-\begin{enumerate}[itemsep=0pt,parsep=0pt]
+\begin{enumerate}[nosep]
     \item 在语义解析模块中，LLM对自然语言问题进行语义解析，将问题以ASP的形式表示出来，以便后续
 输入到迭代反馈模块中进行修正。
     \item 在迭代反馈模块中，LLM对ASP表示进行多次迭代优化，其中包括解析错误、基础化错误等。每一轮迭代都将
@@ -80,13 +80,13 @@ LLM在整个框架中的作用有以下四点：
 
 目标检测是视觉场景理解的基础任务，其任务是从输入图像中识别出所有相关物体，
 并为每个物体确定其边界框、类别和相关属性。本文采用了GLIP模型作为目标检测的核心工具，其主要优势体现在：
-\begin{enumerate}[itemsep=0pt,parsep=0pt] 
+\begin{enumerate}[nosep] 
 \item \textbf{语言-视觉预训练能力：}GLIP在大规模图文对数据上进行预训练，能够根据自然语言描述（例如“红色立方体”）直接定位图像中的对应物体，从而实现图像内容与问题描述的高效对齐； 
 \item \textbf{高效性与鲁棒性：}模型在处理多样化场景时具有较高的检测准确率，适合构造后续依赖视觉信息的场景图。 
 \end{enumerate}
 
 具体实现流程如下：
-\begin{enumerate}[itemsep=0pt,parsep=0pt] 
+\begin{enumerate}[nosep] 
 \item \textbf{图像预处理：}将原始图像调整至GLIP模型要求的输入分辨率（例如800$\times$1333像素），
 以保证检测精度； 
 \item \textbf{文本提示构造：}根据数据集构造要求，设计一组覆盖目标类别及属性的自然语言提示。
@@ -95,7 +95,7 @@ LLM在整个框架中的作用有以下四点：
 \end{enumerate}
 
 例如，对于一张包含“红色立方体”和“蓝色球体”的图像，GLIP可能检测出如下信息： 
-\begin{enumerate}[itemsep=0pt,parsep=0pt] 
+\begin{enumerate}[nosep] 
 \item 物体1：类别为“红色立方体”，边界框坐标为$(x_1, y_1, x_2, y_2)$； 
 \item 物体2：类别为“蓝色球体”，边界框坐标为$(x_3, y_3, x_4, y_4)$。 
 \end{enumerate}
@@ -129,7 +129,7 @@ left(obj1, obj2) 表示物体1在物体2的左边，in\_front\_of(obj1, obj2) �
 occludes(obj1, obj2) 表示物体1遮挡了物体2。
 \subsubsection{场景图生成}
 场景图是将目标检测、空间位置与空间关系综合融合成的统一结构化表示，其主要构成如下： 
-\begin{enumerate}[itemsep=0pt,parsep=0pt] 
+\begin{enumerate}[nosep] 
     \item \textbf{节点表示：}每个节点对应图像中的一个物体，并附有相应的属性（如color, shape, size, material）以及位置信息； 
     \item \textbf{边的构建：}节点之间的边用于表示物体间的空间关系，如left\_of、in\_front\_of等。 
 \end{enumerate}
@@ -139,7 +139,7 @@ occludes(obj1, obj2) 表示物体1遮挡了物体2。
 最终，整个场景图将被转化为ASP事实，以支持后续符号推理任务。
 \subsubsection{实现细节与实例}
 为便于说明，下面给出一个具体示例。假设输入图像包含如下场景： 
-\begin{enumerate}[itemsep=0pt,parsep=0pt] 
+\begin{enumerate}[nosep] 
     \item 一个红色大立方体位于图像左侧； 
     \item 一个蓝色小球体位于图像右侧，且位于红色立方体的前方。 
 \end{enumerate}
@@ -181,7 +181,7 @@ in_front_of(obj2, obj1).
 \end{lstlisting}
 \subsubsection{技术挑战与解决方案}
 在实际实现过程中，本模块面临如下关键技术挑战，并提出相应解决方案： 
-\begin{enumerate}[itemsep=0pt,parsep=0pt] 
+\begin{enumerate}[nosep] 
     \item \textbf{检测准确性}：GLIP 在处理物体密集或遮挡严重的场景时，可能存在误检问题。为此，本文引入非极大值抑制（NMS）以及深度信息辅助过滤，提高检测精度； 
     \item \textbf{空间关系鲁棒性}：二维关系受视角影响较大，为增强鲁棒性，本文在有深度信息的条件下优先采用三维关系，并结合几何约束（例如边界框重叠）进行补充； 
     \item \textbf{计算效率}：面对大规模图像数据，为保证系统实时性，本文通过批量处理图像以及优化提示设计，有效降低了GLIP的推理延时。
@@ -202,7 +202,7 @@ in_front_of(obj2, obj1).
 通过创建一个有针对性的数据集，模型可以更有效地学习这些特定的细微差别。
 
 本文以下对常见的ASP编程任务进行分析，确定了以下9种ASP编码的基本情形，分别为其设计模板，用于后续构建微调数据集。
-\begin{enumerate}[itemsep=0pt,parsep=0pt]
+\begin{enumerate}[nosep]
 \item \textbf{猜测赋值}是ASP编码中的经典情形。具体而言，猜测赋值指的是将某一给定集合中的所有元素赋予一个从固定集合中选出的唯一标签。
 在ASP中，通常使用析取来表示“猜测”。以下是猜测赋值的一个示例。
 \begin{lstlisting}
@@ -305,7 +305,7 @@ T进一步划分为${TC_1, TC_2,..., TC_k}$，每个$TC_i$代表一种特定的�
 \subsubsection{模型选择与微调}
 目前，工业界已推出众多LLM，这些LLM在架构、参数量和训练数据集等方面各有不同。本文聚焦于一些开源LLM，这些开源的LLM也代表了当前LLM领域的最新研究成果。
 选用的LLM如下：
-\begin{enumerate}[itemsep=0pt,parsep=0pt]
+\begin{enumerate}[nosep]
 \item \textbf{ChatGPT-4o}：由OpenAI于2024年发布的多语言、多模态LLM。
 \item \textbf{DeepSeek-Coder}：由深度求索公司发布的开源代码大模型系列，专注于代码生成、补全、调试及跨语言转换等编程任务。
 \item \textbf{LLaMA3}：LLaMA 模型的增强版，在推理、代码生成和遵循指令等任务中有显著提升。
@@ -324,7 +324,7 @@ T进一步划分为${TC_1, TC_2,..., TC_k}$，每个$TC_i$代表一种特定的�
         LLaMA3         & 8B--70B   & 纯解码器 + 分组查询注意力机制   & 网络数据         \\
         \bottomrule
     \end{tabular}
-    \caption{LLM对比详细信息，其中参数量以十亿（B）为单位。}
+    \caption{LLM对比详细信息}
     \label{tab:llm-comparison}
 \end{table}
 
@@ -341,7 +341,7 @@ T进一步划分为${TC_1, TC_2,..., TC_k}$，每个$TC_i$代表一种特定的�
 
 LLM根据提示$x$生成的ASP程序，记为$y ~ P_L(|x)$。与$x$对应的能够真实表示问题的标准ASP程序，记为$y^*$。按照以下步骤来进行验证：
 首先基于$x$构建一个表示具体实例的事实集$F_{y^*}$。接着，构造两个完整的ASP程序：
-\begin{enumerate}[itemsep=0pt,parsep=0pt]
+\begin{enumerate}[nosep]
 \item $P = y \cup F_{y^*}$：由模型生成程序与事实集合成的程序。
 \item $P^* = y^* \cup F_{y^*}$：由标准程序与事实集合成的程序。
 \end{enumerate}
@@ -357,7 +357,7 @@ LLM根据提示$x$生成的ASP程序，记为$y ~ P_L(|x)$。与$x$对应的能�
 其主要功能在于对语义解析模块生成的ASP程序进行检查，如果有错误，则使用LLM对其进行修正。
 \subsubsection{流程概述}
 整个迭代反馈与规则修正的大致流程如下：
-\begin{enumerate}[itemsep=0pt,parsep=0pt]
+\begin{enumerate}[nosep]
 \item 使用Clingo求解器对语义解析模块生成的ASP程序尝试执行。
 \item 如果执行成功，没有提示错误，则无需进行进一步修正，直接将ASP程序流转到框架的下一模块。
 \item 如果执行失败，则将错误的ASP程序和Clingo求解器提示的错误信息，一起输入LLM，由LLM尝试进行修正。
@@ -365,7 +365,7 @@ LLM根据提示$x$生成的ASP程序，记为$y ~ P_L(|x)$。与$x$对应的能�
 \end{enumerate}
 \subsubsection{错误类型与修正策略}
 不同类型的错误信息对应着ASP程序中不同的问题，因此需要采用不同的修正策略。本文设计了多套提示模板，用以指导LLM针对性地进行程序修正。
-\begin{enumerate}[itemsep=0pt,parsep=0pt]
+\begin{enumerate}[nosep]
 \item \textbf{语法错误}：这类错误通常发生在程序违反了ASP的语法规则时。错误信息会指出文件、行号、列号以及意料之外的符号 。例如，遗漏句点、括号不匹配或使用了Clingo版本不支持的语法都可能导致语法错误 。
 以下是该错误的一个提示词模板：
 \begin{lstlisting}
@@ -515,7 +515,7 @@ light_on. % 灯是开着的
 本节未直接修改LLM的内部权重参数，而是通过优化模块化提示词，使模型在无需重新训练的情况下，自动学习如何更有效地修正ASP程序。
 
 如果直接使用LLM进行ASP规则修正，容易出现以下问题：
-\begin{enumerate}[itemsep=0pt,parsep=0pt]
+\begin{enumerate}[nosep]
 \item 生成的ASP规则存在语法错误或逻辑错误；
 \item 不同LLM（如GPT-4 mini、Llama3等）间推理风格差异大，直接迁移困难。
 \end{enumerate}
@@ -524,7 +524,7 @@ light_on. % 灯是开着的
 微调往往需要大量高质量标注数据。因此，本文选择通过提示词优化，以更低的代价提升模型在ASP修正任务中的推理能力，同时保持系统的灵活性与可解释性。
 
 本节基于DSPy进行提示词优化，具体过程如下：
-\begin{enumerate}[itemsep=0pt,parsep=0pt]
+\begin{enumerate}[nosep]
 \item \textbf{模块定义}：将ASP程序修正任务进行拆解，形成标准化模块。每个模块中需要定义输入和输出
 \item \textbf{训练数据准备}：本文使用上一节人工设计的错误修正提示模板作为小规模训练样本，每个样本包括错误的ASP程序、错误类型、正确的ASP程序。例如：
 \begin{lstlisting}
@@ -574,7 +574,7 @@ examples = [
 使其可以基于已有规则进行合理补全。
 
 初始ASP知识库中通常包含以下几个方面的规则：
-\begin{enumerate}[itemsep=0pt,parsep=0pt]
+\begin{enumerate}[nosep]
 \item 基本推理操作规则，包括属性过滤（如\texttt{filter\_color}、\texttt{filter\_shape}）、
 对象选择（\texttt{select}）、合取与析取（\texttt{and}、\texttt{or}）、数量计算（\texttt{count}）、
 布尔值判断（\texttt{exist}、\texttt{verify\_attr}、\texttt{verify\_rel}）等等。例如：
@@ -612,7 +612,7 @@ ans(V) :- end(TO), attr(TO,V).
 ASP知识库的自动拓展包括以下几个步骤：预提示、规则生成、规则验证。
 
 预提示的作用是，为 LLM 提供背景信息和任务说明。具体而言，预提示包括以下内容：
-\begin{enumerate}[itemsep=0pt,parsep=0pt]
+\begin{enumerate}[nosep]
 \item \textbf{任务介绍}：首先简要说明 VQA 任务的背景，告诉 LLM 任务的性质——给定一个问题、
 一个图像和它们的描述，生成相应的答案。
 \item \textbf{语言语法}：介绍 ASP 规则的基本语法和约定。具体而言，ASP 使用了一些类似于逻辑
@@ -663,7 +663,7 @@ LLM会基于原问题、场景、当前规则结果与目标答案的对比，�
 
 回归测试的目的是：在扩展 ASP 理论的同时，确保新规则不会导致旧问题的答案错误。这
 一设计主要基于以下几方面的考量：
-\begin{enumerate}[itemsep=0pt,parsep=0pt]
+\begin{enumerate}[nosep]
 \item \textbf{维护系统稳定性和一致性}： 在软件工程中，回归测试被广泛应用于验证新代码的引入
 是否影响现有功能的正确性。类似地，在 VQA 系统中，每当通过知识蒸馏添加新规则
 时，需要确保这些规则不会干扰系统对先前问题的解答。
@@ -686,7 +686,7 @@ LLM会基于原问题、场景、当前规则结果与目标答案的对比，�
 POVQAD训练集中包含数万个样例，如果直接对样本进行蒸馏，既耗时又可能引入冗余信息。
 因此，为了提高蒸馏效率，本文提出了样例选择策略，以减少无关数据的干扰。具体而言，包
 括以下两种方法：
-\begin{enumerate}[itemsep=0pt,parsep=0pt]
+\begin{enumerate}[nosep]
 \item \textbf{谓词计数策略}：该策略根据 ASP 问题表示中谓词的数量对实例进行分组。 分组方法是：
 统计每个问题表示中出现的谓词数量，并将具有相同谓词数量的问题归为一组。 通过
 这种分组方式，可以根据问题的复杂度（即涉及的谓词数量）来选择示例。 这有助于
@@ -715,7 +715,7 @@ LLM 在训练过程中逐步学习，从处理简单问题（谓词数量少）�
 对外部教师模型的依赖，简化训练流程。
 
 采用批量优化策略，具有以下几点突出优势：
-\begin{enumerate}[itemsep=0pt,parsep=0pt]
+\begin{enumerate}[nosep]
 \item \textbf{提高训练效率}： 通过在同一批次内处理多个样本，模型可以并行学习不同样本的特征
 和模式，减少训练时间。
 \item \textbf{增强模型泛化能力}：批量优化允许模型在一个批次内接触多样化的数据，帮助模型学习
@@ -864,7 +864,7 @@ LLaMA3 70B    & 0.89     & 0.85 \\
 \end{table}
 \subsection{规则修正与规则蒸馏实验}
 规则修正与规则蒸馏实验的目的包括以下两方面：
-\begin{enumerate}[itemsep=0pt,parsep=0pt]
+\begin{enumerate}[nosep]
 \item 验证添加视觉场景理解模块，支持多模态输入后的神经符号VQA框架对部分可见积木世界场景下空间推理问答的有效性。
 \item 评估本文设计的ASP规则蒸馏方法对提升部分可见积木世界场景下空间推理问答准确率的效果。
 \item 验证RCNSP在不同LLM上具有泛化能力。
@@ -916,31 +916,19 @@ RCNSP在不同的LLM上具有泛化能力。RCNSP相比原始框架方法，在D
     \caption{不同模型及方法在各问题类型上的表现}
     \label{tab:overall_comparison}
 \end{table}
-
 \section{本章小结}
-本章详细介绍了神经符号框架的整体设计与实现过程，涵盖视觉场景理解、语义解析、迭代反馈与规则修正、规则蒸馏、ASP 推理与求解结果翻译等模块，构成完整的流水线。
+本章围绕设计一个规则自动补全的神经符号VQA框架的目标，从设计方案、核心技术及实现与实现分析三方面进行展开。
 
-首先，框架总体架构明确了LLM在语义解析、迭代反馈与规则修正、规则蒸馏、求解结果翻译中的作用，
-为空间关系推理提供了有效支撑。
+首先，介绍了RCNSP设计方案。围绕RCNSP的整体设计思路展开，与现有的神经符号框架进行对比，介绍各个模块的功能作用，并重点突出了规则蒸馏中规则自动补充的原理。
 
-在视觉场景理解部分，本文基于GLIP模型实现了目标检测，
-并通过中心点与深度信息提取物体的二维及三维位置信息，再结合空间关系提取技术构建场景图，
-并将提取的信息转化为ASP事实，为后续逻辑推理打下坚实基础。
+其次，介绍了RCNSP核心技术及实现。针对RCNSP中视觉场景理解、语义解析、迭代反馈与规则修正、规则蒸馏、ASP推理、求解结果翻译
+这六个核心模块进行了详细阐述。特别是对于语义解析、迭代反馈与规则修正和规则蒸馏这三个模块进行了重点描述。
 
-在语义解析模块中，本文通过总结ASP任务类型，设计了用于对LLM进行提示的模板，并构造了用于微调LLM的数据集，以训练LLM更准确生成
-ASP程序。实验结果表明，经过微调和DSPy框架支持下的提示优化，生成的ASP查询在语法与语义上均取得了较高准确率，
-验证了LLM在语义解析生成ASP程序方面的有效性。
+最后，进行了实验分析。在第三小节中，本文对语义解析微调实验、规则修正与规则蒸馏实验，从实验目的、实验对象、实验方法、实验环境及实验结果
+分析上进行了阐述。
+最终语义解析微调实验的结果证明了语义解析模块中，经过微调后的LLM在生成ASP程序方面的语法命中率和语义命中率均有明显提升。
+规则修正与规则蒸馏实验的结果证明
+神经符号方法对部分可见积木世界场景下空间推理问答有效，本文设计的ASP规则蒸馏方法可以显著提升部分可见积木世界场景下空间推理问答准确率，
+同时也验证了RCNSP在不同LLM上具有泛化能力。
 
-通过迭代反馈与规则修正模块，系统实现了LLM与ASP求解器之间的闭环交互：
-Clingo求解器对生成的ASP程序进行执行检查，并反馈错误信息，LLM据此优化ASP程序，
-经过多轮迭代后显著提升了程序的可执行率和语义正确率。
-
-通过规则蒸馏模块，以迭代反馈与规则修正模块得到
-的ASP程序和视觉场景理解得到的ASP程序为输入，以ASP知识库为基础，调用LLM对ASP程序进行补充规则，同时对ASP知识库补充推理后所得的新增知识。
-
-最后，在对比试验中，本文综合比较了不同LLM模型和提示方法的表现，
-验证了神经符号框架在处理部分可见场景的空间推理问题上的泛化能力与优势，
-同时也证明了规则蒸馏对神经符号框架性能提升的重要作用。
-
-总体来说，本章不仅构建了一个完整而高效的神经符号推理框架，而且通过实验对比，
-验证了各模块间协同工作的有效性，为后续基于本框架开发用于自动规划的课程教学演示的问答原型系统提供了坚实的理论和实践基础。
+本章的RCNSP为后续开发积木世界VQA系统奠定了坚实基础。
