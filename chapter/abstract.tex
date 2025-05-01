@@ -44,7 +44,7 @@ RCNSP借鉴现有神经符号VQA框架的架构，新增规则蒸馏模块，
 \item 设计实现了一个积木世界VQA原型系统。在RCNSP框架和POVQAD数据集基础上，设计实现了一个
 积木世界VQA原型系统。
 该系统模拟了在自动规划课程的授课场景下，由教师向系统提出积木世界的空间推理问题，系统进行解答并展示推理的中间步骤和逻辑链条，
-为教师向学生展示智能体如何理解外部环境信息并进行推理提供了便利。
+为教师向学生展示智能体如何理解外部环境信息并进行规划提供了便利。
 初步测试表明该系统在CPU为Intel Core i9-12900K，内存128G，显卡为3张RTX 3090并联的硬件环境下，并发量为38，
 90\%响应时间为6.9秒，能够满足自动规划课程教学场景下的用户需要。
 \end{enumerate}
@@ -62,7 +62,7 @@ To address these issues, this thesis focuses on three main contributions: (1) co
 
 \item \textbf{Design of the Rule Complement Neuro-Symbolic Pipeline (RCNSP).} Based on existing neuro-symbolic VQA frameworks, RCNSP introduces a rule distillation module. Before invoking the ASP solver for reasoning, RCNSP uses fine-tuned large language models (LLMs) to automatically supplement missing rules. Experiments conducted with DeepSeek, LLaMA3, and ChatGPT-4o demonstrate that RCNSP achieves an average improvement of 16.5\% in accuracy compared to directly querying VLMs, and an average improvement of 8.9\% compared to existing neuro-symbolic VQA frameworks, indicating the effectiveness of rule distillation in enhancing spatial reasoning performance in partially observable block world scenarios.
 
-\item \textbf{Development of a Block World VQA Prototype System.} Based on RCNSP and POVQAD, a prototype system for block world VQA was developed. In the context of teaching automated planning courses, the system allows instructors to pose spatial reasoning questions, with the system answering while displaying intermediate reasoning steps and logical chains. This facilitates demonstrations of how intelligent agents understand and reason about external environments. Preliminary tests show that, under a hardware setup of an Intel Core i9-12900K CPU, 128GB RAM, and three RTX 3090 GPUs in parallel, the system achieves a concurrency of 38 with a 90\% response time of 6.9 seconds, meeting the performance requirements for classroom use.
+\item \textbf{Development of a Block World VQA Prototype System.} Based on RCNSP and POVQAD, a prototype system for block world VQA was developed. In the context of teaching automated planning courses, the system allows instructors to pose spatial reasoning questions, with the system answering while displaying intermediate reasoning steps and logical chains. This facilitates demonstrations of how intelligent agents understand and plan about external environments. Preliminary tests show that, under a hardware setup of an Intel Core i9-12900K CPU, 128GB RAM, and three RTX 3090 GPUs in parallel, the system achieves a concurrency of 38 with a 90\% response time of 6.9 seconds, meeting the performance requirements for classroom use.
 \end{enumerate}
 \end{englishabstract}
 
