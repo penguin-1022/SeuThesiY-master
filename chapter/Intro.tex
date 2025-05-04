@@ -150,6 +150,260 @@ VQA数据集可以分为四类：通用数据集、合成数据集、诊断数�
 型。此类数据集通常包含来自主流图像数据库（如 MS-COCO\cite{lin2014microsoft} 和 ImageNet\cite{deng2009imagenet}）的数万幅真
 实场景图像，具有显著的规模优势与多样性特征。尽管这些数据集尚无法完全覆盖真实世界
 视觉元素的无限复杂性，但其在广泛性和通用性方面已取得较好近似。
+<<<<<<< HEAD
+=======
+
+COCO-QA是早期VQA数据集之一，基于MS-COCO的12.3万幅图像构建。其问答对通过图像描述自动生成，主要包含对象存在性、数量、颜色及位置等基础问题类型，问题复杂度较低且类别有限。
+
+VQA-v1\cite{Antol2015VQA}（常简称为"VQA数据集"）是首个大规模VQA数据集，
+包含真实场景（VQA-real）与抽象场景（VQA-abstract）两个子集。真实子集涵盖多目标复杂场景，
+抽象子集则由剪贴画软件生成简化场景（合成数据集部分将详细讨论）。该数据集通过亚马逊众包平台（AMT）收集问题与答案，要求工作者提出"能难倒智能机器人"的问题。然而，数据集存在显著偏差：55.86%的二元判断题答案为"是"，数字类问题中"2"占比最高[10]。此外，部分问题具有主观性与观点性，难以客观评估答案正确性，且人工标注一致性较低。
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{figures/example-from-vqa-v1.jpg}
+    \begin{center}
+        \footnotesize 问题：图片中有多少片披萨？\\
+        \footnotesize 问题：这是不是素的披萨？
+    \end{center}
+    \caption{VQA-v1数据集的示例}
+    \label{fig:example-from-vqa-v1}
+\end{figure}
+
+VQA-v2\cite{goyal2017making}（平衡版VQA）针对VQA-v1的偏差问题进行优化设计。
+研究团队发现原始数据集存在严重的语言先验偏差，导致模型可通过利用统计规律而非图像内容提升准确率。
+为此，VQA-v2为每个问题提供两幅语义相似但答案不同的图像，强制模型必须依赖视觉信息进行推理。
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.5\textwidth, keepaspectratio]{figures/hydrant-a.png}
+        \caption*{\footnotesize 问题：消防栓是什么颜色？\\答案：红色}
+        \label{fig:example-from-vqa-v2-1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.5\textwidth, keepaspectratio]{figures/hydrant-b.png}
+        \caption*{\footnotesize 问题：消防栓是什么颜色？\\答案：黑色}
+        \label{fig:example-from-vqa-v2-2}
+    \end{subfigure}
+    \caption{来自VQA-v2数据集的、针对问题‘消防栓是什么颜色？’的两张互补图像（答案不同）}
+    \label{fig:example-from-vqa-v2}
+\end{figure}
+
+Visual Genome, VG​\cite{krishna2017visual}是信息标注最丰富的VQA数据集，包含10万幅图像，平均每幅图像标注21个对象、
+18个属性及18组对象间关系。该数据集包含七类核心标注：区域描述、对象、属性、关系、区域图、场景图及问答对，首次通过场景图形式提供结构化图像表示。
+其问题设计强调明确性与可验证性，所有问题均需严格依赖图像内容作答。与VQA-v1相比，该数据集优化问题类型分布，将二元判断题占比从32.37\%降至零，以鼓励更具挑战性的问答对。
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.7\textwidth, keepaspectratio]{figures/visual-genome-a.png}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth, keepaspectratio]{figures/visual-genome-b.png}
+    \end{subfigure}
+    \caption{Visual Genome中的示例图像及其对应的一部分场景图}
+\end{figure}
+
+Visual7W\cite{zhu2016visual7w}通过对象级语义关联建立文本描述与图像区域的映射关系。
+对于问题中涉及对象的词汇，均提供对应图像区域的边界框标注，帮助模型建立问题对象与视觉实体的关联。
+该数据集涵盖七类问题（What/Where/When/Who/Why/How/Which），前六类需生成描述性答案，最后一类需指向具体图像区域作为答案，不包含二元判断题类型。
+
+TDIUC\cite{kafle2017analysis}专为消除数据集偏差设计，包含160K图像上的160万个问题，
+划分至12个独立类别以评估模型在特定视觉任务上的表现。该数据集通过均衡问题类型分布与答案分布缓解先前模型的评估偏差问题，
+例如：在VQA-v1中提升"Is/Are"类问题准确率15\%可使整体准确率提高5\%，而同等幅度的"Why/Where"类问题改进仅带来4.1\%增益。
+此外，TDIUC引入异常问题（需回答"不适用"），并采用归一化评估指标以消除答案分布偏斜影响。受限于答案长度约束（多为1-2个词汇），其唯一答案数量约为一千个。
+
+GQA\cite{hudson2019gqa}通过融合组合推理与真实图像构建大规模数据集，包含11.3万幅图像上的2200万个问题。该数据集继承Visual Genome的场景图标注体系，
+同时借鉴CLEVR\cite{johnson2017clevr}的问题结构化表示方法，将问题转换为可执行的函数式程序以显式描述推理步骤。
+相较于CLEVR，GQA采用真实图像而非合成场景，在对象类别与属性多样性方面更具优势。其问题生成过程结合自然语言语法规则与概率语法模型，
+提升问题的自然性与抗语言记忆能力。通过采样平衡策略有效降低问题与答案分布的偏斜，并设计一致性、有效性、合理性等多维度评估指标以全面衡量模型能力。
+\subsubsection{合成数据集}
+合成数据集是指通过计算机软件生成的虚拟图像数据而非真实场景图像。优质的视觉问答模型应具备与人类相似的跨模态推理能力，既能处理真实图像数据，又能有效应对合成数据
+。相较于真实数据采集，合成数据集具有显著优势：其构建过程可通过自动化流水线实现，大幅降低时间成本与经济投入；
+同时，研究者可针对性设计复杂推理任务，通过精细化控制场景元素来增强模型组合推理能力的可评估性。
+
+VQA-Abstract作为VQA-v1数据集的子集，其包含50,000个基于剪贴画软件生成的抽象场景。相较于真实场景图像，
+此类图像具有结构简单、噪声干扰少的特点，其核心设计目标在于降低底层视觉特征复杂度，迫使模型聚焦于高层语义推理能力的训练。
+
+SHAPES\cite{andreas2016neural}数据集由64张几何形状排列图构成，每张图像配备244个二元问题，总计生成15,616个问答对。该数据集规模较小，
+主要用于评估模型空间关系推理能力。其简洁的几何元素与有限的问题类型使其成为诊断模型基础空间认知能力的有效工具。
+
+CLEVR\cite{johnson2017clevr}是一个专门用于评估模型高层次推理能力的数据集。CLEVR 包含 10 万张合成图像和 100 万个人工生成的问题。
+场景由一组带有形状、大小、颜色、材质以及在地面平面上的位置等注释的物体组成。CLEVR 的世界由三种物体形状构成，
+每种形状具有两种绝对尺寸、两种材质以及八种颜色。物体之间的空间关系包括四种类型：“左侧”、“右侧”、“后方”和“前方”。CLEVR 中的问题通过手工制作的模板自动生成。
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{figures/clevr-example.png}
+    \begin{center}
+        \footnotesize 问题1：大物体和金属球的数量是否相等？\\
+        \footnotesize 问题2：大球剩下的棕色金属物体的圆柱体尺寸是多少？\\
+    \end{center}
+    \caption{CLEVR数据集的示例}
+    \label{fig:clevr-example}
+\end{figure}
+CLEVR 的一个独特特点是，它为每个问题提供了结构化的表示，作为额外注释。每个问题被表示为一系列函数，
+这些函数反映了解答该问题所需的正确推理步骤。与通用的 VQA 数据集相比，CLEVR 的问题更长、更复杂。这使得 CLEVR 能够生成更多样化的独特问题，
+从而减轻问题的条件偏差。较长的问题通常也对应更长的推理过程。
+
+CLEVR 的一个缺点是其图像内容相对简单和基础。由于物体种类和特征较少，模型容易过拟合。
+为测试这一问题并验证模型的组合泛化能力，作者合成了两个新的 CLEVR 版本：1）在条件 A 中，所有立方体仅为灰色、蓝色、棕色或黄色，
+所有圆柱体仅为红色、绿色、紫色或青色；2）在条件 B 中，这些形状交换颜色配置。两个条件下的球体涵盖全部八种颜色。理想的模型应能够在一个条件下训练，
+并在另一个条件下表现良好。由于 CLEVR 不包含真实图像或自然语言问题，作者建议仅将其用作测试模型组合能力的诊断工具。
+CLEVR 还提供了一个变体 CLEVR-humans，其中的问题由人类以自然语言提供。
+\subsubsection{诊断数据集}
+\begin{enumerate}[itemsep=0pt,parsep=0pt]
+    \item 组合能力评估数据集。
+
+​C-VQA\cite{agrawal2017c}：基于VQA-v1重构的数据集，通过重组训练集与验证集的划分，测试模型对未见概念组合的推理能力。
+例如，在训练集中，“运动类”问题的常见答案为“网球”，而测试集则替换为“滑雪”，以验证模型是否真正理解组合语义而非依赖数据分布偏差。
+
+\begin{figure}[h]
+    \centering
+    
+    % 第一行
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/CVQA-A.png}
+        \caption*{问题：盘子的颜色是什么？\\答案：绿色}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/CVQA-B.png}
+        \caption*{问题：交通信号灯的颜色是什么？\\答案：红色}
+    \end{subfigure}
+
+    {\textbf{训练}}
+
+    \vspace{0.5em}
+    % 第二行
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/CVQA-C.png}
+        \caption*{问题：交通信号灯的颜色是什么？\\答案：绿色}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/CVQA-D.png}
+        \caption*{问题：盘子的颜色是什么？\\答案：红色}
+    \end{subfigure}
+
+    {\textbf{测试}}
+
+    \vspace{0.5em}
+    \caption{CVQA数据集示例}
+    \label{fig:cvqa-example}
+\end{figure}
+
+​VQA-CP\cite{agrawal2018don}：通过重构VQA-v1与VQA-v2的问题类型-答案分布，使训练集与测试集的答案分布差异显著，强制模型避免利用数据集偏差进行预测。
+    \item 解释生成数据集。
+
+​VQA-E\cite{li2018vqa}：包含27万条自动生成的文本解释，覆盖10.8万张图像，旨在训练模型生成答案的逻辑依据。
+
+​VQA-X\cite{park2018multimodal}：规模较小（4.2万条解释，2.8万张图像），提供人工标注的文本解释与视觉注意力热图，支持多模态解释生成。
+
+​VQA-HAT\cite{das2017human}：通过人工标注的注意力区域（用户需对模糊图像局部去模糊以回答问题），提供视觉注意力真值，用于评估模型注意力机制的合理性。
+    \item 语言变体鲁棒性数据集。
+
+​VQA-Rephrasings\cite{shah2019cycle}：针对VQA-v2验证集的4万张图像，为每个问题提供3种人工复述表述，测试模型对语言表述变化的鲁棒性，并提出通用方法以提升复述问题的回答能力。
+    \item 逻辑一致性数据集。
+
+​ConVQA\cite{ray2018make}：包含679万条问题对，覆盖10.8万张图像，设计语义一致但表述不同的问题（如“是否为素食披萨？”与“是否含有意大利辣香肠？”），验证模型逻辑推理的一致性。
+\begin{figure}[h]
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.7\textwidth, keepaspectratio]{figures/CONVQA-A.png}
+        \begin{center}
+            \footnotesize 问题1：图中有多少人？\\
+            \footnotesize 答案1:1\\
+            \footnotesize 问题2：图中是否为1个人？\\
+            \footnotesize 答案2：是\\
+        \end{center}
+        \caption*{(a)}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth, keepaspectratio]{figures/CONVQA-B.png}
+        \begin{center}
+            \footnotesize 问题1：图中的人穿的什么？\\
+            \footnotesize 答案1:T恤衫\\
+            \footnotesize 问题2：这个人是穿的T恤衫吗？\\
+            \footnotesize 答案2：是\\
+        \end{center}
+        \caption*{(b)}
+    \end{subfigure}
+    \caption{ConVQA数据集的示例}
+    \centering
+    \label{fig:convqa-example}
+\end{figure}
+    \item 计数能力数据集。
+
+​HowManyQA\cite{trott2017interpretable}：整合VQA-v2与Visual Genome的计数问题，形成10.6万条简单计数问题（如“图像中有多少只狗？”）。
+
+​TallyQA\cite{acharya2019tallyqa}：扩展复杂计数场景，包含28.8万条问题（其中7.6万条为复杂问题），需结合对象属性与关系推理（如“草地上躺着的狗有多少只？”）。
+    \item 场景文本理解数据集。
+
+​TextVQA\cite{singh2019towards}：包含4.5万条问题与2.8万张图像，要求模型识别图像中文本内容（如车牌号），每问题提供10个人工标注答案。
+
+​ST-VQA\cite{biten2019scene}：包含3.1万条场景文本相关问题与2.3万张图像，确保问题无歧义且图像包含足够文本，采用归一化Levenshtein距离作为评估指标，减少答案拼写误差的影响。
+\begin{figure}[h]
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.7\textwidth, keepaspectratio]{figures/STVQA-A.png}
+        \begin{center}
+            \footnotesize 问题：标志牌上写的是什么？\\
+            \footnotesize 答案:STOP\\
+        \end{center}
+        \caption*{(a)}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth, keepaspectratio]{figures/STVQA-B.png}
+        \begin{center}
+            \footnotesize 问题：这趟列车要去哪里？\\
+            \footnotesize 答案：New York\\
+        \end{center}
+        \caption*{(b)}
+    \end{subfigure}
+    \caption{ST-VQA数据集的示例}
+    \centering
+    \label{fig:ST-VQA-example}
+\end{figure}
+\end{enumerate}  
+\subsubsection{基于知识的数据集}
+当仅凭图像信息无法回答问题时，需借助外部知识源获取所需信息。此类场景下，知识库（Knowledge-Based, KB）数据集通过构建依赖外部知识的问题，
+旨在训练模型识别知识缺口并有效检索相关知识的能力。值得注意的是，知识库数据集与外部知识库（External Knowledge Bases, EKB）存在本质差异：
+前者为特定任务设计的问答数据集，后者为结构化世界知识集合。
+典型EKB包括人工标注构建的大规模知识库（如DBpedia [11]、Freebase [16]、Wikidata [127]），
+以及从非结构化/半结构化数据自动提取的知识库（如YAGO [48][80]、OpenIE [12][34][35]、NELL [22]、NEIL [25]、WebChild [118]、ConceptNet [76]）。
+
+FVQA\cite{wang2017fvqa} 是典型的知识库数据集，包含2,190幅图像及5,826个需外部知识解答的问题。该数据集为每个图像-问题-答案三元组附加结构化支持性事实（如三元组(Cat, CapableOf, ClimbingTrees)），模拟人类常识推理过程。通过提供显式知识标注，FVQA指导模型从事实数据库中检索相关支持性事实以推导答案。
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.28]{figures/FTVQA.png}
+    \begin{center}
+        \footnotesize 问题：地面上的红色物体是用来干什么的？\\
+        \footnotesize 答案：灭火\\
+        \footnotesize 支持性事实：消防栓可用于灭火。
+    \end{center}
+    \caption{FVQA数据集的示例}
+    \label{fig:fvqa-example}
+\end{figure}
+KB-VQA\cite{wang2015explicit}包含700幅图像对应的2,402个问题，涵盖23类问题模板。其中，1,256个为纯视觉问题，883个需常识推理，263个需查询外部知识库，系统化考察模型对内部与外部知识的协同利用能力。
+
+OK-VQA\cite{marino2019ok}包含14,031幅图像对应的14,055个问题，其规模超越FVQA与KB-VQA。该数据集严格限制答案分布偏差，所有问题均需外部知识解答，重点评估模型在开放领域知识下的泛化能力。
+
+早期的VQA v1.0与v2.0数据集主要基于真实图像，问题类型以事实性提问为主，虽然具备一定规模，
+但在逻辑推理深度和场景可控性方面存在明显局限。因此，研究者逐步转向使用合成图像生成更具可控性和推理复杂度的数据集，
+以更有效地评估模型的逻辑与空间推理能力。
+>>>>>>> 92b142cbb53eec87501d91202b2811d0db82bcea
 
 COCO-QA是早期VQA数据集之一，基于MS-COCO的12.3万幅图像构建。其问答对通过图像描述自动生成，主要包含对象存在性、数量、颜色及位置等基础问题类型，问题复杂度较低且类别有限。
 
