@@ -138,3 +138,729 @@ not has_property(X, material, metal),
 60-63. 区域3与区域2内黄色对象组合规则：相同形状的黄色对象配对组数≤1。
 64-66. 区域0与区域3联合约束： 具有相同颜色的对象配对组数 =0（严格禁止）。
 \end{lstlisting}
+\section{语义解析提示词}
+\label{appendix:semantics-parsing-prompts}
+\subsection{颜色查询}
+\begin{lstlisting}
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：There is another small cylinder that is made of the same material as the small ball ; what is its color ? 
+ASP程序：missing(Q):-hasProperty(X,color,Q),X!=Y,hasProperty(Y,size,small),hasProperty(X,shape,cylinder),hasProperty(Y,shape,sphere),hasProperty(X,size,small),same_material(Y,X).
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：There is a big ball that is both behind the purple metal object and behind the shiny sphere ; what color is it ? 
+ASP程序：missing(Q):-hasProperty(X,color,Q),hasProperty(Y2,material,metal),hasProperty(X,size,large),hasProperty(Y1,material,metal),hasProperty(X,shape,sphere),hasProperty(Y1,color,purple),hasProperty(Y2,shape,sphere),behind(Y1,X),behind(Y2,X),X!=Y1,Y1!=Y2,X!=Y2.
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：What is the color of the cone on the left side of the rubber object ? 
+ASP程序：missing(Q):-hasProperty(X,color,Q),hasProperty(Y,material,rubber),hasProperty(X,shape,cone),left(Y,X),X!=Y.
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：The block is what color ? 
+ASP程序：missing(Q):-hasProperty(X,color,Q),hasProperty(X,shape,cube). 
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：There is a sphere on the right side of the tiny green metallic sphere in front of the small brown object ; what is its color ? 
+ASP程序：missing(Q):-hasProperty(X,color,Q),hasProperty(Y1,color,green),hasProperty(Y1,shape,sphere),hasProperty(X,shape,sphere),hasProperty(Y2,size,small),hasProperty(Y1,size,small),hasProperty(Y2,color,brown),hasProperty(Y1,material,metal),right(Y1,X),front(Y2,Y1),X!=Y1,Y1!=Y2,X!=Y2. 
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：There is a rubber object that is on the left side of the tiny cyan shiny ball to the right of the cyan object that is in front of the small green metal block ; what is its color ?
+ASP程序：missing(Q):-hasProperty(X,color,Q),hasProperty(Y2,color,cyan),hasProperty(Y3,material,metal),hasProperty(Y3,color,green),hasProperty(Y1,material,metal),hasProperty(Y3,size,small),hasProperty(Y1,color,cyan),hasProperty(Y1,shape,sphere),hasProperty(Y3,shape,cube),hasProperty(X,material,rubber),hasProperty(Y1,size,small),left(Y1,X),right(Y2,Y1),front(Y3,Y2),X!=Y1,Y1!=Y2,Y2!=Y3,X!=Y2,X!=Y3,Y1!=Y3. 
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：There is another tiny rubber object that is the same shape as the purple matte object ; what color is it ? 
+ASP程序：missing(Q):-hasProperty(X,color,Q),X!=Y,hasProperty(Y,color,purple),hasProperty(Y,material,rubber),hasProperty(X,material,rubber),hasProperty(X,size,small),same_shape(Y,X). 
+\end{lstlisting}
+\subsection{形状查询}
+\begin{lstlisting}
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：What shape is the blue object left of the medium blue rubber object on the right side of the big object right of the small cyan rubber cone ?
+ASP程序：missing(Q):-hasProperty(X,shape,Q),hasProperty(Y3,shape,cone),hasProperty(X,color,blue),hasProperty(Y1,color,blue),hasProperty(Y1,size,medium),hasProperty(Y3,size,small),hasProperty(Y3,material,rubber),hasProperty(Y2,size,large),hasProperty(Y3,color,cyan),hasProperty(Y1,material,rubber),left(Y1,X),right(Y2,Y1),right(Y3,Y2),X!=Y1,Y1!=Y2,Y2!=Y3,X!=Y2,X!=Y3,Y1!=Y3.
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：What shape is the other blue object that is the same material as the cylinder ? 
+ASP程序：missing(Q):-hasProperty(X,shape,Q),X!=Y,hasProperty(X,color,blue),hasProperty(Y,shape,cylinder),same_material(Y,X). 
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：There is a tiny object that is to the right of the small red ball and in front of the small blue rubber cube ; what shape is it ? 
+ASP程序：missing(Q):-hasProperty(X,shape,Q),hasProperty(Y2,size,small),hasProperty(Y1,color,red),hasProperty(Y2,shape,cube),hasProperty(Y2,color,blue),hasProperty(X,size,small),hasProperty(Y2,material,rubber),hasProperty(Y1,size,small),hasProperty(Y1,shape,sphere),right(Y1,X),front(Y2,X),X!=Y1,Y1!=Y2,X!=Y2. 
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：What is the shape of the brown object that is in front of the block that is behind the medium object ? 
+ASP程序：missing(Q):-hasProperty(X,shape,Q),hasProperty(Y2,size,medium),hasProperty(Y1,shape,cube),hasProperty(X,color,brown),front(Y1,X),behind(Y2,Y1),X!=Y1,Y1!=Y2,X!=Y2. 
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：What shape is the blue thing that is in front of the small red metal cone ? 
+ASP程序：missing(Q):-hasProperty(X,shape,Q),hasProperty(Y,shape,cone),hasProperty(Y,color,red),hasProperty(Y,size,small),hasProperty(X,color,blue),hasProperty(Y,material,metal),front(Y,X),X!=Y. 
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：What is the shape of the other purple object that is the same size as the gray object ? 
+ASP程序：missing(Q):-hasProperty(X,shape,Q),X!=Y,hasProperty(Y,color,gray),hasProperty(X,color,purple),same_size(Y,X). 
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：What is the shape of the other tiny object that is the same color as the tiny block ? 
+ASP程序：missing(Q):-hasProperty(X,shape,Q),X!=Y,hasProperty(Y,shape,cube),hasProperty(Y,size,small),hasProperty(X,size,small),same_color(Y,X). 
+\end{lstlisting}
+\subsection{大小查询}
+\begin{lstlisting}
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：There is another gray object that is made of the same material as the cyan cone ; what is its size ? 
+ASP程序：missing(Q):-hasProperty(X,size,Q),X!=Y,hasProperty(Y,color,cyan),hasProperty(Y,shape,cone),hasProperty(X,color,gray),same_material(Y,X).
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：There is a green object that is both to the right of the brown metallic object and to the right of the large rubber cylinder ; what size is it ? 
+ASP程序：missing(Q):-hasProperty(X,size,Q),hasProperty(Y1,color,brown),hasProperty(Y2,shape,cylinder),hasProperty(Y2,size,large),hasProperty(Y2,material,rubber),hasProperty(Y1,material,metal),hasProperty(X,color,green),right(Y1,X),right(Y2,X),X!=Y1,Y1!=Y2,X!=Y2. 
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：There is another green thing that is the same shape as the red matte thing ; what size is it ? 
+ASP程序：missing(Q):-hasProperty(X,size,Q),X!=Y,hasProperty(X,color,green),hasProperty(Y,material,rubber),hasProperty(Y,color,red),same_shape(Y,X). 
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：What size is the brown thing ? 
+ASP程序：missing(Q):-hasProperty(X,size,Q),hasProperty(X,color,brown). 
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：There is a cylinder to the right of the big red metal cone ; how big is it ? 
+ASP程序：missing(Q):-hasProperty(X,size,Q),hasProperty(Y,size,large),hasProperty(Y,color,red),hasProperty(Y,material,metal),hasProperty(Y,shape,cone),hasProperty(X,shape,cylinder),right(Y,X),X!=Y. 
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：There is another sphere that is the same color as the big sphere ; what size is it ? 
+ASP程序：missing(Q):-hasProperty(X,size,Q),X!=Y,hasProperty(Y,shape,sphere),hasProperty(X,shape,sphere),hasProperty(Y,size,large),same_color(Y,X).
+\end{lstlisting}
+\subsection{材质查询}
+\begin{lstlisting}
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：What is the material of the other red thing that is the same shape as the big thing ? 
+ASP程序：missing(Q):-hasProperty(X,material,Q),X!=Y,hasProperty(Y,size,large),hasProperty(X,color,red),same_shape(Y,X). 
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：What material is the red object to the left of the large blue shiny object that is behind the blue object ? 
+ASP程序：missing(Q):-hasProperty(X,material,Q),hasProperty(X,color,red),hasProperty(Y1,size,large),hasProperty(Y2,color,blue),hasProperty(Y1,material,metal),hasProperty(Y1,color,blue),left(Y1,X),behind(Y2,Y1),X!=Y1,Y1!=Y2,X!=Y2. 
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：What is the medium object that is on the right side of the green matte sphere and right of the big yellow shiny ball made of ? 
+ASP程序：missing(Q):-hasProperty(X,material,Q),hasProperty(Y2,size,large),hasProperty(Y2,material,metal),hasProperty(Y2,color,yellow),hasProperty(Y1,shape,sphere),hasProperty(Y1,color,green),hasProperty(Y2,shape,sphere),hasProperty(Y1,material,rubber),hasProperty(X,size,medium),right(Y1,X),right(Y2,X),X!=Y1,Y1!=Y2,X!=Y2. 
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：The cyan object in front of the green matte object in front of the tiny cyan rubber cylinder right of the matte object is made of what material ? 
+ASP程序：missing(Q):-hasProperty(X,material,Q),hasProperty(Y2,shape,cylinder),hasProperty(Y1,material,rubber),hasProperty(Y2,material,rubber),hasProperty(X,color,cyan),hasProperty(Y2,size,small),hasProperty(Y1,color,green),hasProperty(Y2,color,cyan),hasProperty(Y3,material,rubber),front(Y1,X),front(Y2,Y1),right(Y3,Y2),X!=Y1,Y1!=Y2,Y2!=Y3,X!=Y2,X!=Y3,Y1!=Y3. 
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：What is the material of the other purple cone that is the same size as the shiny object ? 
+ASP程序：missing(Q):-hasProperty(X,material,Q),X!=Y,hasProperty(Y,material,metal),hasProperty(X,shape,cone),hasProperty(X,color,purple),same_size(Y,X). 
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：What is the cyan cone made of ? 
+ASP程序：missing(Q):-hasProperty(X,material,Q),hasProperty(X,color,cyan),hasProperty(X,shape,cone). 
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：What is the material of the red cylinder to the left of the purple thing ? 
+ASP程序：missing(Q):-hasProperty(X,material,Q),hasProperty(Y,color,purple),hasProperty(X,color,red),hasProperty(X,shape,cylinder),left(Y,X),X!=Y. 
+
+任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+问题：What is the material of the other tiny cube that is the same color as the matte object ? 
+ASP程序：missing(Q):-hasProperty(X,material,Q),X!=Y,hasProperty(Y,material,rubber),hasProperty(X,shape,cube),hasProperty(X,size,small),same_color(Y,X). 
+\end{lstlisting}
+
+\section{ASP规则修正提示词}
+\label{appendix:rule-fix}
+\subsection{语法错误}
+这类错误通常发生在程序违反了ASP的语法规则时。错误信息会指出文件、行号、列号以及意料之外的符号 。例如，遗漏句点、括号不匹配或使用了Clingo版本不支持的语法都可能导致语法错误 。
+以下是该错误的一个提示词模板：
+\begin{lstlisting}
+任务描述：请根据提供的 ASP 程序和 Clingo 错误信息，对程序进行修正。
+
+错误类型：语法错误 (Syntax Error) - 规则或事实缺少句号。
+
+错误程序：
+node(a).
+node(b) % <- 错误：这里缺少句号
+edge(a, b).
+
+path(X, Y) :- edge(X, Y).
+path(X, Z) :- edge(X, Y), path(Y, Z).
+
+Clingo错误信息：
+<stdin>:3:1: error: syntax error, unexpected IDENTIFIER, expecting '.' or ':
+  node(b)
+
+修正后程序：
+node(a).
+node(b). % <- 修正：添加句号
+edge(a, b).
+
+path(X, Y) :- edge(X, Y).
+path(X, Z) :- edge(X, Y), path(Y, Z).
+\end{lstlisting}
+\subsection{谓词未定义}
+这通常是一个警告，表示某个谓词在规则体中被使用，但从未在任何规则的头部定义过 。
+程序执行不会因此停止，但可能暗示着逻辑错误 。以下是该错误的一个提示词模板：
+\begin{lstlisting}
+任务描述：请根据提供的 ASP 程序和 Clingo 错误信息，对程序进行修正。
+
+错误类型：未定义的谓词（Undefined Predicate）
+
+错误程序：
+p(a) :- q(a).
+
+Clingo错误信息：
+error: in rule at line 1: undefined predicate: q/1
+
+修正后程序：
+q(a).
+p(a) :- q(a).
+\end{lstlisting}
+\subsection{循环负依赖}
+循环负依赖发生在程序的依赖图中存在负循环，即一个谓词通过一系列规则负依赖于自身。
+负循环可能导致程序没有解答集。​此外在某些情况下，可能导致多个解答集的产生，增加了解释的复杂性。以下是该错误的一个提示词模板：
+\begin{lstlisting}
+任务描述：请根据提供的 ASP 程序和 Clingo 错误信息，对程序进行修正。
+
+错误类型：​递归中的负循环（Negative Cycle in Recursion）​
+
+错误程序：
+p(X) :- not q(X).
+q(X) :- not p(X).
+
+Clingo错误信息：
+error: in rule at line 2: cyclic dependency: p/1 -> q/1 -> p/1
+
+修正后程序：
+p(X) :- r(X), not q(X).
+q(X) :- s(X), not p(X).
+\end{lstlisting}
+\subsection{重复的规则或者事实}
+这类错误往往是由于人为输入错误或多个ASP程序进行合并时，没有去重导致。以下是该错误的一个提示词模板：
+\begin{lstlisting}
+任务描述：请根据提供的 ASP 程序和 Clingo 错误信息，对程序进行修正。
+
+错误类型：​重复的规则或事实（Duplicate Rules or Facts）​
+
+错误程序：
+p(a).
+p(a).
+
+Clingo错误信息：
+warning: fact at line 2 is a duplicate of fact at line 1
+
+修正后程序：
+p(a).
+\end{lstlisting}
+\subsection{约束条件恒为假}
+在ASP中，约束条件的作用是排除使Body为真的解答集。
+当约束条件的Body部分恒为真时，该约束条件始终排除所有可能的解答集。出现这一错误时，由于所有可能的解答集都被排除，程序将没有解答集，即程序不一致。
+\begin{lstlisting}
+任务描述：请根据提供的 ASP 程序和 Clingo 错误信息，对程序进行修正。
+
+错误类型：​约束条件总为假（Constraint Always False）
+
+错误程序：
+:- p(X), not p(X).
+
+Clingo错误信息：
+warning: constraint at line 1 is always false
+
+修正后程序：
+:- p(X), not q(X).
+\end{lstlisting}
+\subsection{不安全变量}
+当一个变量出现在规则的头部，但没有在规则体的任何肯定字面量中出现时，就会发生这种错误 。这可能会导致产生无限的稳定模型 。Clingo会报告出错的规则以及不安全的变量名 。以下是该错误的一个提示词模板：
+\begin{lstlisting}
+任务描述：请根据提供的 ASP 程序和 Clingo 错误信息，对程序进行修正。
+
+错误类型：基础化错误 (Grounding Error) - 规则中存在不安全变量。
+
+错误程序：
+reachable(X) :- edge(Y, X). % <- 错误：变量 Y 是不安全的，因为它没有在规则头或任何正文字面量中安全出现
+
+Clingo错误信息：
+<stdin>:5:20-21: error: variable Y is unsafe
+  reachable(X) :- edge(Y, X).
+
+修正后程序：
+reachable(X) :- edge(Y, X), node(Y). % <- 修正：添加 node(Y) 来约束 Y 的范围
+\end{lstlisting}
+\subsection{不一致的事实和规则}
+如果程序中定义的事实和规则之间存在矛盾，会导致出现逻辑错误。以下是该错误的一个提示词模板：
+\begin{lstlisting}
+任务描述：请根据提供的 ASP 程序和 Clingo 错误信息，对程序进行修正。
+
+错误类型:逻辑错误 (Logical Error) - 程序包含直接冲突的规则或事实，导致没有稳定模型。
+
+错误程序:
+light_on. % 灯是开着的
+
+:- light_on. % 约束：灯不能是开着的
+
+Clingo 错误信息:
+Reading from <stdin>
+Solving...
+UNSATISFIABLE
+
+Models       : 0
+Calls        : 1
+Time         : 0.000s (Solving: 0.00s 1st Model: 0.00s Unsat: 0.00s)
+CPU Time     : 0.000s
+
+修正后程序 (根据意图选择修正): (修正方法取决于真实意图。这里假设约束是错误的)
+light_on. % 灯是开着的
+
+% :- light_on. % <- 修正：注释掉或删除冲突的约束
+(或者，如果事实是错误的)
+% light_on. % <- 修正：注释掉或删除冲突的事实
+
+:- light_on. % 约束：灯不能是开着的
+\end{lstlisting}
+\section{预提示}
+\label{appendix:preprompt}
+\subsection{任务介绍}
+我们目前在研究视觉问答的相关问题，需要你完成一系列任务。
+任务包括接收一张图像和与该图像相关的问题作为输入，并产生正确的答案作为输出。
+
+我们已经将图像和问题都预处理成了正确的答案集编程（Answer Set Programming，ASP）表示形式。
+场景/问题对的ASP事实作为ASP程序的实例，我们称之为理论（Theory）。
+这是一个规则集合，用于处理输入实例并计算出正确的答案。
+
+你的任务是帮助我们随着新的问题实例的出现，扩展这个理论，添加新的规则。
+在接下来的部分，我们会先给出一些定义，然后提出具体的任务。
+\subsection{语言语法}
+答案集编程（Answer Set Programming，ASP）是一种面向解决困难搜索问题的声明式编程范式。
+其语法和用法可以总结如下：
+
+规则（Rules）：ASP程序的基本构建模块。一个规则包含头部（head）和体部（body），其书写形式为：头部 :- 体部。
+这意味着如果体部为真，那么头部也为真。
+体部中的谓词之间用逗号分隔，而不是像Prolog中那样用分号。
+例如：flies(tweety) :- bird(tweety), not penguin(tweety). （如果tweety是鸟并且不是企鹅，那么tweety会飞。）
+
+原子（Atoms）：这是基本命题，可以是任何以小写字母开头的字符和数字组成的字符串。
+
+字面量（Literals）：一个原子或其否定。ASP中使用的否定是失败即否定（negation as failure），用not表示。
+例如，not a 表示无法证明a为真。
+
+事实（Facts）：这是没有体部的规则，声明一些无条件为真的事情。
+例如：bird(tweety). （tweety是鸟。）
+
+约束（Constraints）：这是没有头部的规则，用于排除某些答案。
+例如：:- not fly(tweety). （任何tweety不飞的答案集都是不可接受的。）
+
+选择规则（Choice Rules）：这些规则允许生成多个答案，表达原子可以被自由选择是否包含在答案集中。
+例如：{fish(tweety);bird(tweety)} :- penguin(tweety). （意味着企鹅tweety可能是鱼，可能是鸟，也可能都不是。）
+
+注释（Comments）：在ASP中，注释以%开始，直到行尾。它们会被ASP求解器忽略。
+
+在ASP中，不允许在规则的体部使用;来表示逻辑析取。
+相反，我们需要通过单独的规则来表达析取。
+
+在ASP中，当一个变量出现在规则的头部或体部的否定字面量中，但没有出现在体部的肯定字面量中时，该变量被认为是**不安全（unsafe）**的。
+不安全变量的示例：
+
+% 示例1：否定谓词中存在未绑定的Y，常规谓词中存在S和T
+p1(X) :- not q(X,Y), r(S), s(T).
+
+% 示例2：否定谓词中存在未绑定的Y，常规谓词中存在S，否定谓词中存在T
+p2(X, B) :- not q(Y), r(S), not s(T).
+\subsection{场景与问题解释}
+请看以下用于表示图像中物体的ASP形式。
+
+它由可能多个形如 'obj(ID,X,Y,M,C,F,S)' 的谓词组成，
+其中 'ID' 是定义物体的唯一标识符，'X, Y' 是介于 0 和 10 之间的坐标，
+'M' 是材质（material），'C' 是颜色（color），'F' 是形状（form），'S' 是尺寸（size）。
+以下是这种编码的一个示例片段：
+
+obj(0,324,201,rubber,purple,sphere,large). （ID为0的物体，坐标为(324, 201)，材质是橡胶，颜色是紫色，形状是球体，尺寸是大的。）
+obj(1,282,166,rubber,purple,cylinder,small). （ID为1的物体，坐标为(282, 166)，材质是橡胶，颜色是紫色，形状是圆柱体，尺寸是小的。）
+obj(2,216,94,metal,blue,sphere,large).   （ID为2的物体，坐标为(216, 94)，材质是金属，颜色是蓝色，形状是球体，尺寸是大的。）
+obj(3,127,115,metal,green,cube,large).   （ID为3的物体，坐标为(127, 115)，材质是金属，颜色是绿色，形状是立方体，尺寸是大的。）
+\subsection{答案格式}
+
+\subsection{初始ASP知识库}
+\begin{lstlisting}
+% Uniqueness rule/constraint
+state(T+1,ID) :- unique(T), state(T,ID).
+:- unique(T), state(T,ID), state(T,ID'), ID!=ID'.
+
+% Spatial relation rules
+state(T+1,ID) :- relate_left(T), state(T,ID'), left_of(ID,ID').
+state(T+1,ID) :- relate_right(T), state(T,ID'), right_of(ID,ID').
+
+% Count rule
+int(T+1,V) :- count(T), #count{ ID : state(T,ID) } = V.
+
+% Exist rule
+bool(T+1,yes) :- exist(T), state(T,ID).
+bool(T+1,no) :- exist(T), not bool(T+1,yes).
+
+% Filtering rules
+state(T+1,ID) :- filter_large(T), state(T,ID), has_size(ID,large).
+state(T+1,ID) :- filter_small(T), state(T,ID), has_size(ID,small).
+state(T+1,ID) :- filter_gray(T), state(T,ID), has_color(ID,gray).
+state(T+1,ID) :- filter_red(T), state(T,ID), has_color(ID,red).
+state(T+1,ID) :- filter_blue(T), state(T,ID), has_color(ID,blue).
+state(T+1,ID) :- filter_green(T), state(T,ID), has_color(ID,green).
+state(T+1,ID) :- filter_brown(T), state(T,ID), has_color(ID,brown).
+
+% Query functions
+size(T+1,SIZE) :- query_size(T), state(T,ID), has_size(ID,SIZE).
+color(T+1,COLOR) :- query_color(T), state(T,ID), has_color(ID,COLOR).
+
+% Logical operators
+state(T+1,ID) :- and(T,T'), state(T,ID), state(T',ID).
+
+state(T+1,ID) :- or(T,T'), state(T,ID).
+state(T+1,ID') :- or(T,T'), state(T',ID').
+
+bool(T+1, yes) :- boolean_negation(T), bool(T, no).
+bool(T+1, no) :- boolean_negation(T), not bool(T+1, yes).
+
+% Same-attribute relations
+state(T+1,ID') :- same_size(T), state(T,ID), has_size(ID,SIZE), has_size(ID',SIZE), ID!=ID'.
+state(T+1,ID') :- same_color(T), state(T,ID), has_color(ID,COLOR), has_color(ID',COLOR), ID!=ID'.
+
+% % Integer comparison
+bool(T+1,yes) :- equal_integer(T,T'), int(T,V), int(T',V'), V=V'.
+bool(T+1,no) :- equal_integer(T,T'), not bool(T+1,yes).
+
+bool(T+1,yes) :- less_than(T,T'), int(T,V), int(T',V'), V<V'.
+bool(T+1,no) :- less_than(T,T'), not bool(T+1,yes).
+
+
+% Attribute comparison
+bool(T+1,yes) :- equal_size(T,T'), size(T,V), size(T',V'), V=V'.
+bool(T+1,no) :- equal_size(T,T'), not bool(T+1,yes).
+
+bool(T+1,yes) :- equal_color(T,T'), color(T,V), color(T',V'), V=V'.
+bool(T+1,no) :- equal_color(T,T'), not bool(T+1,yes).
+
+
+% State rules
+state(0,ID) :- object(ID).
+state(T+1,ID) :- scene(T), object(ID).
+
+scene(X) :- scene(X,Y).
+
+object(ID) :- obj(ID,_,_,_,_,_,_).
+position(ID,X,Y) :- obj(ID,X,Y,_,_,_,_).
+has_size(ID,SIZE) :- obj(ID,_,_,_,_,_,SIZE).
+has_color(ID,COLOR) :- obj(ID,_,_,_,COLOR,_,_).
+has_material(ID,MATERIAL):- obj(ID,_,_,MATERIAL,_,_,_).
+has_shape(ID,SHAPE) :- obj(ID,_,_,_,_,SHAPE,_).
+
+left_of(ID,ID') :- position(ID,X,Y), position(ID',X',Y'), state(T',ID'), ID!=ID', X<X'.
+right_of(ID,ID') :- position(ID,X,Y), position(ID',X',Y'), state(T',ID'), ID!=ID', X>=X'.
+in_front_of(ID,ID') :- position(ID,X,Y), position(ID',X',Y'), state(T',ID'), ID!=ID', Y>Y'.
+behind_of(ID,ID') :- position(ID,X,Y), position(ID',X',Y'), state(T',ID'), ID!=ID', Y<=Y'.
+
+% Derive answer (T must equal the last point in time)
+ans(V) :- end(T), size(T,V).
+ans(V) :- end(T), color(T,V).
+ans(V) :- end(T), material(T,V).
+ans(V) :- end(T), shape(T,V).
+ans(V) :- end(T), bool(T,V).
+ans(V) :- end(T), int(T,V).
+
+:- not ans(_).
+
+#show ans/1.
+
+% Added rules to handle new instances
+
+\end{lstlisting}
+
+\begin{lstlisting}
+% State rules
+state(0,ID) :- object(ID).
+state(T+1,ID) :- scene(T), object(ID).
+
+scene(X) :- scene(X,Y).
+
+object(ID) :- obj(ID,_,_,_,_,_,_).
+position(ID,X,Y) :- obj(ID,X,Y,_,_,_,_).
+has_size(ID,SIZE) :- obj(ID,_,_,_,_,_,SIZE).
+has_color(ID,COLOR) :- obj(ID,_,_,_,COLOR,_,_).
+has_material(ID,MATERIAL):- obj(ID,_,_,MATERIAL,_,_,_).
+has_shape(ID,SHAPE) :- obj(ID,_,_,_,_,SHAPE,_).
+
+left_of(ID,ID') :- position(ID,X,Y), position(ID',X',Y'), state(T',ID'), ID!=ID', X<X'.
+right_of(ID,ID') :- position(ID,X,Y), position(ID',X',Y'), state(T',ID'), ID!=ID', X>=X'.
+in_front_of(ID,ID') :- position(ID,X,Y), position(ID',X',Y'), state(T',ID'), ID!=ID', Y>Y'.
+behind_of(ID,ID') :- position(ID,X,Y), position(ID',X',Y'), state(T',ID'), ID!=ID', Y<=Y'.
+
+% Derive answer (T must equal the last point in time)
+ans(V) :- end(T), size(T,V).
+ans(V) :- end(T), color(T,V).
+ans(V) :- end(T), material(T,V).
+ans(V) :- end(T), shape(T,V).
+ans(V) :- end(T), bool(T,V).
+ans(V) :- end(T), int(T,V).
+
+:- not ans(_).
+
+#show ans/1.
+
+% Added rules to handle new instances
+\end{lstlisting}
+
+\begin{lstlisting}
+% Spatial relation rules
+state(T+1,ID) :- relate_left(T), state(T,ID'), left_of(ID,ID').
+% Filtering rules
+state(T+1,ID) :- filter_large(T), state(T,ID), has_size(ID,large).
+
+
+% Query functions
+size(T+1,SIZE) :- query_size(T), state(T,ID), has_size(ID,SIZE).
+
+
+% Same-attribute relations
+state(T+1,ID') :- same_size(T), state(T,ID), has_size(ID,SIZE), has_size(ID',SIZE), ID!=ID'.
+
+
+% % Integer comparison
+bool(T+1,yes) :- equal_integer(T,T'), int(T,V), int(T',V'), V=V'.
+bool(T+1,no) :- equal_integer(T,T'), not bool(T+1,yes).
+
+
+% Attribute comparison
+bool(T+1,yes) :- equal_size(T,T'), size(T,V), size(T',V'), V=V'.
+bool(T+1,no) :- equal_size(T,T'), not bool(T+1,yes).
+
+
+
+% State rules
+state(0,ID) :- object(ID).
+state(T+1,ID) :- scene(T), object(ID).
+
+scene(X) :- scene(X,Y).
+
+object(ID) :- obj(ID,_,_,_,_,_,_).
+position(ID,X,Y) :- obj(ID,X,Y,_,_,_,_).
+has_size(ID,SIZE) :- obj(ID,_,_,_,_,_,SIZE).
+has_color(ID,COLOR) :- obj(ID,_,_,_,COLOR,_,_).
+has_material(ID,MATERIAL):- obj(ID,_,_,MATERIAL,_,_,_).
+has_shape(ID,SHAPE) :- obj(ID,_,_,_,_,SHAPE,_).
+
+left_of(ID,ID') :- position(ID,X,Y), position(ID',X',Y'), state(T',ID'), ID!=ID', X<X'.
+right_of(ID,ID') :- position(ID,X,Y), position(ID',X',Y'), state(T',ID'), ID!=ID', X>=X'.
+in_front_of(ID,ID') :- position(ID,X,Y), position(ID',X',Y'), state(T',ID'), ID!=ID', Y>Y'.
+behind_of(ID,ID') :- position(ID,X,Y), position(ID',X',Y'), state(T',ID'), ID!=ID', Y<=Y'.
+
+% Derive answer (T must equal the last point in time)
+ans(V) :- end(T), size(T,V).
+ans(V) :- end(T), color(T,V).
+ans(V) :- end(T), material(T,V).
+ans(V) :- end(T), shape(T,V).
+ans(V) :- end(T), bool(T,V).
+ans(V) :- end(T), int(T,V).
+
+:- not ans(_).
+
+#show ans/1.
+
+% Added rules to handle new instances
+\end{lstlisting}
+
+\begin{lstlisting}
+scene(X) :- scene(X,_).
+
+% Auxiliary predicates
+object(ID) :- obj(ID,_,_,_,_,_,_).
+position(ID,X,Y) :- obj(ID,X,Y,_,_,_,_).
+has_size(ID,SIZE) :- obj(ID,_,_,_,_,_,SIZE).
+has_color(ID,COLOR) :- obj(ID,_,_,_,COLOR,_,_).
+has_material(ID,MATERIAL):- obj(ID,_,_,MATERIAL,_,_,_).
+has_shape(ID,SHAPE) :- obj(ID,_,_,_,_,SHAPE,_).
+
+left_of(ID,ID') :- position(ID,X,Y), position(ID',X',Y'), state(T',ID'), ID!=ID', X<X'.
+right_of(ID,ID') :- position(ID,X,Y), position(ID',X',Y'), state(T',ID'), ID!=ID', X>=X'.
+in_front_of(ID,ID') :- position(ID,X,Y), position(ID',X',Y'), state(T',ID'), ID!=ID', Y>Y'.
+behind_of(ID,ID') :- position(ID,X,Y), position(ID',X',Y'), state(T',ID'), ID!=ID', Y<=Y'.
+
+% Uniqueness rule/constraint
+state(T+1,ID) :- unique(T), state(T,ID).
+:- unique(T), state(T,ID), state(T,ID'), ID!=ID'.
+
+% Spatial relation rules
+state(T+1,ID) :- relate_left(T), state(T,ID'), left_of(ID,ID').
+state(T+1,ID) :- relate_right(T), state(T,ID'), right_of(ID,ID').
+state(T+1,ID) :- relate_front(T), state(T,ID'), in_front_of(ID,ID') .
+state(T+1,ID) :- relate_behind(T), state(T,ID'), behind_of(ID,ID').
+
+% Count rule
+int(T+1,V) :- count(T), #count{ ID : state(T,ID) } = V.
+
+% Exist rule
+bool(T+1,yes) :- exist(T), state(T,ID).
+bool(T+1,no) :- exist(T), not bool(T+1,yes).
+
+% Filtering rules
+state(T+1,ID) :- filter_large(T), state(T,ID), has_size(ID,large).
+state(T+1,ID) :- filter_small(T), state(T,ID), has_size(ID,small).
+state(T+1,ID) :- filter_gray(T), state(T,ID), has_color(ID,gray).
+state(T+1,ID) :- filter_red(T), state(T,ID), has_color(ID,red).
+state(T+1,ID) :- filter_blue(T), state(T,ID), has_color(ID,blue).
+state(T+1,ID) :- filter_green(T), state(T,ID), has_color(ID,green).
+state(T+1,ID) :- filter_brown(T), state(T,ID), has_color(ID,brown).
+state(T+1,ID) :- filter_purple(T), state(T,ID), has_color(ID,purple).
+state(T+1,ID) :- filter_cyan(T), state(T,ID), has_color(ID,cyan).
+state(T+1,ID) :- filter_yellow(T), state(T,ID), has_color(ID,yellow).
+state(T+1,ID) :- filter_metal(T), state(T,ID), has_material(ID,metal).
+state(T+1,ID) :- filter_rubber(T), state(T,ID), has_material(ID,rubber).
+state(T+1,ID) :- filter_sphere(T), state(T,ID), has_shape(ID,sphere).
+state(T+1,ID) :- filter_cylinder(T), state(T,ID), has_shape(ID,cylinder).
+state(T+1,ID) :- filter_cube(T), state(T,ID), has_shape(ID,cube).
+
+% Query functions
+size(T+1,SIZE) :- query_size(T), state(T,ID), has_size(ID,SIZE).
+color(T+1,COLOR) :- query_color(T), state(T,ID), has_color(ID,COLOR).
+material(T+1,MATERIAL) :- query_material(T), state(T,ID), has_material(ID,MATERIAL).
+shape(T+1,SHAPE) :- query_shape(T), state(T,ID), has_shape(ID,SHAPE).
+
+% Logical operators
+state(T+1,ID) :- and(T,T'), state(T,ID), state(T',ID).
+
+state(T+1,ID) :- or(T,T'), state(T,ID).
+state(T+1,ID') :- or(T,T'), state(T',ID').
+
+bool(T+1, yes) :- boolean_negation(T), bool(T, no).
+bool(T+1, no) :- boolean_negation(T), not bool(T+1, yes).
+
+% Same-attribute relations
+state(T+1,ID') :- same_size(T), state(T,ID), has_size(ID,SIZE), has_size(ID',SIZE), ID!=ID'.
+state(T+1,ID') :- same_color(T), state(T,ID), has_color(ID,COLOR), has_color(ID',COLOR), ID!=ID'.
+state(T+1,ID') :- same_material(T), state(T,ID), has_material(ID,MATERIAL), has_material(ID',MATERIAL), ID!=ID'.
+state(T+1,ID') :- same_shape(T), state(T,ID), has_shape(ID,SHAPE), has_shape(ID',SHAPE), ID!=ID'.
+
+% % Integer comparison
+bool(T+1,yes) :- equal_integer(T,T'), int(T,V), int(T',V'), V=V'.
+bool(T+1,no) :- equal_integer(T,T'), not bool(T+1,yes).
+
+bool(T+1,yes) :- less_than(T,T'), int(T,V), int(T',V'), V<V'.
+bool(T+1,no) :- less_than(T,T'), not bool(T+1,yes).
+
+bool(T+1,yes) :- greater_than(T,T'), int(T,V), int(T',V'), V>V'.
+bool(T+1,no) :- greater_than(T,T'), not bool(T+1,yes).
+
+% Attribute comparison
+bool(T+1,yes) :- equal_size(T,T'), size(T,V), size(T',V'), V=V'.
+bool(T+1,no) :- equal_size(T,T'), not bool(T+1,yes).
+
+bool(T+1,yes) :- equal_color(T,T'), color(T,V), color(T',V'), V=V'.
+bool(T+1,no) :- equal_color(T,T'), not bool(T+1,yes).
+
+bool(T+1,yes) :- equal_material(T,T'), material(T,V), material(T',V'), V=V'.
+bool(T+1,no) :- equal_material(T,T'), not bool(T+1,yes).
+
+bool(T+1,yes) :- equal_shape(T,T'), shape(T,V), shape(T',V'), V=V'.
+bool(T+1,no) :- equal_shape(T,T'), not bool(T+1,yes).
+
+
+% State rules
+state(0,ID) :- object(ID).
+state(T+1,ID) :- scene(T), object(ID).
+
+% Derive answer (T must equal the last point in time)
+ans(V) :- end(T), size(T,V).
+ans(V) :- end(T), color(T,V).
+ans(V) :- end(T), material(T,V).
+ans(V) :- end(T), shape(T,V).
+ans(V) :- end(T), bool(T,V).
+ans(V) :- end(T), int(T,V).
+
+:- not ans(_).
+
+#show ans/1.
+
+% Added rules to handle new instances
+\end{lstlisting}
+\subsection{任务说明}
+\begin{lstlisting}
+你的任务是保持ASP理论的更新，添加能够处理问题的规则。
+我们提供了一个可以处理一些实例的初始理论。
+提示输入将包含一个或多个ASP表示的问题。
+如果存在多个问题，它们将用#符号分隔。
+
+你的任务是接收问题，并向理论添加规则，使其能够处理这些问题。
+
+这非常重要！
+如果你违反以下任何规则，输出将是错误的！
+
+你只能向理论添加规则。
+你不能从理论中删除任何规则。
+不要向理论添加事实。
+不要向理论添加注释。
+如果你添加一条规则，它必须只有一个谓词作为头部，并且该谓词应该只包含变量，除非绝对必要。
+添加的规则必须位于注释 '% Added rules to handle new instances' 和 '% End of Theory' 之间。
+不要删除这些注释。
+只输出完整的ASP理论，包含原始规则和新规则。
+如果你输出任何自然语言，答案都是不正确的！
+不要编写任何非显式的ASP规则。
+不要将提示添加到理论中。
+
+添加新规则时，请记住：
+在ASP中，不允许在规则的体部使用;来表示逻辑析取。
+相反，我们需要通过单独的规则来表达析取。
+
+在ASP中，当一个变量出现在规则的头部或体部的否定字面量中，但没有出现在体部的肯定字面量中时，该变量被认为是**不安全（unsafe）**的。
+不安全变量的示例：
+不安全：a(X) :- not b(X). 这里，X是不安全的，因为它没有在体部的肯定字面量中定义。
+不安全：a(Y) :- b(X). 这里，Y是不安全的，因为它没有在体部的肯定字面量中定义。
+不安全：a(TO, no) :- not b(TO, TI), c(TI, ID).
+安全：a(X) :- b(X), not c(X). 在这种情况下，X是安全的，因为它出现在肯定字面量 b(X) 中。
+\end{lstlisting}
+
+\begin{lstlisting}
+你的任务是使用新的规则扩展我们提供的初始ASP理论，这些规则能够计算出正确的答案。
+提示输入将包含一个或多个ASP表示的问题。
+如果存在多个问题，它们将用#符号分隔。
+
+你的任务是接收ASP问题，并返回能够正确处理这些问题的ASP规则。
+识别理论中缺失的谓词并实现它。
+
+这非常重要！
+如果你违反以下任何规则，输出将是错误的！
+
+只输出新的ASP规则。
+不要添加输出ASP事实。
+新规则应尽可能通用，即包含较少的常量和较多的变量。
+新规则应尽可能通用。
+返回新规则时不要使用代码块格式，只需纯文本。
+不要添加任何不安全的规则。
+请记住：
+
+在ASP中，不允许在规则的体部使用;来表示逻辑析取。
+相反，我们需要通过单独的规则来表达析取。
+
+在ASP中，当一个变量出现在规则的头部或体部的否定字面量中，但没有出现在体部的肯定字面量中时，该变量被认为是**不安全（unsafe）**的。
+不安全变量的示例：
+不安全：a(X) :- not b(X). 这里，X是不安全的，因为它没有在体部的肯定字面量中定义。
+不安全：a(Y) :- b(X). 这里，Y是不安全的，因为它没有在体部的肯定字面量中定义。
+不安全：a(TO, no) :- not b(TO, TI), c(TI, ID).
+安全：a(X) :- b(X), not c(X). 在这种情况下，X是安全的，因为它出现在肯定字面量 b(X) 中。
+\end{lstlisting}
+
+\begin{lstlisting}
+你的任务是保持ASP理论的更新，添加能够处理问题的规则。
+我们提供了一个可以处理一些实例的初始理论。
+提示输入将包含一个或多个ASP表示的问题。
+如果只有一个问题，它将附带其相关的ASP场景编码。
+如果存在多个问题，它们将用#符号分隔。
+
+你的任务是接收问题，并向理论添加规则，使其能够处理这些问题。
+
+这非常重要！
+如果你违反以下任何规则，输出将是错误的！
+
+只输出新的ASP规则。
+不要添加输出ASP事实。
+新规则应尽可能通用，即包含较少的常量和较多的变量。
+新规则应尽可能通用。
+返回新规则时不要使用代码块格式，只需纯文本。
+不要添加任何不安全的规则。
+如果你不确定，可以添加多个规则，但这些规则不应相互矛盾。
+不要添加注释也不要输出解释。
+不要输出任何自然语言。
+只以纯文本形式输出新的规则。
+不要输出任何非显式的ASP规则。
+如果你输出任何自然语言，答案都是错误的！
+\end{lstlisting}
+\section{求解结果翻译}
+\label{appendix:result-translate}

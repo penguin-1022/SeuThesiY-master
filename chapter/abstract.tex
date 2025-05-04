@@ -30,7 +30,7 @@
 针对上述问题，本文从构建积木世界部分可见场景中基于空间推理的VQA数据集、
 设计规则自动补充的神经符号VQA方法、设计实现VQA课堂演示原型系统三个方面开展工作，具体如下：
 
-\begin{enumerate}[itemsep=0pt]
+\begin{enumerate}[nosep]
 \item 部分可见积木世界场景空间推理VQA数据集（Partial Observation VQA Dataset, POVQA\-D）构建。
 CLEVR是空间推理的经典数据集，然而CLEVR中问题涉及的物体属性和物体间空间关系在图像中均完全可见，
 通过引入部分可见性与环境约束，构建了覆盖部分场景可见问题的VQA数据集POVQAD。
@@ -57,7 +57,7 @@ Currently, neuro-symbolic models—combining neural networks and symbolic reason
 
 To address these issues, this thesis focuses on three main contributions: (1) constructing a spatial reasoning VQA dataset under partial observability in the block world; (2) designing a neuro-symbolic VQA method with automatic rule complement; and (3) developing a prototype VQA system for classroom demonstration. The details are as follows:
 
-\begin{enumerate}[itemsep=0pt]
+\begin{enumerate}[nosep]
 \item \textbf{Construction of the Partial Observation VQA Dataset (POVQAD).} CLEVR is a classical dataset for spatial reasoning; however, in CLEVR, object attributes and spatial relations are fully visible within images. By introducing partial observability and environmental constraints, we constructed POVQAD, a dataset covering VQA tasks involving partially observable scenes. POVQAD requires models to reason by utilizing both background knowledge and limited observable information, providing a more effective evaluation of spatial reasoning capabilities under partial observability.
 
 \item \textbf{Design of the Rule Complement Neuro-Symbolic Pipeline (RCNSP).} Based on existing neuro-symbolic VQA frameworks, RCNSP introduces a rule distillation module. Before invoking the ASP solver for reasoning, RCNSP uses fine-tuned large language models (LLMs) to automatically supplement missing rules. Experiments conducted with DeepSeek, LLaMA3, and ChatGPT-4o demonstrate that RCNSP achieves an average improvement of 16.5\% in accuracy compared to directly querying VLMs, and an average improvement of 8.9\% compared to existing neuro-symbolic VQA frameworks, indicating the effectiveness of rule distillation in enhancing spatial reasoning performance in partially observable block world scenarios.
