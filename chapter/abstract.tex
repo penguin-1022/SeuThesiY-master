@@ -32,9 +32,9 @@
 
 \begin{enumerate}[nosep]
 \item 部分可见积木世界场景空间推理VQA数据集（Partial Observation VQA Dataset, POVQA\-D）构建。
-CLEVR是空间推理的经典数据集，然而CLEVR中问题涉及的物体属性和物体间空间关系在图像中均完全可见，
+CLEVR是积木世界的经典数据集，然而CLEVR中问题涉及的物体属性和物体间空间关系在图像中均完全可见，
 通过引入部分可见性与环境约束，构建了覆盖部分场景可见问题的VQA数据集POVQAD。
-POVQAD要求模型利用背景知识和部分可见场景中的信息进行推理
+POVQAD要求模型能够利用背景知识和部分可见场景中的信息进行推理
 ，比原数据集更能有效考察模型在部分可见积木世界场景中回答空间推理问题的能力。
 \item 规则自动补充的神经符号VQA框架（Rule Complement Neuro-Symbolic Pipeline, RCNSP）设计。
 RCNSP借鉴现有神经符号VQA框架的工作，对LLM进行提示词优化以提高ASP规则生成、规则修正的语法及语义准确率，
@@ -52,18 +52,21 @@ RCNSP借鉴现有神经符号VQA框架的工作，对LLM进行提示词优化以
 \end{abstract}
 
 \begin{englishabstract}{Answer Set Programming, Visual Question Answering, Spatial Reasoning, Neuro-symbolic Method}
-The block world serves as an important scenario for research, education, experimentation, and evaluation in artificial intelligence, capable of simulating spatial relations among objects in practical applications. Block World Visual Question Answering (VQA) requires Visual Language Models (VLMs) to possess spatial reasoning capabilities. However, existing studies have shown that their accuracy significantly declines when facing partially observable scenes. 
+The Block World is a fundamental scenario for research, education, experimentation, and evaluation in artificial intelligence, capable of simulating spatial relationships among objects in real-world applications. Block World Visual Question Answering (VQA) tasks require Visual Language Models (VLMs) to possess spatial reasoning capabilities. However, existing studies have shown that the accuracy of VLMs significantly drops in partially observable environments. Neuro-symbolic models, which integrate neural networks and symbolic reasoning, convert visual information into logical symbols using deep learning and solve problems through symbolic inference. These models have demonstrated superior performance in spatial reasoning tasks compared to purely neural-based VLMs.
 
-Currently, neuro-symbolic models—combining neural networks and symbolic reasoning—leverage deep learning to translate visual information into logical symbols, followed by symbolic reasoning for problem solving. These models demonstrate superior performance in spatial reasoning tasks compared to purely deep learning-based VLMs. Answer Set Programming (ASP), a symbolic reasoning method characterized by non-monotonic reasoning and efficient solvers, is highly promising for constructing neuro-symbolic VQA frameworks. However, in existing designs, the extension of ASP rules still relies heavily on manual efforts, making it difficult to effectively handle VQA tasks under partial observability conditions.
+Answer Set Programming (ASP), a symbolic reasoning paradigm with non-monotonic reasoning and efficient solvers, has been widely adopted in neuro-symbolic VQA frameworks. However, current frameworks still rely heavily on manual rule construction, making it difficult to handle spatial reasoning tasks in partially observable scenarios effectively.
 
-To address these issues, this thesis focuses on three main contributions: (1) constructing a spatial reasoning VQA dataset under partial observability in the block world; (2) designing a neuro-symbolic VQA method with automatic rule complement; and (3) developing a prototype VQA system for classroom demonstration. The details are as follows:
+To address this issue, this work focuses on three main aspects: constructing a spatial reasoning VQA dataset under partial observability in Block World, designing a neuro-symbolic VQA method with automatic rule augmentation, and developing a classroom demonstration prototype system for VQA. Specifically:
 
 \begin{enumerate}[nosep]
-\item \textbf{Construction of the Partial Observation VQA Dataset (POVQAD).} CLEVR is a classical dataset for spatial reasoning; however, in CLEVR, object attributes and spatial relations are fully visible within images. By introducing partial observability and environmental constraints, we constructed POVQAD, a dataset covering VQA tasks involving partially observable scenes. POVQAD requires models to reason by utilizing both background knowledge and limited observable information, providing a more effective evaluation of spatial reasoning capabilities under partial observability.
+\item \textbf{Construction of the Partial Observation VQA Dataset (POVQAD):}  
+CLEVR is a classical dataset for spatial reasoning, but all object attributes and spatial relations in its scenes are fully visible. We introduce partial observability and environmental constraints to construct POVQAD, a dataset that challenges models to reason with background knowledge and limited visual input. Compared to existing datasets, POVQAD better evaluates a model's capability in answering spatial reasoning questions under partial observability in the Block World.
 
-\item \textbf{Design of the Rule Complement Neuro-Symbolic Pipeline (RCNSP).} Based on existing neuro-symbolic VQA frameworks, RCNSP introduces a rule distillation module. Before invoking the ASP solver for reasoning, RCNSP uses fine-tuned large language models (LLMs) to automatically supplement missing rules. Experiments conducted with DeepSeek, LLaMA3, and ChatGPT-4o demonstrate that RCNSP achieves an average improvement of 16.5\% in accuracy compared to directly querying VLMs, and an average improvement of 8.9\% compared to existing neuro-symbolic VQA frameworks, indicating the effectiveness of rule distillation in enhancing spatial reasoning performance in partially observable block world scenarios.
+\item \textbf{Design of the Rule Complement Neuro-Symbolic Pipeline (RCNSP):}  
+RCNSP builds upon existing neuro-symbolic frameworks and enhances large language models (LLMs) with prompt optimization to improve the syntactic and semantic accuracy of ASP rule generation and correction. Furthermore, it introduces a rule distillation module to automatically expand ASP rules. Experiments with DeepSeek, LLaMA3, and ChatGPT-4o demonstrate that RCNSP improves the average accuracy by 16.5\% over direct VLM questioning and by 8.9\% over existing neuro-symbolic VQA frameworks. These results confirm that rule distillation significantly enhances the spatial reasoning accuracy in partially observable Block World scenarios.
 
-\item \textbf{Development of a Block World VQA Prototype System.} Based on RCNSP and POVQAD, a prototype system for block world VQA was developed. In the context of teaching automated planning courses, the system allows instructors to pose spatial reasoning questions, with the system answering while displaying intermediate reasoning steps and logical chains. This facilitates demonstrations of how intelligent agents understand and plan about external environments. Preliminary tests show that, under a hardware setup of an Intel Core i9-12900K CPU, 128GB RAM, and three RTX 3090 GPUs in parallel, the system achieves a concurrency of 38 with a 90\% response time of 6.9 seconds, meeting the performance requirements for classroom use.
+\item \textbf{Implementation of a Block World VQA Prototype System:}  
+Based on the RCNSP framework and the POVQAD dataset, a prototype system for Block World VQA is implemented. This system simulates classroom teaching of automated planning, where instructors pose spatial reasoning questions to the system. The system provides answers along with intermediate reasoning steps and logical chains, helping students understand how intelligent agents perceive and plan in their environments. Preliminary tests show that on a system with an Intel Core i9-12900K CPU, 128GB RAM, and three RTX 3090 GPUs, the system supports a concurrency of 38 with a 90\% response time of 6.9 seconds, meeting the performance requirements of educational scenarios in automated planning.
 \end{enumerate}
 \end{englishabstract}
 
