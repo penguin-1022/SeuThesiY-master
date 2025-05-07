@@ -1566,7 +1566,7 @@
       \endverb
       \keyw{cunnington2024neurosymboliclearninganswerset}
     \endentry
-    \entry{wang2024dspybasedneuralsymbolicpipelineenhance}{online}{}{}
+    \entry{wang2024dspy}{article}{}{}
       \name{author}{3}{}{%
         {{hash=87cb0cf10631e7a96744b1a0767961c1}{%
            family={Wang},
@@ -1600,25 +1600,15 @@
       \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{eprintclass}{cs.AI}
-      \field{eprinttype}{arXiv}
+      \field{journaltitle}{arXiv preprint arXiv:2411.18564}
       \field{langid}{english}
       \field{title}{Dspy-based Neural-Symbolic Pipeline to Enhance Spatial Reasoning in LLMs}
-      \field{usera}{EB}
+      \field{usera}{J}
       \field{userd}{english}
       \field{userf}{english}
       \field{year}{2024}
       \field{dateera}{ce}
-      \verb{eprint}
-      \verb 2411.18564
-      \endverb
-      \verb{urlraw}
-      \verb https://arxiv.org/abs/2411.18564
-      \endverb
-      \verb{url}
-      \verb https://arxiv.org/abs/2411.18564
-      \endverb
-      \keyw{wang2024dspybasedneuralsymbolicpipelineenhance}
+      \keyw{wang2024dspy}
     \endentry
     \entry{sam-abraham-etal-2024-clevr}{inproceedings}{}{}
       \name{author}{3}{}{%
@@ -3076,8 +3066,8 @@
       \strng{authornamehash}{e47a2d79cf54093c9f06ba61f3584215}
       \strng{authorfullhash}{4db7fe5a8dea87f90d5ff7bfcbd75609}
       \strng{authorfullhashraw}{4db7fe5a8dea87f90d5ff7bfcbd75609}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}
@@ -3141,8 +3131,8 @@
       \strng{authornamehash}{b0058e7ec5e8f862c5d605fb459253ab}
       \strng{authorfullhash}{f210693436fc0dbccbc0a0754a494b42}
       \strng{authorfullhashraw}{f210693436fc0dbccbc0a0754a494b42}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{European Conference on Computer Vision (ECCV), Workshops}
@@ -3629,8 +3619,8 @@
       \strng{authornamehash}{d4ef2548433d417ed0a08049928b3fc1}
       \strng{authorfullhash}{6af98bcfb7fccfb9ca88b04097c016fa}
       \strng{authorfullhashraw}{6af98bcfb7fccfb9ca88b04097c016fa}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{arXiv preprint arXiv:2302.06590}
@@ -4168,8 +4158,8 @@
       \strng{authornamehash}{73e92a052512e23e8e1b808470de6bfe}
       \strng{authorfullhash}{49892dc82cf49b0c5a7feda525dd2813}
       \strng{authorfullhashraw}{49892dc82cf49b0c5a7feda525dd2813}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{KR}
@@ -4434,8 +4424,8 @@
       \strng{authornamehash}{d8ad6a6e974e3dec9ec94445656eb08d}
       \strng{authorfullhash}{b30ff344098007e5a25f5629ff53abfe}
       \strng{authorfullhashraw}{b30ff344098007e5a25f5629ff53abfe}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.AI}
@@ -4694,8 +4684,8 @@
       \strng{authorfullhash}{2ade867ae3ef0be7ef5755284d4a2b07}
       \strng{authorfullhashraw}{2ade867ae3ef0be7ef5755284d4a2b07}
       \field{extraname}{3}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the 29th International Joint Conference on Artificial Intelligence (IJCAI)}
@@ -4814,50 +4804,6 @@
       \field{dateera}{ce}
       \keyw{bauer2023neuro}
     \endentry
-    \entry{wang2024dspy}{article}{}{}
-      \name{author}{3}{}{%
-        {{hash=87cb0cf10631e7a96744b1a0767961c1}{%
-           family={Wang},
-           familyi={W\bibinitperiod},
-           given={Rong},
-           giveni={R\bibinitperiod}}}%
-        {{hash=8016fcef174ea5388b737fab7c4e1672}{%
-           family={Sun},
-           familyi={S\bibinitperiod},
-           given={Kun},
-           giveni={K\bibinitperiod}}}%
-        {{hash=df7f6b70d4658b031eb9800ec429581f}{%
-           family={Kuhn},
-           familyi={K\bibinitperiod},
-           given={Jonas},
-           giveni={J\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \strng{namehash}{29ba1ff73300470bfa42bd2c790af4fe}
-      \strng{fullhash}{ed7ffcd227fe330b58a57a68df96cd93}
-      \strng{fullhashraw}{ed7ffcd227fe330b58a57a68df96cd93}
-      \strng{bibnamehash}{ed7ffcd227fe330b58a57a68df96cd93}
-      \strng{authorbibnamehash}{ed7ffcd227fe330b58a57a68df96cd93}
-      \strng{authornamehash}{29ba1ff73300470bfa42bd2c790af4fe}
-      \strng{authorfullhash}{ed7ffcd227fe330b58a57a68df96cd93}
-      \strng{authorfullhashraw}{ed7ffcd227fe330b58a57a68df96cd93}
-      \field{extraname}{5}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{arXiv preprint arXiv:2411.18564}
-      \field{langid}{english}
-      \field{title}{Dspy-based Neural-Symbolic Pipeline to Enhance Spatial Reasoning in LLMs}
-      \field{usera}{J}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{year}{2024}
-      \field{dateera}{ce}
-      \keyw{wang2024dspy}
-    \endentry
     \entry{moe_ai_2024}{online}{}{}
       \name{author}{1}{}{%
         {{hash=2b031fe0f29fedfa13b0c48bd3bceeea}{%
@@ -4895,56 +4841,6 @@
       \verb http://www.moe.gov.cn/jyb_xwfb/gzdt_gzdt/s5987/202412/t20241202_1165500.html
       \endverb
       \keyw{moe_ai_2024}
-    \endentry
-    \entry{van1991well}{article}{}{}
-      \name{author}{3}{}{%
-        {{hash=ef35ec63067986c3cead0f3506d0b9c0}{%
-           family={Van\bibnamedelima Gelder},
-           familyi={V\bibinitperiod\bibinitdelim G\bibinitperiod},
-           given={Allen},
-           giveni={A\bibinitperiod}}}%
-        {{hash=086104de2402fc3119dd543cacbc8f6f}{%
-           family={Ross},
-           familyi={R\bibinitperiod},
-           given={Kenneth\bibnamedelima A},
-           giveni={K\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
-        {{hash=e4acab70644d78b8a036751278309d48}{%
-           family={Schlipf},
-           familyi={S\bibinitperiod},
-           given={John\bibnamedelima S},
-           giveni={J\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \list{publisher}{1}{%
-        {ACM}%
-      }
-      \strng{namehash}{d21b0795b47d0e17d22f44f0747d0522}
-      \strng{fullhash}{ff2c02edc8e2cd73c163bb1c0e5dafb1}
-      \strng{fullhashraw}{ff2c02edc8e2cd73c163bb1c0e5dafb1}
-      \strng{bibnamehash}{ff2c02edc8e2cd73c163bb1c0e5dafb1}
-      \strng{authorbibnamehash}{ff2c02edc8e2cd73c163bb1c0e5dafb1}
-      \strng{authornamehash}{d21b0795b47d0e17d22f44f0747d0522}
-      \strng{authorfullhash}{ff2c02edc8e2cd73c163bb1c0e5dafb1}
-      \strng{authorfullhashraw}{ff2c02edc8e2cd73c163bb1c0e5dafb1}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Journal of the {ACM}}
-      \field{langid}{english}
-      \field{number}{3}
-      \field{title}{The Well-Founded Semantics for General Logic Programs}
-      \field{usera}{J}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{volume}{38}
-      \field{year}{1991}
-      \field{dateera}{ce}
-      \field{pages}{619\bibrangedash 649}
-      \range{pages}{31}
-      \keyw{van1991well}
     \endentry
     \entry{li2022grounded}{inproceedings}{}{}
       \name{author}{6}{}{%
@@ -5006,69 +4902,6 @@
       \field{pages}{10965\bibrangedash 10975}
       \range{pages}{11}
       \keyw{li2022grounded}
-    \endentry
-    \entry{fandinno2021planningincompleteinformationquantified}{online}{}{}
-      \name{author}{5}{}{%
-        {{hash=ff0cc9e7122367357b3186495ab0f058}{%
-           family={Fandinno},
-           familyi={F\bibinitperiod},
-           given={Jorge},
-           giveni={J\bibinitperiod}}}%
-        {{hash=a43c9333f32b74907720538af7308c5c}{%
-           family={Laferrière},
-           familyi={L\bibinitperiod},
-           given={François},
-           giveni={F\bibinitperiod}}}%
-        {{hash=586007140096e6d78832f56de1edf859}{%
-           family={Romero},
-           familyi={R\bibinitperiod},
-           given={Javier},
-           giveni={J\bibinitperiod}}}%
-        {{hash=3c55d70c19bd5f5a654a6ad7ae64450c}{%
-           family={Schaub},
-           familyi={S\bibinitperiod},
-           given={Torsten},
-           giveni={T\bibinitperiod}}}%
-        {{hash=fa9d149ca8966d751c3d8d9a2201aa8e}{%
-           family={Son},
-           familyi={S\bibinitperiod},
-           given={Tran\bibnamedelima Cao},
-           giveni={T\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \strng{namehash}{4c2cf4fdd700a0a9b3d65ff247f99ced}
-      \strng{fullhash}{dd62c7efc7fe20e6a30e5034843836c9}
-      \strng{fullhashraw}{dd62c7efc7fe20e6a30e5034843836c9}
-      \strng{bibnamehash}{3d4c54e334e83947e9c9670af4eccf4a}
-      \strng{authorbibnamehash}{3d4c54e334e83947e9c9670af4eccf4a}
-      \strng{authornamehash}{4c2cf4fdd700a0a9b3d65ff247f99ced}
-      \strng{authorfullhash}{dd62c7efc7fe20e6a30e5034843836c9}
-      \strng{authorfullhashraw}{dd62c7efc7fe20e6a30e5034843836c9}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{eprintclass}{cs.AI}
-      \field{eprinttype}{arXiv}
-      \field{langid}{english}
-      \field{title}{Planning with Incomplete Information in Quantified Answer Set Programming}
-      \field{usera}{EB}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{year}{2021}
-      \field{dateera}{ce}
-      \verb{eprint}
-      \verb 2108.06405
-      \endverb
-      \verb{urlraw}
-      \verb https://arxiv.org/abs/2108.06405
-      \endverb
-      \verb{url}
-      \verb https://arxiv.org/abs/2108.06405
-      \endverb
-      \keyw{fandinno2021planningincompleteinformationquantified}
     \endentry
     \entry{ge2021selfdistillationbatchknowledgeensembling}{online}{}{}
       \name{author}{9}{}{%
