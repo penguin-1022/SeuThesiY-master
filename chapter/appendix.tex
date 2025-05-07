@@ -3,7 +3,8 @@
 \subsection{约束模板}
 \label{appendix:constraints}
 \begin{lstlisting}
-:- object(X), at(X, R'), not has_property(X, P1', V1'). :- object(X), at(X, R'), not has_property(X, P2', V2').
+:- object(X), at(X, R'), not has_property(X, P1', V1'). 
+:- object(X), at(X, R'), not has_property(X, P2', V2').
 :- object(X), at(X, R'), has_property(X, P1', V1'). :- object(X), at(X, R'), has_property(X, P2', V2').
 :- object(X), at(X, R'), has_property(X, P1', V1'). :- object(X), at(X, R'), has_property(X, P1', V2').
 :- object(X), at(X, R'), not has_property(X, P1', V1'), not has_property(X, P2', V2').
@@ -14,10 +15,21 @@
 :- #count{X1, X2: sameProperty(X1, X2, P1'), object(X1), object(X2), at(X1, R1'), at(X2, R2')}>=N'.
 :- #count{X1, X2: sameProperty(X1, X2, P1'), object(X1), object(X2), at(X1, R1'), at(X2, R2'), has_property(X1, P2', V2'), has_property(X2, P2', V2')}>=N'.
 :- object(X), has_property(X, P1', V1').
+% 如果物体 X 部分遮挡物体 Y，则它们必须位于同一区域，并且 X 的位置在 Y 的前方。
+:- partially_occlude(X, Y), not at(X, R), not at(Y, R).
+:- partially_occlude(X, Y), not front(X, Y).
+
+% 如果物体 X 完全遮挡物体 Y，则它们必须位于同一区域，并且 X 的位置完全覆盖 Y。
+:- fully_occlude(X, Y), not at(X, R), not at(Y, R).
+:- fully_occlude(X, Y), not completelyCovers(X, Y).
+
+% 限制场景中遮挡关系的数量。
+:- #count{partially_occlude(X, Y): object(X), object(Y)} < N.
+:- #count{fully_occlude(X, Y): object(X), object(Y)} < M.
 \end{lstlisting}
-\subsection{环境}
+\subsection{全局约束}
 \label{appendix:environment}
-生成的每个场景都需要满足其对应环境中的所有约束。以下是POVQAD中所有环境共享的通用规则，所有规则均以ASP表示：
+生成的每个场景都需要满足其对应环境中的所有约束。以下是POVQAD中所有环境共享的通用全局约束，所有约束均以ASP表示：
 \begin{lstlisting}
 1. property(color, gray). property(color, red).
 2. property(color, blue). property(color, green).
@@ -27,23 +39,18 @@
 6. property(shape, sphere). property(shape, cone).
 7. property(size, small). property(size, medium).
 8. property(size, large).
-9. property(material, rubber).
-property(material, metal).
+9. property(material, rubber). property(material, metal).
 10. region(0). region(1). region(2). region(3).
-11. right_R(0, 0). right_R(0, 1). right_R(0, 2).
-right_R(0, 3).
-12. right_R(1, 1). right_R(1, 3).
-13. right_R(2, 0). right_R(2, 1). right_R(2, 2).
-right_R(2, 3).
-14. right_R(3, 1). right_R(3, 3).
-15. left_R(R1, R2) :- right_R(R2, R1).
-16. front_R(0, 0). front_R(0, 1). front_R(0, 2).
-front_R(0, 3).
-17. front_R(1, 0). front_R(1, 1). front_R(1, 2).
-front_R(1, 3).
-18. front_R(2, 2). front_R(2, 3).
-19. front_R(3, 2). front_R(3, 3).
-20. behind_R(R1, R2) :- front_R(R2, R1).
+11. right(0, 0). right(0, 1). right(0, 3).
+12. right(1, 1). 
+13. right(2, 1). right(2, 2). right(2, 3).
+14. right(3, 3).
+15. left(R1, R2) :- right(R2, R1).
+16. above(0, 0).
+17. above(1, 1).
+18. above(2, 0). above(2, 1). above(2, 2).
+19. above(3, 0). above(3, 1). above(3, 3).
+20. below(R1, R2) :- above(R2, R1).
 21. sameProperty(X1, X2, P) :- has_property(X1,P,V),}
 22. has_property(X2,P,V), X1!=X2.
 23. same_color(X,Y):- sameProperty(X, Y, color).
@@ -58,14 +65,16 @@ front_R(1, 3).
 32. property(shape, V)}1 :- obj(X).
 33. 1{has_property(X, size, V) :
 34. property(size, V)}1 :- obj(X).
-35.1{at(X, R): region(R)}1 :- obj(X).
-36.:- sameProperty(X1, X2, color),
+35. 1{at(X, R): region(R)}1 :- obj(X).
+36. :- sameProperty(X1, X2, color),
 37. sameProperty(X1, X2, material),
 38. sameProperty(X1, X2, size)},
 39. sameProperty(X1, X2, shape),
 40. obj(X1), obj(X2), X1!=X2.
-41.exceed_region_capacity(R) :42. #count{X: obj(X), at(X, R)} >= 4, region(R).
-43:- exceed_region_capacity(_).
+41. height(0). height(1).
+42. region(0, 0). region(1, 0). front(1, 0).
+43. behind(R1, R2) :- front(R2, R1).
+44. :- partially_occludes(O1,O2), fully_occludes(O1,O2).
 \end{lstlisting}
 以上通用规则对应的自然语言含义如下：
 \begin{lstlisting}
@@ -75,55 +84,58 @@ front_R(1, 3).
 7-8. 尺寸属性取值范围（3级）：小、中、大。
 9. 材质属性取值范围（2种）：橡胶、金属。
 10. 场景划分为四个空间区域，编号为0、1、2、3。
-11. 当对象A位于区域0时，其右侧对象B的合法区域：0/1/2/3。
-12. 当对象A位于区域1时，其右侧对象B的合法区域：1/3。
-13. 当对象A位于区域2时，其右侧对象B的合法区域：0/1/2/3。
-14. 当对象A位于区域3时，其右侧对象B的合法区域：1/3。
+11. 当对象A位于区域0时，其右侧对象B的合法区域：0/1/3。
+12. 当对象A位于区域1时，其右侧对象B的合法区域：1。
+13. 当对象A位于区域2时，其右侧对象B的合法区域：1/2/3。
+14. 当对象A位于区域3时，其右侧对象B的合法区域：3。
 15. 方位对称性规则：若对象A在对象B右侧，则对象B必在对象A左侧。
-16. 当对象A位于区域0时，其前方对象B的合法区域：0/1/2/3。
-17. 当对象A位于区域1时，其前方对象B的合法区域：0/1/2/3。
-18. 当对象A位于区域2时，其前方对象B的合法区域：2/3。
-19. 当对象A位于区域3时，其前方对象B的合法区域：2/3。
-20. 方位对称性规则：若对象A在对象B前方，则对象B必在对象A后方。
+16. 当对象A位于区域0时，其上方对象B的合法区域：0。
+17. 当对象A位于区域1时，其上方对象B的合法区域：1。
+18. 当对象A位于区域2时，其上方对象B的合法区域：0/1/2。
+19. 当对象A位于区域3时，其上方对象B的合法区域：0/1/3。
+20. 方位对称性规则：若对象A在对象B上方，则对象B必在对象A下方。
 27-28. 颜色属性强制单值约束：每个对象必须且只能具有一个颜色值。
 29-30. 材质属性强制单值约束：每个对象必须且只能具有一个材质值。
 31-32. 形状属性强制单值约束：每个对象必须且只能具有一个形状值。
 33-34. 尺寸属性强制单值约束：每个对象必须且只能具有一个尺寸值。
 35. 空间位置强制单值约束：每个对象必须且只能被分配至一个区域。
 36-40. 对象差异性原则：任意两个对象不得在所有四个属性（颜色/形状/尺寸/材质）上完全一致。
-41-43. 区域容量限制：每个空间区域最多容纳3个对象。
+41. 高度划分为两层，编号0和1。
+42. 对象A的高度为1，对象B的高度为0时，则对象A在对象B的前方。
+43. 方位对称性规则：若对象A在对象B前方，则对象B必在对象A后方。
+44. 不允许对象A部分遮挡B的同时，又部分遮挡C。
 \end{lstlisting}
 以下用ASP表示的约束来表示特定环境。
 \begin{lstlisting}
 44. obj(0..4).
 45. :- obj(X), at(X, 0),
-has_property(X, size, large).
+    has_property(X, size, large).
 46. :- obj(X), at(X, 0),
-has_property(X, shape, cylinder).
+    has_property(X, shape, cylinder).
 47. :- obj(X), at(X, 0),
-has_property(X, shape, cone).
+    has_property(X, shape, cone).
 48. :- obj(X), at(X, 1),
-has_property(X, size, small).
+    has_property(X, size, small).
 49. :- obj(X), at(X, 1),
-has_property(X, shape, cone).
+    has_property(X, shape, cone).
 50. :- obj(X), at(X, 1),
-has_property(X, material, rubber).
+    has_property(X, material, rubber).
 51. :- obj(X), at(X, 1),
-has_property(X, shape, cube).
+    has_property(X, shape, cube).
 52. :- obj(X), at(X, 2),
-not has_property(X, size, medium).
+    not has_property(X, size, medium).
 53. :- obj(X), at(X, 2),
-not has_property(X, material, metal).
+    not has_property(X, material, metal).
 54. :- obj(X), at(X, 2),
-has_property(X, material, rubber).
+    has_property(X, material, rubber).
 55. :- obj(X), at(X, 2),
-has_property(X, shape, sphere).
+    has_property(X, shape, sphere).
 56. :- obj(X), at(X, 2),
-has_property(X, shape, cube).
+    has_property(X, shape, cube).
 57. :- obj(X), at(X, 3),
-has_property(X, size, small).
+    has_property(X, size, small).
 58 :- obj(X), at(X, 3),
-not has_property(X, material, metal),
+    not has_property(X, material, metal),
 59. not has_property(X, color, blue).
 60. :- #count{X1, X2: sameProperty(X1, X2, shape),
 61. obj(X1), obj(X2), at(X1, 3), at(X2, 2),
@@ -131,7 +143,7 @@ not has_property(X, material, metal),
 63. has_property(X2, color, yellow)} >= 4.
 64. :- #count{X1, X2: sameProperty(X1, X2, color),
 65. obj(X1), obj(X2),
-66. at(X1, 0), at(X2, 3)} >= 2.
+66. {at(X1, 0), at(X2, 3)} >= 2.
 \end{lstlisting}
 以下是对前述的规则的逐行解释：
 \begin{lstlisting}
@@ -153,129 +165,217 @@ not has_property(X, material, metal),
 60-63. 区域3与区域2内黄色对象组合规则：相同形状的黄色对象配对组数≤1。
 64-66. 区域0与区域3联合约束： 具有相同颜色的对象配对组数 =0（严格禁止）。
 \end{lstlisting}
+\subsection{问题模板}
+占位符的含义为：
+<Z>、<C>、<M>、<S>：目标对象的大小、颜色、材质、形状；<Z1>,<C1>,…<S1>, <R1>,<R2>：参照对象及其空间关系
+\subsubsection{位置类问题}
+\begin{lstlisting}
+Which region contains the <Z> <C> <M> <S> that is <R1> the <Z1> <C1> <M1> <S1> and <R2> the <Z2> <C2> <M2> <S2>?
+
+In which region is the <Z> <C> <M> <S> located that is both <R1> the <Z1> <C1> <M1> <S1> and <R2> the <Z2> <C2> <M2> <S2>?
+
+What region is the <Z> <C> <M> <S>—which lies <R1> the <Z1> <C1> <M1> <S1>—in?
+
+Which of regions 0–3 does the <Z> <C> <M> <S> occupy, given that it is <R1> the <Z1> <C1> <M1> <S1> and between the <Z2> <C2> <M2> <S2> and the <Z3> <C3> <M3> <S3>?
+
+The <Z> <C> <M> <S> that is both <R1> the <Z1> <C1> <M1> <S1> and <R2> the <Z2> <C2> <M2> <S2> is in which region?
+\end{lstlisting}
+\subsubsection{位置关系类问题}
+What is the spatial relation <R> between the <Z> <C> <M> <S> and the <Z1> <C1> <M1> <S1>?
+
+Which of the following describes how the <Z> <C> <M> <S> is positioned relative to the <Z1> <C1> <M1> <S1>: <R1> / <R2> / <R3>?
+
+What is the relation between the <Z> <C> <M> <S> that is <R2> the <Z1> <C1> <M1> <S1> and the <Z2> <C2> <M2> <S2>?
+
+Between <R1> and <R2>, which one holds for the <Z> <C> <M> <S> relative to the <Z1> <C1> <M1> <S1>?
+
+What relation <R> holds between the <Z> <C> <M> <S> and each of <Z1> <C1> <M1> <S1> and <Z2> <C2> <M2> <S2>?
+\subsubsection{与位置相关的计数类问题}
+How many <S> are <R> the <Z> <C> <M> <S>?
+
+How many <Z> <C> <M> <S> are both <R1> the <Z1> <C1> <M1> <S1> and <R2> the <Z2> <C2> <M2> <S2>?
+
+What is the number of <S> that are <R> any of the <Z1> <C1> <M1> <S1>, <Z2> <C2> <M2> <S2>, and <Z3> <C3> <M3> <S3>?
+
+How many objects are between the <Z1> <C1> <M1> <S1> and the <Z2> <C2> <M2> <S2>?
+
+How many <S> that have <C> color are <R> the <Z> <C> <M> <S>?
 \section{语义解析提示词}
 \label{appendix:semantics-parsing-prompts}
-\subsection{颜色查询}
+% \subsection{颜色查询}
+% \begin{lstlisting}
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：There is another small cylinder that is made of the same material as the small ball ; what is its color ? 
+% ASP程序：missing(Q):-has_property(X,color,Q),X!=Y,has_property(Y,size,small),has_property(X,shape,cylinder),has_property(Y,shape,sphere),has_property(X,size,small),same_material(Y,X).
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：There is a big ball that is both behind the purple metal object and behind the shiny sphere ; what color is it ? 
+% ASP程序：missing(Q):-has_property(X,color,Q),has_property(Y2,material,metal),has_property(X,size,large),has_property(Y1,material,metal),has_property(X,shape,sphere),has_property(Y1,color,purple),has_property(Y2,shape,sphere),behind(Y1,X),behind(Y2,X),X!=Y1,Y1!=Y2,X!=Y2.
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：What is the color of the cone on the left side of the rubber object ? 
+% ASP程序：missing(Q):-has_property(X,color,Q),has_property(Y,material,rubber),has_property(X,shape,cone),left(Y,X),X!=Y.
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：The block is what color ? 
+% ASP程序：missing(Q):-has_property(X,color,Q),has_property(X,shape,cube). 
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：There is a sphere on the right side of the tiny green metallic sphere in front of the small brown object ; what is its color ? 
+% ASP程序：missing(Q):-has_property(X,color,Q),has_property(Y1,color,green),has_property(Y1,shape,sphere),has_property(X,shape,sphere),has_property(Y2,size,small),has_property(Y1,size,small),has_property(Y2,color,brown),has_property(Y1,material,metal),right(Y1,X),front(Y2,Y1),X!=Y1,Y1!=Y2,X!=Y2. 
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：There is a rubber object that is on the left side of the tiny cyan shiny ball to the right of the cyan object that is in front of the small green metal block ; what is its color ?
+% ASP程序：missing(Q):-has_property(X,color,Q),has_property(Y2,color,cyan),has_property(Y3,material,metal),has_property(Y3,color,green),has_property(Y1,material,metal),has_property(Y3,size,small),has_property(Y1,color,cyan),has_property(Y1,shape,sphere),has_property(Y3,shape,cube),has_property(X,material,rubber),has_property(Y1,size,small),left(Y1,X),right(Y2,Y1),front(Y3,Y2),X!=Y1,Y1!=Y2,Y2!=Y3,X!=Y2,X!=Y3,Y1!=Y3. 
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：There is another tiny rubber object that is the same shape as the purple matte object ; what color is it ? 
+% ASP程序：missing(Q):-has_property(X,color,Q),X!=Y,has_property(Y,color,purple),has_property(Y,material,rubber),has_property(X,material,rubber),has_property(X,size,small),same_shape(Y,X). 
+% \end{lstlisting}
+% \subsection{形状查询}
+% \begin{lstlisting}
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：What shape is the blue object left of the medium blue rubber object on the right side of the big object right of the small cyan rubber cone ?
+% ASP程序：missing(Q):-has_property(X,shape,Q),has_property(Y3,shape,cone),has_property(X,color,blue),has_property(Y1,color,blue),has_property(Y1,size,medium),has_property(Y3,size,small),has_property(Y3,material,rubber),has_property(Y2,size,large),has_property(Y3,color,cyan),has_property(Y1,material,rubber),left(Y1,X),right(Y2,Y1),right(Y3,Y2),X!=Y1,Y1!=Y2,Y2!=Y3,X!=Y2,X!=Y3,Y1!=Y3.
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：What shape is the other blue object that is the same material as the cylinder ? 
+% ASP程序：missing(Q):-has_property(X,shape,Q),X!=Y,has_property(X,color,blue),has_property(Y,shape,cylinder),same_material(Y,X). 
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：There is a tiny object that is to the right of the small red ball and in front of the small blue rubber cube ; what shape is it ? 
+% ASP程序：missing(Q):-has_property(X,shape,Q),has_property(Y2,size,small),has_property(Y1,color,red),has_property(Y2,shape,cube),has_property(Y2,color,blue),has_property(X,size,small),has_property(Y2,material,rubber),has_property(Y1,size,small),has_property(Y1,shape,sphere),right(Y1,X),front(Y2,X),X!=Y1,Y1!=Y2,X!=Y2. 
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：What is the shape of the brown object that is in front of the block that is behind the medium object ? 
+% ASP程序：missing(Q):-has_property(X,shape,Q),has_property(Y2,size,medium),has_property(Y1,shape,cube),has_property(X,color,brown),front(Y1,X),behind(Y2,Y1),X!=Y1,Y1!=Y2,X!=Y2. 
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：What shape is the blue thing that is in front of the small red metal cone ? 
+% ASP程序：missing(Q):-has_property(X,shape,Q),has_property(Y,shape,cone),has_property(Y,color,red),has_property(Y,size,small),has_property(X,color,blue),has_property(Y,material,metal),front(Y,X),X!=Y. 
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：What is the shape of the other purple object that is the same size as the gray object ? 
+% ASP程序：missing(Q):-has_property(X,shape,Q),X!=Y,has_property(Y,color,gray),has_property(X,color,purple),same_size(Y,X). 
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：What is the shape of the other tiny object that is the same color as the tiny block ? 
+% ASP程序：missing(Q):-has_property(X,shape,Q),X!=Y,has_property(Y,shape,cube),has_property(Y,size,small),has_property(X,size,small),same_color(Y,X). 
+% \end{lstlisting}
+% \subsection{大小查询}
+% \begin{lstlisting}
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：There is another gray object that is made of the same material as the cyan cone ; what is its size ? 
+% ASP程序：missing(Q):-has_property(X,size,Q),X!=Y,has_property(Y,color,cyan),has_property(Y,shape,cone),has_property(X,color,gray),same_material(Y,X).
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：There is a green object that is both to the right of the brown metallic object and to the right of the large rubber cylinder ; what size is it ? 
+% ASP程序：missing(Q):-has_property(X,size,Q),has_property(Y1,color,brown),has_property(Y2,shape,cylinder),has_property(Y2,size,large),has_property(Y2,material,rubber),has_property(Y1,material,metal),has_property(X,color,green),right(Y1,X),right(Y2,X),X!=Y1,Y1!=Y2,X!=Y2. 
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：There is another green thing that is the same shape as the red matte thing ; what size is it ? 
+% ASP程序：missing(Q):-has_property(X,size,Q),X!=Y,has_property(X,color,green),has_property(Y,material,rubber),has_property(Y,color,red),same_shape(Y,X). 
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：What size is the brown thing ? 
+% ASP程序：missing(Q):-has_property(X,size,Q),has_property(X,color,brown). 
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：There is a cylinder to the right of the big red metal cone ; how big is it ? 
+% ASP程序：missing(Q):-has_property(X,size,Q),has_property(Y,size,large),has_property(Y,color,red),has_property(Y,material,metal),has_property(Y,shape,cone),has_property(X,shape,cylinder),right(Y,X),X!=Y. 
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：There is another sphere that is the same color as the big sphere ; what size is it ? 
+% ASP程序：missing(Q):-has_property(X,size,Q),X!=Y,has_property(Y,shape,sphere),has_property(X,shape,sphere),has_property(Y,size,large),same_color(Y,X).
+% \end{lstlisting}
+% \subsection{材质查询}
+% \begin{lstlisting}
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：What is the material of the other red thing that is the same shape as the big thing ? 
+% ASP程序：missing(Q):-has_property(X,material,Q),X!=Y,has_property(Y,size,large),has_property(X,color,red),same_shape(Y,X). 
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：What material is the red object to the left of the large blue shiny object that is behind the blue object ? 
+% ASP程序：missing(Q):-has_property(X,material,Q),has_property(X,color,red),has_property(Y1,size,large),has_property(Y2,color,blue),has_property(Y1,material,metal),has_property(Y1,color,blue),left(Y1,X),behind(Y2,Y1),X!=Y1,Y1!=Y2,X!=Y2. 
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：What is the medium object that is on the right side of the green matte sphere and right of the big yellow shiny ball made of ? 
+% ASP程序：missing(Q):-has_property(X,material,Q),has_property(Y2,size,large),has_property(Y2,material,metal),has_property(Y2,color,yellow),has_property(Y1,shape,sphere),has_property(Y1,color,green),has_property(Y2,shape,sphere),has_property(Y1,material,rubber),has_property(X,size,medium),right(Y1,X),right(Y2,X),X!=Y1,Y1!=Y2,X!=Y2. 
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：The cyan object in front of the green matte object in front of the tiny cyan rubber cylinder right of the matte object is made of what material ? 
+% ASP程序：missing(Q):-has_property(X,material,Q),has_property(Y2,shape,cylinder),has_property(Y1,material,rubber),has_property(Y2,material,rubber),has_property(X,color,cyan),has_property(Y2,size,small),has_property(Y1,color,green),has_property(Y2,color,cyan),has_property(Y3,material,rubber),front(Y1,X),front(Y2,Y1),right(Y3,Y2),X!=Y1,Y1!=Y2,Y2!=Y3,X!=Y2,X!=Y3,Y1!=Y3. 
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：What is the material of the other purple cone that is the same size as the shiny object ? 
+% ASP程序：missing(Q):-has_property(X,material,Q),X!=Y,has_property(Y,material,metal),has_property(X,shape,cone),has_property(X,color,purple),same_size(Y,X). 
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：What is the cyan cone made of ? 
+% ASP程序：missing(Q):-has_property(X,material,Q),has_property(X,color,cyan),has_property(X,shape,cone). 
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：What is the material of the red cylinder to the left of the purple thing ? 
+% ASP程序：missing(Q):-has_property(X,material,Q),has_property(Y,color,purple),has_property(X,color,red),has_property(X,shape,cylinder),left(Y,X),X!=Y. 
+
+% 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
+% 问题：What is the material of the other tiny cube that is the same color as the matte object ? 
+% ASP程序：missing(Q):-has_property(X,material,Q),X!=Y,has_property(Y,material,rubber),has_property(X,shape,cube),has_property(X,size,small),same_color(Y,X). 
+% \end{lstlisting}
+\subsection{所处位置问题}
 \begin{lstlisting}
 任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：There is another small cylinder that is made of the same material as the small ball ; what is its color ? 
-ASP程序：missing(Q):-has_property(X,color,Q),X!=Y,has_property(Y,size,small),has_property(X,shape,cylinder),has_property(Y,shape,sphere),has_property(X,size,small),same_material(Y,X).
+问题：Which region is the small blue cube that is to the right of the red cylinder and in front of the green rubber sphere located in?
+ASP程序：missing(R) :- region(X, R),has_property(X, size, small),has_property(X, color, blue),has_property(X, shape, cube),has_property(Y1, color, red),has_property(Y1, shape, cylinder),right(Y1, X),has_property(Y2, color, green),has_property(Y2, material, rubber),has_property(Y2, shape, sphere),front(Y2, X),X != Y1,Y1 != Y2,X != Y2.
 
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：There is a big ball that is both behind the purple metal object and behind the shiny sphere ; what color is it ? 
-ASP程序：missing(Q):-has_property(X,color,Q),has_property(Y2,material,metal),has_property(X,size,large),has_property(Y1,material,metal),has_property(X,shape,sphere),has_property(Y1,color,purple),has_property(Y2,shape,sphere),behind(Y1,X),behind(Y2,X),X!=Y1,Y1!=Y2,X!=Y2.
+任务描述：你是一个 AI 助手，负责将英文问题转换成 ASP 逻辑语言。
+问题：In which region is the rubber cone that is behind the large metallic block and to the left of the small yellow sphere?
+ASP程序：missing(R) :- region(X, R),has_property(X, material, rubber),has_property(X, shape, cone),has_property(Y1, size, large),has_property(Y1, material, metal),has_property(Y1, shape, cube),behind(Y1, X),has_property(Y2, size, small),has_property(Y2, color, yellow),has_property(Y2, shape, sphere),left(X, Y2),X != Y1,X != Y2,Y1 != Y2.
 
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：What is the color of the cone on the left side of the rubber object ? 
-ASP程序：missing(Q):-has_property(X,color,Q),has_property(Y,material,rubber),has_property(X,shape,cone),left(Y,X),X!=Y.
-
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：The block is what color ? 
-ASP程序：missing(Q):-has_property(X,color,Q),has_property(X,shape,cube). 
-
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：There is a sphere on the right side of the tiny green metallic sphere in front of the small brown object ; what is its color ? 
-ASP程序：missing(Q):-has_property(X,color,Q),has_property(Y1,color,green),has_property(Y1,shape,sphere),has_property(X,shape,sphere),has_property(Y2,size,small),has_property(Y1,size,small),has_property(Y2,color,brown),has_property(Y1,material,metal),right(Y1,X),front(Y2,Y1),X!=Y1,Y1!=Y2,X!=Y2. 
-
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：There is a rubber object that is on the left side of the tiny cyan shiny ball to the right of the cyan object that is in front of the small green metal block ; what is its color ?
-ASP程序：missing(Q):-has_property(X,color,Q),has_property(Y2,color,cyan),has_property(Y3,material,metal),has_property(Y3,color,green),has_property(Y1,material,metal),has_property(Y3,size,small),has_property(Y1,color,cyan),has_property(Y1,shape,sphere),has_property(Y3,shape,cube),has_property(X,material,rubber),has_property(Y1,size,small),left(Y1,X),right(Y2,Y1),front(Y3,Y2),X!=Y1,Y1!=Y2,Y2!=Y3,X!=Y2,X!=Y3,Y1!=Y3. 
-
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：There is another tiny rubber object that is the same shape as the purple matte object ; what color is it ? 
-ASP程序：missing(Q):-has_property(X,color,Q),X!=Y,has_property(Y,color,purple),has_property(Y,material,rubber),has_property(X,material,rubber),has_property(X,size,small),same_shape(Y,X). 
+任务描述：你是一个 AI 助手，负责将英文问题转换成 ASP 逻辑语言。
+问题：Which region contains the shiny sphere that is between the red block and the cyan cylinder?
+ASP程序：missing(R) :- region(X, R), has_property(X, material, shiny),has_property(X, shape, sphere), between(X, Y1, Y2),has_property(Y1, color, red), has_property(Y1, shape, cube),has_property(Y2, color, cyan), has_property(Y2, shape, cylinder),X != Y1, X != Y2, Y1 != Y2.
 \end{lstlisting}
-\subsection{形状查询}
+\subsection{位置关系问题}
 \begin{lstlisting}
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：What shape is the blue object left of the medium blue rubber object on the right side of the big object right of the small cyan rubber cone ?
-ASP程序：missing(Q):-has_property(X,shape,Q),has_property(Y3,shape,cone),has_property(X,color,blue),has_property(Y1,color,blue),has_property(Y1,size,medium),has_property(Y3,size,small),has_property(Y3,material,rubber),has_property(Y2,size,large),has_property(Y3,color,cyan),has_property(Y1,material,rubber),left(Y1,X),right(Y2,Y1),right(Y3,Y2),X!=Y1,Y1!=Y2,Y2!=Y3,X!=Y2,X!=Y3,Y1!=Y3.
+任务描述：你是一个 AI 助手，负责将英文问题转换成 ASP 逻辑语言。
+问题：Is the gray cone above the green rubber block?
+ASP程序：missing(Q) :- has_property(X, color, gray), has_property(X, shape, cone),has_property(Y, color, green), has_property(Y, material, rubber),has_property(Y, shape, cube), above(X, Y),Q = yes.
+ASP程序：missing(Q) :- has_property(X, color, gray), has_property(X, shape, cone),has_property(Y, color, green), has_property(Y, material, rubber),has_property(Y, shape, cube), not above(X, Y),Q = no.
 
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：What shape is the other blue object that is the same material as the cylinder ? 
-ASP程序：missing(Q):-has_property(X,shape,Q),X!=Y,has_property(X,color,blue),has_property(Y,shape,cylinder),same_material(Y,X). 
+任务描述：你是一个 AI 助手，负责将英文问题转换成 ASP 逻辑语言。
+问题：Does the red cylinder lie to the left of the large blue cube?
+ASP程序：missing(Q) :- has_property(X, color, red), has_property(X, shape, cylinder),has_property(Y, size, large), has_property(Y, color, blue),has_property(Y, shape, cube), left(X, Y),Q = yes.
+ASP程序：missing(Q) :- has_property(X, color, red), has_property(X, shape, cylinder),has_property(Y, size, large), has_property(Y, color, blue),has_property(Y, shape, cube), not left(X, Y),Q = no.
 
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：There is a tiny object that is to the right of the small red ball and in front of the small blue rubber cube ; what shape is it ? 
-ASP程序：missing(Q):-has_property(X,shape,Q),has_property(Y2,size,small),has_property(Y1,color,red),has_property(Y2,shape,cube),has_property(Y2,color,blue),has_property(X,size,small),has_property(Y2,material,rubber),has_property(Y1,size,small),has_property(Y1,shape,sphere),right(Y1,X),front(Y2,X),X!=Y1,Y1!=Y2,X!=Y2. 
+任务描述：你是一个 AI 助手，负责将英文问题转换成 ASP 逻辑语言。
+问题：Is the small yellow sphere adjacent to the red block?
+ASP程序：missing(Q) :- has_property(X, size, small), has_property(X, color, yellow),has_property(X, shape, sphere), has_property(Y, color, red),has_property(Y, shape, cube), adjacent(X, Y),Q = yes.
+ASP程序：missing(Q) :- has_property(X, size, small), has_property(X, color, yellow),has_property(X, shape, sphere), has_property(Y, color, red),has_property(Y, shape, cube), not adjacent(X, Y),Q = no.
 
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：What is the shape of the brown object that is in front of the block that is behind the medium object ? 
-ASP程序：missing(Q):-has_property(X,shape,Q),has_property(Y2,size,medium),has_property(Y1,shape,cube),has_property(X,color,brown),front(Y1,X),behind(Y2,Y1),X!=Y1,Y1!=Y2,X!=Y2. 
+问题：What is the spatial relation between the red cube and the small blue sphere?
+ASP程序：missing(Q) :- has_property(X, color, red), has_property(X, shape, cube),has_property(Y, size, small), has_property(Y, color, blue),has_property(Y, shape, sphere),( above(X, Y), Q = above; below(X, Y), Q = below; left(X, Y),  Q = left; right(X, Y), Q = right; front(X, Y), Q = front; behind(X, Y),Q = behind ).
 
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：What shape is the blue thing that is in front of the small red metal cone ? 
-ASP程序：missing(Q):-has_property(X,shape,Q),has_property(Y,shape,cone),has_property(Y,color,red),has_property(Y,size,small),has_property(X,color,blue),has_property(Y,material,metal),front(Y,X),X!=Y. 
+问题：What is the spatial relation between the green rubber cylinder and the yellow metal block?
+ASP程序：missing(Q) :- has_property(X, color, green), has_property(X, material, rubber),has_property(X, shape, cylinder), has_property(Y, color, yellow),has_property(Y, material, metal), has_property(Y, shape, cube),( inside(X, Y),   Q = inside; outside(X, Y),  Q = outside; on_surface(X, Y), Q = on_surface; at_bottom(X, Y),  Q = at_bottom; at_top(X, Y),     Q = at_top ).
 
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：What is the shape of the other purple object that is the same size as the gray object ? 
-ASP程序：missing(Q):-has_property(X,shape,Q),X!=Y,has_property(Y,color,gray),has_property(X,color,purple),same_size(Y,X). 
-
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：What is the shape of the other tiny object that is the same color as the tiny block ? 
-ASP程序：missing(Q):-has_property(X,shape,Q),X!=Y,has_property(Y,shape,cube),has_property(Y,size,small),has_property(X,size,small),same_color(Y,X). 
+问题：What is the spatial relation between the tiny red cone and the large purple sphere?
+ASP程序：missing(Q) :- has_property(X, size, small), has_property(X, color, red), has_property(X, shape, cone), has_property(Y, size, large),has_property(Y, color, purple), has_property(Y, shape, sphere),( adjacent(X, Y),  Q = adjacent; near(X, Y),      Q = near; opposite(X, Y),  Q = opposite).
 \end{lstlisting}
-\subsection{大小查询}
+\subsection{与位置有关的计数问题}
 \begin{lstlisting}
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：There is another gray object that is made of the same material as the cyan cone ; what is its size ? 
-ASP程序：missing(Q):-has_property(X,size,Q),X!=Y,has_property(Y,color,cyan),has_property(Y,shape,cone),has_property(X,color,gray),same_material(Y,X).
+任务描述：你是一个 AI 助手，负责将英文问题转换成 ASP 逻辑语言。
+问题：How many small objects are to the left of the red cylinder?
+ASP程序：missing(Q) :- has_property(Y, color, red),has_property(Y, shape, cylinder),Q = #count{X : has_property(X, size, small), left(X, Y), X != Y}.
 
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：There is a green object that is both to the right of the brown metallic object and to the right of the large rubber cylinder ; what size is it ? 
-ASP程序：missing(Q):-has_property(X,size,Q),has_property(Y1,color,brown),has_property(Y2,shape,cylinder),has_property(Y2,size,large),has_property(Y2,material,rubber),has_property(Y1,material,metal),has_property(X,color,green),right(Y1,X),right(Y2,X),X!=Y1,Y1!=Y2,X!=Y2. 
+任务描述：你是一个 AI 助手，负责将英文问题转换成 ASP 逻辑语言。
+问题：How many spheres are in front of the large metallic block?
+ASP程序：missing(Q) :- has_property(Y, size, large),has_property(Y, material, metal),has_property(Y, shape, cube),Q = #count{X : has_property(X, shape, sphere), front(X, Y), X != Y}.
 
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：There is another green thing that is the same shape as the red matte thing ; what size is it ? 
-ASP程序：missing(Q):-has_property(X,size,Q),X!=Y,has_property(X,color,green),has_property(Y,material,rubber),has_property(Y,color,red),same_shape(Y,X). 
-
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：What size is the brown thing ? 
-ASP程序：missing(Q):-has_property(X,size,Q),has_property(X,color,brown). 
-
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：There is a cylinder to the right of the big red metal cone ; how big is it ? 
-ASP程序：missing(Q):-has_property(X,size,Q),has_property(Y,size,large),has_property(Y,color,red),has_property(Y,material,metal),has_property(Y,shape,cone),has_property(X,shape,cylinder),right(Y,X),X!=Y. 
-
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：There is another sphere that is the same color as the big sphere ; what size is it ? 
-ASP程序：missing(Q):-has_property(X,size,Q),X!=Y,has_property(Y,shape,sphere),has_property(X,shape,sphere),has_property(Y,size,large),same_color(Y,X).
+任务描述：你是一个 AI 助手，负责将英文问题转换成 ASP 逻辑语言。
+问题：How many objects are between the green cone and the blue block?
+ASP程序：missing(Q) :- has_property(Y1, color, green),has_property(Y1, shape, cone),has_property(Y2, color, blue),has_property(Y2, shape, cube),Q = #count{X : between(X, Y1, Y2), X != Y1, X != Y2}.
 \end{lstlisting}
-\subsection{材质查询}
-\begin{lstlisting}
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：What is the material of the other red thing that is the same shape as the big thing ? 
-ASP程序：missing(Q):-has_property(X,material,Q),X!=Y,has_property(Y,size,large),has_property(X,color,red),same_shape(Y,X). 
-
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：What material is the red object to the left of the large blue shiny object that is behind the blue object ? 
-ASP程序：missing(Q):-has_property(X,material,Q),has_property(X,color,red),has_property(Y1,size,large),has_property(Y2,color,blue),has_property(Y1,material,metal),has_property(Y1,color,blue),left(Y1,X),behind(Y2,Y1),X!=Y1,Y1!=Y2,X!=Y2. 
-
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：What is the medium object that is on the right side of the green matte sphere and right of the big yellow shiny ball made of ? 
-ASP程序：missing(Q):-has_property(X,material,Q),has_property(Y2,size,large),has_property(Y2,material,metal),has_property(Y2,color,yellow),has_property(Y1,shape,sphere),has_property(Y1,color,green),has_property(Y2,shape,sphere),has_property(Y1,material,rubber),has_property(X,size,medium),right(Y1,X),right(Y2,X),X!=Y1,Y1!=Y2,X!=Y2. 
-
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：The cyan object in front of the green matte object in front of the tiny cyan rubber cylinder right of the matte object is made of what material ? 
-ASP程序：missing(Q):-has_property(X,material,Q),has_property(Y2,shape,cylinder),has_property(Y1,material,rubber),has_property(Y2,material,rubber),has_property(X,color,cyan),has_property(Y2,size,small),has_property(Y1,color,green),has_property(Y2,color,cyan),has_property(Y3,material,rubber),front(Y1,X),front(Y2,Y1),right(Y3,Y2),X!=Y1,Y1!=Y2,Y2!=Y3,X!=Y2,X!=Y3,Y1!=Y3. 
-
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：What is the material of the other purple cone that is the same size as the shiny object ? 
-ASP程序：missing(Q):-has_property(X,material,Q),X!=Y,has_property(Y,material,metal),has_property(X,shape,cone),has_property(X,color,purple),same_size(Y,X). 
-
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：What is the cyan cone made of ? 
-ASP程序：missing(Q):-has_property(X,material,Q),has_property(X,color,cyan),has_property(X,shape,cone). 
-
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：What is the material of the red cylinder to the left of the purple thing ? 
-ASP程序：missing(Q):-has_property(X,material,Q),has_property(Y,color,purple),has_property(X,color,red),has_property(X,shape,cylinder),left(Y,X),X!=Y. 
-
-任务描述：你是一个AI助手，负责将英文问题转换成ASP逻辑语言。
-问题：What is the material of the other tiny cube that is the same color as the matte object ? 
-ASP程序：missing(Q):-has_property(X,material,Q),X!=Y,has_property(Y,material,rubber),has_property(X,shape,cube),has_property(X,size,small),same_color(Y,X). 
-\end{lstlisting}
-
 \section{ASP规则修正提示词}
 \label{appendix:rule-fix}
 \subsection{语法错误}
@@ -907,8 +1007,14 @@ visible(o1)	“在可见区域中”
 not visible(o1)	“在不可见区域中”
 left(o1, o2)	“o1 在 o2 的左侧”
 right(o1, o2)	“o1 在 o2 的右侧”
-in_front_of(o1, o2)	“o1 在 o2 的前面”
+front(o1, o2)	“o1 在 o2 的前面”
 behind(o1, o2)	“o1 在 o2 的后面”
+inside(o1, o2) “o1 在 o2 的内部”
+above(o1, o2) “o1 在 o2 的上方”
+below(o1, o2) “o1 在 o2 的下方”
+outside(o1, o2) “o1 在 o2 的外部”
+partially_occludes(o1, o2) “o1 将 o2 部分遮挡”
+fully_occludes(o1, o2) “o1 将 o2 全部遮挡”
 same_row(o1, o2)	“o1 和 o2 在同一排”
 answer(yes)	“是”
 answer(no)	“否”
