@@ -4903,6 +4903,69 @@
       \range{pages}{11}
       \keyw{li2022grounded}
     \endentry
+    \entry{fandinno2021planningincompleteinformationquantified}{online}{}{}
+      \name{author}{5}{}{%
+        {{hash=ff0cc9e7122367357b3186495ab0f058}{%
+           family={Fandinno},
+           familyi={F\bibinitperiod},
+           given={Jorge},
+           giveni={J\bibinitperiod}}}%
+        {{hash=a43c9333f32b74907720538af7308c5c}{%
+           family={Laferrière},
+           familyi={L\bibinitperiod},
+           given={François},
+           giveni={F\bibinitperiod}}}%
+        {{hash=586007140096e6d78832f56de1edf859}{%
+           family={Romero},
+           familyi={R\bibinitperiod},
+           given={Javier},
+           giveni={J\bibinitperiod}}}%
+        {{hash=3c55d70c19bd5f5a654a6ad7ae64450c}{%
+           family={Schaub},
+           familyi={S\bibinitperiod},
+           given={Torsten},
+           giveni={T\bibinitperiod}}}%
+        {{hash=fa9d149ca8966d751c3d8d9a2201aa8e}{%
+           family={Son},
+           familyi={S\bibinitperiod},
+           given={Tran\bibnamedelima Cao},
+           giveni={T\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {english}%
+      }
+      \strng{namehash}{4c2cf4fdd700a0a9b3d65ff247f99ced}
+      \strng{fullhash}{dd62c7efc7fe20e6a30e5034843836c9}
+      \strng{fullhashraw}{dd62c7efc7fe20e6a30e5034843836c9}
+      \strng{bibnamehash}{3d4c54e334e83947e9c9670af4eccf4a}
+      \strng{authorbibnamehash}{3d4c54e334e83947e9c9670af4eccf4a}
+      \strng{authornamehash}{4c2cf4fdd700a0a9b3d65ff247f99ced}
+      \strng{authorfullhash}{dd62c7efc7fe20e6a30e5034843836c9}
+      \strng{authorfullhashraw}{dd62c7efc7fe20e6a30e5034843836c9}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.AI}
+      \field{eprinttype}{arXiv}
+      \field{langid}{english}
+      \field{title}{Planning with Incomplete Information in Quantified Answer Set Programming}
+      \field{usera}{EB}
+      \field{userd}{english}
+      \field{userf}{english}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \verb{eprint}
+      \verb 2108.06405
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2108.06405
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2108.06405
+      \endverb
+      \keyw{fandinno2021planningincompleteinformationquantified}
+    \endentry
     \entry{ge2021selfdistillationbatchknowledgeensembling}{online}{}{}
       \name{author}{9}{}{%
         {{hash=8d15528b5240a490f390fe03395cdabf}{%

@@ -15,17 +15,10 @@
 :- #count{X1, X2: sameProperty(X1, X2, P1'), object(X1), object(X2), at(X1, R1'), at(X2, R2')}>=N'.
 :- #count{X1, X2: sameProperty(X1, X2, P1'), object(X1), object(X2), at(X1, R1'), at(X2, R2'), has_property(X1, P2', V2'), has_property(X2, P2', V2')}>=N'.
 :- object(X), has_property(X, P1', V1').
-% 如果物体 X 部分遮挡物体 Y，则它们必须位于同一区域，并且 X 的位置在 Y 的前方。
-:- partially_occlude(X, Y), not at(X, R), not at(Y, R).
-:- partially_occlude(X, Y), not front(X, Y).
-
-% 如果物体 X 完全遮挡物体 Y，则它们必须位于同一区域，并且 X 的位置完全覆盖 Y。
-:- fully_occlude(X, Y), not at(X, R), not at(Y, R).
-:- fully_occlude(X, Y), not completelyCovers(X, Y).
-
-% 限制场景中遮挡关系的数量。
-:- #count{partially_occlude(X, Y): object(X), object(Y)} < N.
-:- #count{fully_occlude(X, Y): object(X), object(Y)} < M.
+:- #count{occludes(X, Y): object(X), object(Y)} < N.
+:- #count{occludes(X, Y): object(X), object(Y)} < M.
+:- occlusion_rate(T, R), (R <= 0; R >= 1).
+:- target(T), not { Oc : occluder(Oc), occludes(Oc,T) } >= 1.
 \end{lstlisting}
 \subsection{全局约束}
 \label{appendix:environment}
