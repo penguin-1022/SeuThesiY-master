@@ -46,8 +46,6 @@ CLEVR 被广泛用于神经符号推理模型的验证实验，成为空间推�
 由于所有信息完全可见，故在该问题的推理过程中，模型不需要猜测、补全或者使用外部知识，
 显然，真正的人工智能应该能够模仿人类的思考过程，根据问题所处的场景，灵活选取已有的相关知识，结合图像场景
 的约束和问题的要求，进行推理。
-% \item CLEVR中所有问题通常设计为唯一答案，未考虑部分可见场景这种不确定性条件之下的多解性问题。
-% 在部分可见场景中，由于不确定性的存在，可能会有多个满足条件的物体或关系，导致问题的答案不唯一。
 \end{enumerate}
 以上三点局限导致模型在CLEVR数据集上获得的推理性能难以泛化至更具挑战性的实际应用场景，
 尤其是在积木世界这类典型结构化环境中，部分可见性对问题求解结果具有显著影响。因此，
@@ -193,7 +191,7 @@ S, S ∩ body^−(r) = \emptyset$，则集合$ S $满足体部。若 $S $满足�
     P^S = \{ head(r) \leftarrow body^+(r) \mid r \in P, body^-(r) \cap S = \emptyset \} \label{equation:GL}
 \end{equation}
 \end{definition}
-\begin{definition}[简单逻辑程序回答集\cite{}]
+\begin{definition}[简单逻辑程序回答集]
     假设$P$是简单逻辑程序，程序$P$的回答集是$S \subseteq Lit(P)$ 满足：
 
     \begin{enumerate}[nosep]
