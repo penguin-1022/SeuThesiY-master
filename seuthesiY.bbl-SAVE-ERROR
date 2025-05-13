@@ -19,6 +19,178 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global/global}
+    \entry{hogg1983block}{inproceedings}{}{}
+      \name{author}{1}{}{%
+        {{hash=030b2dcc48cccddd2f766ce213a1f5f8}{%
+           family={Hogg},
+           familyi={H\bibinitperiod},
+           given={David\bibnamedelima C.},
+           giveni={D\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {english}%
+      }
+      \strng{namehash}{030b2dcc48cccddd2f766ce213a1f5f8}
+      \strng{fullhash}{030b2dcc48cccddd2f766ce213a1f5f8}
+      \strng{fullhashraw}{030b2dcc48cccddd2f766ce213a1f5f8}
+      \strng{bibnamehash}{030b2dcc48cccddd2f766ce213a1f5f8}
+      \strng{authorbibnamehash}{030b2dcc48cccddd2f766ce213a1f5f8}
+      \strng{authornamehash}{030b2dcc48cccddd2f766ce213a1f5f8}
+      \strng{authorfullhash}{030b2dcc48cccddd2f766ce213a1f5f8}
+      \strng{authorfullhashraw}{030b2dcc48cccddd2f766ce213a1f5f8}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AAAI Spring Symposium on Physical Agents}
+      \field{langid}{english}
+      \field{title}{Block Worlds}
+      \field{usera}{C}
+      \field{userd}{english}
+      \field{userf}{english}
+      \field{year}{1983}
+      \field{dateera}{ce}
+      \keyw{hogg1983block}
+    \endentry
+    \entry{10.5555/3073924}{book}{}{}
+      \name{author}{3}{}{%
+        {{hash=d4b01a4cf3a9690cd8e7bb1a53071daf}{%
+           family={Ghallab},
+           familyi={G\bibinitperiod},
+           given={Malik},
+           giveni={M\bibinitperiod}}}%
+        {{hash=7912a8c46c9c7673b1551e899b294808}{%
+           family={Nau},
+           familyi={N\bibinitperiod},
+           given={Dana},
+           giveni={D\bibinitperiod}}}%
+        {{hash=112648ef53b14383bba68454cac128ef}{%
+           family={Traverso},
+           familyi={T\bibinitperiod},
+           given={Paolo},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {english}%
+      }
+      \list{location}{1}{%
+        {USA}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{391f69ca49373b5e0aee090616188436}
+      \strng{fullhash}{2ae5ec486a9c4db85b1f28c4a48fd047}
+      \strng{fullhashraw}{2ae5ec486a9c4db85b1f28c4a48fd047}
+      \strng{bibnamehash}{2ae5ec486a9c4db85b1f28c4a48fd047}
+      \strng{authorbibnamehash}{2ae5ec486a9c4db85b1f28c4a48fd047}
+      \strng{authornamehash}{391f69ca49373b5e0aee090616188436}
+      \strng{authorfullhash}{2ae5ec486a9c4db85b1f28c4a48fd047}
+      \strng{authorfullhashraw}{2ae5ec486a9c4db85b1f28c4a48fd047}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Autonomous AI systems need complex computational techniques for planning and performing actions. Planning and acting require significant deliberation because an intelligent system must coordinate and integrate these activities in order to act effectively in the real world. This book presents a comprehensive paradigm of planning and acting using the most recent and advanced automated-planning techniques. It explains the computational deliberation capabilities that allow an actor, whether physical or virtual, to reason about its actions, choose them, organize them purposefully, and act deliberately to achieve an objective. Useful for students, practitioners, and researchers, this book covers state-of-the-art planning techniques, acting techniques, and their integration which will allow readers to design intelligent systems that are able to act effectively in the real world.}
+      \field{edition}{1st}
+      \field{isbn}{1107037271}
+      \field{langid}{english}
+      \field{title}{Automated Planning and Acting}
+      \field{usera}{M}
+      \field{userd}{english}
+      \field{userf}{english}
+      \field{year}{2016}
+      \field{dateera}{ce}
+      \keyw{10.5555/3073924}
+    \endentry
+    \entry{gao2025multimodalagenttuningbuilding}{online}{}{}
+      \name{author}{10}{}{%
+        {{hash=136aab75d8b21bc6934cbfe9423a5856}{%
+           family={Gao},
+           familyi={G\bibinitperiod},
+           given={Zhi},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=7bb2844bdbbae29d1f2d4b5641491d0a}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Bofei},
+           giveni={B\bibinitperiod}}}%
+        {{hash=459c345c3ec9ccd61ea86fb5b095046a}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Pengxiang},
+           giveni={P\bibinitperiod}}}%
+        {{hash=557401f59248fd925007bb00c18f1abe}{%
+           family={Ma},
+           familyi={M\bibinitperiod},
+           given={Xiaojian},
+           giveni={X\bibinitperiod}}}%
+        {{hash=dd02c263476b26cf6663ebaf822a827f}{%
+           family={Yuan},
+           familyi={Y\bibinitperiod},
+           given={Tao},
+           giveni={T\bibinitperiod}}}%
+        {{hash=f6e77dcd934bbace465439a20db575ec}{%
+           family={Fan},
+           familyi={F\bibinitperiod},
+           given={Yue},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=e64a6f8bcb34673f8f76ad3e689a895e}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Yuwei},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=3d289786cb39f229d409a397c99f4944}{%
+           family={Jia},
+           familyi={J\bibinitperiod},
+           given={Yunde},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=9b4356508155ef61bbcbb2e10e2c918b}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Song-Chun},
+           giveni={S\bibinithyphendelim C\bibinitperiod}}}%
+        {{hash=16a77262afb7cc9b0229c21f168bd098}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Qing},
+           giveni={Q\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {english}%
+      }
+      \strng{namehash}{48c6c2af44b5bca2dced710a6d20179b}
+      \strng{fullhash}{2a323ac50ada5bb05a6ca196dab14439}
+      \strng{fullhashraw}{2a323ac50ada5bb05a6ca196dab14439}
+      \strng{bibnamehash}{c4aedf1eb4a3ff7ea443d3b2f7062278}
+      \strng{authorbibnamehash}{c4aedf1eb4a3ff7ea443d3b2f7062278}
+      \strng{authornamehash}{48c6c2af44b5bca2dced710a6d20179b}
+      \strng{authorfullhash}{2a323ac50ada5bb05a6ca196dab14439}
+      \strng{authorfullhashraw}{2a323ac50ada5bb05a6ca196dab14439}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.AI}
+      \field{eprinttype}{arXiv}
+      \field{langid}{english}
+      \field{title}{Multi-modal Agent Tuning: Building a VLM-Driven Agent for Efficient Tool Usage}
+      \field{usera}{EB}
+      \field{userd}{english}
+      \field{userf}{english}
+      \field{year}{2025}
+      \field{dateera}{ce}
+      \verb{eprint}
+      \verb 2412.15606
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2412.15606
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2412.15606
+      \endverb
+      \keyw{gao2025multimodalagenttuningbuilding}
+    \endentry
     \entry{goyal2017making}{inproceedings}{}{}
       \name{author}{5}{}{%
         {{hash=99b04ec4962b20f72d695d4700916bd2}{%
@@ -58,8 +230,8 @@
       \strng{authornamehash}{976b01b39aa56fa5a2de67e49296095f}
       \strng{authorfullhash}{eecaaec32055fb9fe130765f48aefd01}
       \strng{authorfullhashraw}{eecaaec32055fb9fe130765f48aefd01}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition}
@@ -73,535 +245,6 @@
       \field{pages}{6904\bibrangedash 6913}
       \range{pages}{10}
       \keyw{goyal2017making}
-    \endentry
-    \entry{hogg1983block}{inproceedings}{}{}
-      \name{author}{1}{}{%
-        {{hash=030b2dcc48cccddd2f766ce213a1f5f8}{%
-           family={Hogg},
-           familyi={H\bibinitperiod},
-           given={David\bibnamedelima C.},
-           giveni={D\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \strng{namehash}{030b2dcc48cccddd2f766ce213a1f5f8}
-      \strng{fullhash}{030b2dcc48cccddd2f766ce213a1f5f8}
-      \strng{fullhashraw}{030b2dcc48cccddd2f766ce213a1f5f8}
-      \strng{bibnamehash}{030b2dcc48cccddd2f766ce213a1f5f8}
-      \strng{authorbibnamehash}{030b2dcc48cccddd2f766ce213a1f5f8}
-      \strng{authornamehash}{030b2dcc48cccddd2f766ce213a1f5f8}
-      \strng{authorfullhash}{030b2dcc48cccddd2f766ce213a1f5f8}
-      \strng{authorfullhashraw}{030b2dcc48cccddd2f766ce213a1f5f8}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{AAAI Spring Symposium on Physical Agents}
-      \field{langid}{english}
-      \field{title}{Block Worlds}
-      \field{usera}{C}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{year}{1983}
-      \field{dateera}{ce}
-      \keyw{hogg1983block}
-    \endentry
-    \entry{chiyahgarcia2024repairsblockworldnew}{online}{}{}
-      \name{author}{3}{}{%
-        {{hash=0e896ffa7ce45460cf2be3444d0f75f9}{%
-           family={Chiyah-Garcia},
-           familyi={C\bibinithyphendelim G\bibinitperiod},
-           given={Javier},
-           giveni={J\bibinitperiod}}}%
-        {{hash=c8a08f7db06f6f73bd4aebe699c8fa62}{%
-           family={Suglia},
-           familyi={S\bibinitperiod},
-           given={Alessandro},
-           giveni={A\bibinitperiod}}}%
-        {{hash=46c741b2b6894f1b1a70808bff2103b5}{%
-           family={Eshghi},
-           familyi={E\bibinitperiod},
-           given={Arash},
-           giveni={A\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \strng{namehash}{feb14f979e3892d14478f6bb61603708}
-      \strng{fullhash}{fe8ffc4bde85aa0c192c646ccd2024de}
-      \strng{fullhashraw}{fe8ffc4bde85aa0c192c646ccd2024de}
-      \strng{bibnamehash}{fe8ffc4bde85aa0c192c646ccd2024de}
-      \strng{authorbibnamehash}{fe8ffc4bde85aa0c192c646ccd2024de}
-      \strng{authornamehash}{feb14f979e3892d14478f6bb61603708}
-      \strng{authorfullhash}{fe8ffc4bde85aa0c192c646ccd2024de}
-      \strng{authorfullhashraw}{fe8ffc4bde85aa0c192c646ccd2024de}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{eprintclass}{cs.CL}
-      \field{eprinttype}{arXiv}
-      \field{langid}{english}
-      \field{title}{Repairs in a Block World: A New Benchmark for Handling User Corrections with Multi-Modal Language Models}
-      \field{usera}{EB}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{year}{2024}
-      \field{dateera}{ce}
-      \verb{eprint}
-      \verb 2409.14247
-      \endverb
-      \verb{urlraw}
-      \verb https://arxiv.org/abs/2409.14247
-      \endverb
-      \verb{url}
-      \verb https://arxiv.org/abs/2409.14247
-      \endverb
-      \keyw{chiyahgarcia2024repairsblockworldnew}
-    \endentry
-    \entry{silver2023generalizedplanningpddldomains}{online}{}{}
-      \name{author}{6}{}{%
-        {{hash=5a63ff59f50ac2b81a3bbd82438e127c}{%
-           family={Silver},
-           familyi={S\bibinitperiod},
-           given={Tom},
-           giveni={T\bibinitperiod}}}%
-        {{hash=0fb8704d834928fc03d93e897a51184a}{%
-           family={Dan},
-           familyi={D\bibinitperiod},
-           given={Soham},
-           giveni={S\bibinitperiod}}}%
-        {{hash=4c5c4af363dc6a764d2a2dfbcec42355}{%
-           family={Srinivas},
-           familyi={S\bibinitperiod},
-           given={Kavitha},
-           giveni={K\bibinitperiod}}}%
-        {{hash=5c7ff02e1f8b4c4aa7bfddece14f23d2}{%
-           family={Tenenbaum},
-           familyi={T\bibinitperiod},
-           given={Joshua\bibnamedelima B.},
-           giveni={J\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
-        {{hash=72fdc7bf3120e1cff12e3ecf7e892b9a}{%
-           family={Kaelbling},
-           familyi={K\bibinitperiod},
-           given={Leslie\bibnamedelima Pack},
-           giveni={L\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
-        {{hash=6c6bfa1098d4ff07b1c8d633bcbc1eb0}{%
-           family={Katz},
-           familyi={K\bibinitperiod},
-           given={Michael},
-           giveni={M\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \strng{namehash}{baa1858e46c5afcd24a7411a35f30469}
-      \strng{fullhash}{c32da282aa74476975af63e14cc5ca57}
-      \strng{fullhashraw}{c32da282aa74476975af63e14cc5ca57}
-      \strng{bibnamehash}{3a3db4f4b244d1b10b094df21d32144a}
-      \strng{authorbibnamehash}{3a3db4f4b244d1b10b094df21d32144a}
-      \strng{authornamehash}{baa1858e46c5afcd24a7411a35f30469}
-      \strng{authorfullhash}{c32da282aa74476975af63e14cc5ca57}
-      \strng{authorfullhashraw}{c32da282aa74476975af63e14cc5ca57}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{eprintclass}{cs.AI}
-      \field{eprinttype}{arXiv}
-      \field{langid}{english}
-      \field{title}{Generalized Planning in PDDL Domains with Pretrained Large Language Models}
-      \field{usera}{EB}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{year}{2023}
-      \field{dateera}{ce}
-      \verb{eprint}
-      \verb 2305.11014
-      \endverb
-      \verb{urlraw}
-      \verb https://arxiv.org/abs/2305.11014
-      \endverb
-      \verb{url}
-      \verb https://arxiv.org/abs/2305.11014
-      \endverb
-      \keyw{silver2023generalizedplanningpddldomains}
-    \endentry
-    \entry{johnson2017clevr}{inproceedings}{}{}
-      \name{author}{6}{}{%
-        {{hash=90edc587e1d523d4e173b1fe6e733445}{%
-           family={Johnson},
-           familyi={J\bibinitperiod},
-           given={Justin},
-           giveni={J\bibinitperiod}}}%
-        {{hash=9cadf8ca1dd9b5f5a830ba2059b2517f}{%
-           family={Hariharan},
-           familyi={H\bibinitperiod},
-           given={Bharath},
-           giveni={B\bibinitperiod}}}%
-        {{hash=a33ababcca5b83a7777452957fb2eef2}{%
-           family={Van\bibnamedelimb Der\bibnamedelima Maaten},
-           familyi={V\bibinitperiod\bibinitdelim D\bibinitperiod\bibinitdelim M\bibinitperiod},
-           given={Laurens},
-           giveni={L\bibinitperiod}}}%
-        {{hash=cd00ce5bc45f687c432e52e0fa1a7aa6}{%
-           family={Fei-Fei},
-           familyi={F\bibinithyphendelim F\bibinitperiod},
-           given={Li},
-           giveni={L\bibinitperiod}}}%
-        {{hash=0eae2d56a9cbb037c64028d6573877a7}{%
-           family={Zitnick},
-           familyi={Z\bibinitperiod},
-           given={C.\bibnamedelimi Lawrence},
-           giveni={C\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
-        {{hash=bd5dadbe57bedc5957c19a3154c4d424}{%
-           family={Girshick},
-           familyi={G\bibinitperiod},
-           given={Ross},
-           giveni={R\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \list{publisher}{1}{%
-        {IEEE}%
-      }
-      \strng{namehash}{703afbca586b4470d0f3fab18063c292}
-      \strng{fullhash}{4c5a881d4b879b242a071594b5887a40}
-      \strng{fullhashraw}{4c5a881d4b879b242a071594b5887a40}
-      \strng{bibnamehash}{44967f4aade097f349203fdd9ba58bd4}
-      \strng{authorbibnamehash}{44967f4aade097f349203fdd9ba58bd4}
-      \strng{authornamehash}{703afbca586b4470d0f3fab18063c292}
-      \strng{authorfullhash}{4c5a881d4b879b242a071594b5887a40}
-      \strng{authorfullhashraw}{4c5a881d4b879b242a071594b5887a40}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)}
-      \field{langid}{english}
-      \field{title}{{CLEVR}: A Diagnostic Dataset for Compositional Language and Elementary Visual Reasoning}
-      \field{usera}{C}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{year}{2017}
-      \field{dateera}{ce}
-      \field{pages}{2901\bibrangedash 2910}
-      \range{pages}{10}
-      \verb{doi}
-      \verb 10.1109/CVPR.2017.322
-      \endverb
-      \keyw{johnson2017clevr}
-    \endentry
-    \entry{pratt2023does}{inproceedings}{}{}
-      \name{author}{4}{}{%
-        {{hash=d6c01e2260c43df6867d1d6dc7d72c3a}{%
-           family={Pratt},
-           familyi={P\bibinitperiod},
-           given={Sarah},
-           giveni={S\bibinitperiod}}}%
-        {{hash=da0114911788f6c818e3ff395876d348}{%
-           family={Covert},
-           familyi={C\bibinitperiod},
-           given={Ian},
-           giveni={I\bibinitperiod}}}%
-        {{hash=0601c437ba55f05a3dd1e353269ab24a}{%
-           family={Liu},
-           familyi={L\bibinitperiod},
-           given={Rosanne},
-           giveni={R\bibinitperiod}}}%
-        {{hash=396c6ddedb6f986906fc3e4994d19974}{%
-           family={Farhadi},
-           familyi={F\bibinitperiod},
-           given={Ali},
-           giveni={A\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \strng{namehash}{43fc7a52ceade8fef6ec7783934e4e5c}
-      \strng{fullhash}{86c60ad7d388a6974d68c3e492549b31}
-      \strng{fullhashraw}{86c60ad7d388a6974d68c3e492549b31}
-      \strng{bibnamehash}{de0f478f173df0e16137464f3cc44a89}
-      \strng{authorbibnamehash}{de0f478f173df0e16137464f3cc44a89}
-      \strng{authornamehash}{43fc7a52ceade8fef6ec7783934e4e5c}
-      \strng{authorfullhash}{86c60ad7d388a6974d68c3e492549b31}
-      \strng{authorfullhashraw}{86c60ad7d388a6974d68c3e492549b31}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{Proceedings of the IEEE/CVF International Conference on Computer Vision}
-      \field{langid}{english}
-      \field{title}{What does a platypus look like? generating customized prompts for zero-shot image classification}
-      \field{usera}{C}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{year}{2023}
-      \field{dateera}{ce}
-      \field{pages}{15691\bibrangedash 15701}
-      \range{pages}{11}
-      \keyw{pratt2023does}
-    \endentry
-    \entry{alaluf2024myvlm}{inproceedings}{}{}
-      \name{author}{5}{}{%
-        {{hash=b0f3130816096ed324656d246cf676cb}{%
-           family={Alaluf},
-           familyi={A\bibinitperiod},
-           given={Yuval},
-           giveni={Y\bibinitperiod}}}%
-        {{hash=89364e2db8972659a668cbdc092b95af}{%
-           family={Richardson},
-           familyi={R\bibinitperiod},
-           given={Elad},
-           giveni={E\bibinitperiod}}}%
-        {{hash=a578af1b4773bec82ac5d1de26494d9d}{%
-           family={Tulyakov},
-           familyi={T\bibinitperiod},
-           given={Sergey},
-           giveni={S\bibinitperiod}}}%
-        {{hash=769548eecf1ec8f5523b7a76dc6fc0b7}{%
-           family={Aberman},
-           familyi={A\bibinitperiod},
-           given={Kfir},
-           giveni={K\bibinitperiod}}}%
-        {{hash=cdf44d78713bc27a81394749a9d8bbdc}{%
-           family={Cohen-Or},
-           familyi={C\bibinithyphendelim O\bibinitperiod},
-           given={Daniel},
-           giveni={D\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \list{organization}{1}{%
-        {Springer}%
-      }
-      \strng{namehash}{b25d18e954642ff2a1397242784b11aa}
-      \strng{fullhash}{b7bd46f6b8b4584cd6b4e144bf1406cd}
-      \strng{fullhashraw}{b7bd46f6b8b4584cd6b4e144bf1406cd}
-      \strng{bibnamehash}{4b59b63057bb6b86e6a081d293cc801e}
-      \strng{authorbibnamehash}{4b59b63057bb6b86e6a081d293cc801e}
-      \strng{authornamehash}{b25d18e954642ff2a1397242784b11aa}
-      \strng{authorfullhash}{b7bd46f6b8b4584cd6b4e144bf1406cd}
-      \strng{authorfullhashraw}{b7bd46f6b8b4584cd6b4e144bf1406cd}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{European Conference on Computer Vision}
-      \field{langid}{english}
-      \field{title}{Myvlm: Personalizing vlms for user-specific queries}
-      \field{usera}{C}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{year}{2024}
-      \field{dateera}{ce}
-      \field{pages}{73\bibrangedash 91}
-      \range{pages}{19}
-      \keyw{alaluf2024myvlm}
-    \endentry
-    \entry{kuo2022f}{article}{}{}
-      \name{author}{5}{}{%
-        {{hash=3cc708ae090a5f7937b32d4db877ea79}{%
-           family={Kuo},
-           familyi={K\bibinitperiod},
-           given={Weicheng},
-           giveni={W\bibinitperiod}}}%
-        {{hash=5be07c427051f588ee76d0a1251cfe65}{%
-           family={Cui},
-           familyi={C\bibinitperiod},
-           given={Yin},
-           giveni={Y\bibinitperiod}}}%
-        {{hash=5813f8c529124cb35d685f466e6f2015}{%
-           family={Gu},
-           familyi={G\bibinitperiod},
-           given={Xiuye},
-           giveni={X\bibinitperiod}}}%
-        {{hash=d4a1e7abe2c02e040d73e4981782505f}{%
-           family={Piergiovanni},
-           familyi={P\bibinitperiod},
-           given={AJ},
-           giveni={A\bibinitperiod}}}%
-        {{hash=9406cce515a208965f1ff00b4b4a8ead}{%
-           family={Angelova},
-           familyi={A\bibinitperiod},
-           given={Anelia},
-           giveni={A\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \strng{namehash}{d88d2d7625d2736b20374a557517ee07}
-      \strng{fullhash}{0fe2425391b5e9ffb967e41b7acc2f96}
-      \strng{fullhashraw}{0fe2425391b5e9ffb967e41b7acc2f96}
-      \strng{bibnamehash}{8550f76e5ee7173c2eca41bda57e3231}
-      \strng{authorbibnamehash}{8550f76e5ee7173c2eca41bda57e3231}
-      \strng{authornamehash}{d88d2d7625d2736b20374a557517ee07}
-      \strng{authorfullhash}{0fe2425391b5e9ffb967e41b7acc2f96}
-      \strng{authorfullhashraw}{0fe2425391b5e9ffb967e41b7acc2f96}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{arXiv preprint arXiv:2209.15639}
-      \field{langid}{english}
-      \field{title}{F-vlm: Open-vocabulary object detection upon frozen vision and language models}
-      \field{usera}{J}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{year}{2022}
-      \field{dateera}{ce}
-      \keyw{kuo2022f}
-    \endentry
-    \entry{huang2024lita}{inproceedings}{}{}
-      \name{author}{7}{}{%
-        {{hash=8dfbb8663d1cd3d4f6e0d52b7479f99f}{%
-           family={Huang},
-           familyi={H\bibinitperiod},
-           given={De-An},
-           giveni={D\bibinithyphendelim A\bibinitperiod}}}%
-        {{hash=59ba857b6a308fcce01117e7ea3e125d}{%
-           family={Liao},
-           familyi={L\bibinitperiod},
-           given={Shijia},
-           giveni={S\bibinitperiod}}}%
-        {{hash=b7b2192c6f4c536a69778fc23a86671e}{%
-           family={Radhakrishnan},
-           familyi={R\bibinitperiod},
-           given={Subhashree},
-           giveni={S\bibinitperiod}}}%
-        {{hash=33f2a6a69957ffa96ee361513e5beef0}{%
-           family={Yin},
-           familyi={Y\bibinitperiod},
-           given={Hongxu},
-           giveni={H\bibinitperiod}}}%
-        {{hash=8ac65f0c6a6050a1bdbe904e1f4a1cf9}{%
-           family={Molchanov},
-           familyi={M\bibinitperiod},
-           given={Pavlo},
-           giveni={P\bibinitperiod}}}%
-        {{hash=49413d1d3447de11288e86f34da02c3f}{%
-           family={Yu},
-           familyi={Y\bibinitperiod},
-           given={Zhiding},
-           giveni={Z\bibinitperiod}}}%
-        {{hash=08129312c062dd971f82ea43031cdef0}{%
-           family={Kautz},
-           familyi={K\bibinitperiod},
-           given={Jan},
-           giveni={J\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \list{organization}{1}{%
-        {Springer}%
-      }
-      \strng{namehash}{cb435324eb05ca46b1fff1283002fd99}
-      \strng{fullhash}{b3a7ab0a2e8b74241df798528a832a4c}
-      \strng{fullhashraw}{b3a7ab0a2e8b74241df798528a832a4c}
-      \strng{bibnamehash}{2f1e8a2f27806faeee2140eebf442b14}
-      \strng{authorbibnamehash}{2f1e8a2f27806faeee2140eebf442b14}
-      \strng{authornamehash}{cb435324eb05ca46b1fff1283002fd99}
-      \strng{authorfullhash}{b3a7ab0a2e8b74241df798528a832a4c}
-      \strng{authorfullhashraw}{b3a7ab0a2e8b74241df798528a832a4c}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{European Conference on Computer Vision}
-      \field{langid}{english}
-      \field{title}{Lita: Language instructed temporal-localization assistant}
-      \field{usera}{C}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{year}{2024}
-      \field{dateera}{ce}
-      \field{pages}{202\bibrangedash 218}
-      \range{pages}{17}
-      \keyw{huang2024lita}
-    \endentry
-    \entry{lv2023kosmos}{article}{}{}
-      \true{moreauthor}
-      \true{morelabelname}
-      \name{author}{10}{}{%
-        {{hash=16c15c1e2b6e3b196fd18ea0415143d4}{%
-           family={Lv},
-           familyi={L\bibinitperiod},
-           given={Tengchao},
-           giveni={T\bibinitperiod}}}%
-        {{hash=9c947c7a366bf27ebdb27000794a506a}{%
-           family={Huang},
-           familyi={H\bibinitperiod},
-           given={Yupan},
-           giveni={Y\bibinitperiod}}}%
-        {{hash=67a49f395d547156e1eeb0f575ec23a7}{%
-           family={Chen},
-           familyi={C\bibinitperiod},
-           given={Jingye},
-           giveni={J\bibinitperiod}}}%
-        {{hash=398b5771ec8a3d50451428331cc22695}{%
-           family={Zhao},
-           familyi={Z\bibinitperiod},
-           given={Yuzhong},
-           giveni={Y\bibinitperiod}}}%
-        {{hash=78ba53ab4de66d8eeddac38373c56b9a}{%
-           family={Jia},
-           familyi={J\bibinitperiod},
-           given={Yilin},
-           giveni={Y\bibinitperiod}}}%
-        {{hash=d22cf63412f5bb89dcde7965f3514581}{%
-           family={Cui},
-           familyi={C\bibinitperiod},
-           given={Lei},
-           giveni={L\bibinitperiod}}}%
-        {{hash=92b699dbe7e16bed6b434a3743ac8736}{%
-           family={Ma},
-           familyi={M\bibinitperiod},
-           given={Shuming},
-           giveni={S\bibinitperiod}}}%
-        {{hash=8d7647c4f053908774020bf795261142}{%
-           family={Chang},
-           familyi={C\bibinitperiod},
-           given={Yaoyao},
-           giveni={Y\bibinitperiod}}}%
-        {{hash=183ec41bf2d4edc2c4d5fb9f288d8e6a}{%
-           family={Huang},
-           familyi={H\bibinitperiod},
-           given={Shaohan},
-           giveni={S\bibinitperiod}}}%
-        {{hash=82baeb93c6572095f63e51c66a00d89f}{%
-           family={Wang},
-           familyi={W\bibinitperiod},
-           given={Wenhui},
-           giveni={W\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \strng{namehash}{02b41a3aec9517ed3983d91b250f501e}
-      \strng{fullhash}{2e8e0538223ea96ad33003431fd6cb4c}
-      \strng{fullhashraw}{2e8e0538223ea96ad33003431fd6cb4c}
-      \strng{bibnamehash}{3f82e243d0792c8702094cdc872efcf8}
-      \strng{authorbibnamehash}{3f82e243d0792c8702094cdc872efcf8}
-      \strng{authornamehash}{02b41a3aec9517ed3983d91b250f501e}
-      \strng{authorfullhash}{2e8e0538223ea96ad33003431fd6cb4c}
-      \strng{authorfullhashraw}{2e8e0538223ea96ad33003431fd6cb4c}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{arXiv preprint arXiv:2309.11419}
-      \field{langid}{english}
-      \field{title}{Kosmos-2.5: A multimodal literate model}
-      \field{usera}{J}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{year}{2023}
-      \field{dateera}{ce}
-      \keyw{lv2023kosmos}
     \endentry
     \entry{vardi2025clipupclipbasedunanswerableproblem}{online}{}{}
       \name{author}{3}{}{%
@@ -632,8 +275,8 @@
       \strng{authornamehash}{aaf1a3cb3283dc79a222a19abf8fbb76}
       \strng{authorfullhash}{66782d4fe6b2f0aa0cf7c032aeda91f0}
       \strng{authorfullhashraw}{66782d4fe6b2f0aa0cf7c032aeda91f0}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.CV}
@@ -716,8 +359,8 @@
       \strng{authorfullhash}{1f52b6bbec2190a725897d97769b8e5e}
       \strng{authorfullhashraw}{1f52b6bbec2190a725897d97769b8e5e}
       \field{extraname}{1}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.CV}
@@ -739,59 +382,6 @@
       \verb https://arxiv.org/abs/2401.12168
       \endverb
       \keyw{chen2024spatialvlmendowingvisionlanguagemodels}
-    \endentry
-    \entry{anis2025limitationsvisionlanguagemodelsunderstanding}{online}{}{}
-      \name{author}{3}{}{%
-        {{hash=a3695136a8d59909cd2a83685979fd5a}{%
-           family={Anis},
-           familyi={A\bibinitperiod},
-           given={Ahmad\bibnamedelima Mustafa},
-           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
-        {{hash=21661e24bb08a71c0bc580fa696611ea}{%
-           family={Ali},
-           familyi={A\bibinitperiod},
-           given={Hasnain},
-           giveni={H\bibinitperiod}}}%
-        {{hash=f6e17147884fabd67237b0e54802cf4f}{%
-           family={Sarfraz},
-           familyi={S\bibinitperiod},
-           given={Saquib},
-           giveni={S\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \strng{namehash}{76c292a038dda01a87645430b97d6a70}
-      \strng{fullhash}{42a6f872b2ddfbd87f098d1d834c372c}
-      \strng{fullhashraw}{42a6f872b2ddfbd87f098d1d834c372c}
-      \strng{bibnamehash}{42a6f872b2ddfbd87f098d1d834c372c}
-      \strng{authorbibnamehash}{42a6f872b2ddfbd87f098d1d834c372c}
-      \strng{authornamehash}{76c292a038dda01a87645430b97d6a70}
-      \strng{authorfullhash}{42a6f872b2ddfbd87f098d1d834c372c}
-      \strng{authorfullhashraw}{42a6f872b2ddfbd87f098d1d834c372c}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{eprintclass}{cs.CV}
-      \field{eprinttype}{arXiv}
-      \field{langid}{english}
-      \field{title}{On the Limitations of Vision-Language Models in Understanding Image Transforms}
-      \field{usera}{EB}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{year}{2025}
-      \field{dateera}{ce}
-      \verb{eprint}
-      \verb 2503.09837
-      \endverb
-      \verb{urlraw}
-      \verb https://arxiv.org/abs/2503.09837
-      \endverb
-      \verb{url}
-      \verb https://arxiv.org/abs/2503.09837
-      \endverb
-      \keyw{anis2025limitationsvisionlanguagemodelsunderstanding}
     \endentry
     \entry{campbell2024understandinglimitsvisionlanguage}{online}{}{}
       \name{author}{11}{}{%
@@ -862,8 +452,8 @@
       \strng{authornamehash}{c2849756df586e1f0ed3bfe08bdff79f}
       \strng{authorfullhash}{bda32d8a3990439b675b8f029984993e}
       \strng{authorfullhashraw}{bda32d8a3990439b675b8f029984993e}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.AI}
@@ -885,64 +475,6 @@
       \verb https://arxiv.org/abs/2411.00238
       \endverb
       \keyw{campbell2024understandinglimitsvisionlanguage}
-    \endentry
-    \entry{rahmanzadehgervi2025visionlanguagemodelsblind}{online}{}{}
-      \name{author}{4}{}{%
-        {{hash=951d27ae2b6d90d0ab5e6f1d23becf94}{%
-           family={Rahmanzadehgervi},
-           familyi={R\bibinitperiod},
-           given={Pooyan},
-           giveni={P\bibinitperiod}}}%
-        {{hash=f2fac1988f4a469872fa3a80db47d89e}{%
-           family={Bolton},
-           familyi={B\bibinitperiod},
-           given={Logan},
-           giveni={L\bibinitperiod}}}%
-        {{hash=e2bf2b631fe421bf48b4ddaf69c805d9}{%
-           family={Taesiri},
-           familyi={T\bibinitperiod},
-           given={Mohammad\bibnamedelima Reza},
-           giveni={M\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
-        {{hash=e18fab8650bff8356d03e7eb12f7d1e1}{%
-           family={Nguyen},
-           familyi={N\bibinitperiod},
-           given={Anh\bibnamedelima Totti},
-           giveni={A\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \strng{namehash}{2cc210f6d972c93cf7185f18340b4a5e}
-      \strng{fullhash}{34e3a2a3194f3f890993edfef8f396ec}
-      \strng{fullhashraw}{34e3a2a3194f3f890993edfef8f396ec}
-      \strng{bibnamehash}{9e0c2e0192aa5b99c430df11dc928e7c}
-      \strng{authorbibnamehash}{9e0c2e0192aa5b99c430df11dc928e7c}
-      \strng{authornamehash}{2cc210f6d972c93cf7185f18340b4a5e}
-      \strng{authorfullhash}{34e3a2a3194f3f890993edfef8f396ec}
-      \strng{authorfullhashraw}{34e3a2a3194f3f890993edfef8f396ec}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{eprintclass}{cs.AI}
-      \field{eprinttype}{arXiv}
-      \field{langid}{english}
-      \field{title}{Vision language models are blind: Failing to translate detailed visual features into words}
-      \field{usera}{EB}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{year}{2025}
-      \field{dateera}{ce}
-      \verb{eprint}
-      \verb 2407.06581
-      \endverb
-      \verb{urlraw}
-      \verb https://arxiv.org/abs/2407.06581
-      \endverb
-      \verb{url}
-      \verb https://arxiv.org/abs/2407.06581
-      \endverb
-      \keyw{rahmanzadehgervi2025visionlanguagemodelsblind}
     \endentry
     \entry{premsri2025neurosymbolictrainingreasoningspatial}{online}{}{}
       \name{author}{2}{}{%
@@ -968,8 +500,8 @@
       \strng{authornamehash}{a182e46b604f07eedbacd0b99d5a68ac}
       \strng{authorfullhash}{9afd9073c01aeb5a04dd9e25d32b3367}
       \strng{authorfullhashraw}{9afd9073c01aeb5a04dd9e25d32b3367}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.CL}
@@ -1031,8 +563,8 @@
       \strng{authornamehash}{c7a643e0b63fd2d43010f3ecf68aef72}
       \strng{authorfullhash}{5dbb373bae8eadeaba2d0a0a97855fa6}
       \strng{authorfullhashraw}{5dbb373bae8eadeaba2d0a0a97855fa6}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.CV}
@@ -1090,8 +622,8 @@
       \strng{authorfullhash}{b973265fcf18ea9db0467bbd1382f258}
       \strng{authorfullhashraw}{b973265fcf18ea9db0467bbd1382f258}
       \field{extraname}{1}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.CV}
@@ -1138,8 +670,8 @@
       \strng{authornamehash}{fd6c5071b14f35b878fde1b6f943ed49}
       \strng{authorfullhash}{54684e8f96006665c722ab6860e1f084}
       \strng{authorfullhashraw}{54684e8f96006665c722ab6860e1f084}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{arXiv preprint arXiv:2201.12438}
@@ -1186,8 +718,8 @@
       \strng{authornamehash}{8829143aa9a9a29adbad04cb52ca5b8a}
       \strng{authorfullhash}{419f5840bc8e2143e47c3cf818c68e24}
       \strng{authorfullhashraw}{419f5840bc8e2143e47c3cf818c68e24}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{arXiv preprint arXiv:1906.02361}
@@ -1239,8 +771,8 @@
       \strng{authornamehash}{e83dd2159a1c1b9083bc541d859661c6}
       \strng{authorfullhash}{860c6481ce1836e182e5a6739b9d90cc}
       \strng{authorfullhashraw}{860c6481ce1836e182e5a6739b9d90cc}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{arXiv preprint arXiv:2205.11916}
@@ -1305,8 +837,8 @@
       \strng{authornamehash}{7e5e566ee8f47df717196e96221e7705}
       \strng{authorfullhash}{01d9b6265352f5a8f4628e8f37339d80}
       \strng{authorfullhashraw}{01d9b6265352f5a8f4628e8f37339d80}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{arXiv preprint arXiv:2201.11903}
@@ -1343,8 +875,8 @@
       \strng{authornamehash}{3121362cf332810de752375a194acd2a}
       \strng{authorfullhash}{701aac313c79e95b5099346df9bba24a}
       \strng{authorfullhashraw}{701aac313c79e95b5099346df9bba24a}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Proceedings of the 5th International Conference on Logic Programming (ICLP/SLP)}
@@ -1396,8 +928,8 @@
       \strng{authornamehash}{980252df49c9c725a120aee1519288fc}
       \strng{authorfullhash}{6ff2ecbb0dace9a796d510f578f069a3}
       \strng{authorfullhashraw}{6ff2ecbb0dace9a796d510f578f069a3}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{langid}{english}
@@ -1441,8 +973,8 @@
       \strng{authornamehash}{ef230718dfe218b42541ce2805eb35c7}
       \strng{authorfullhash}{277f5a9e7e265abf49e8e178b581c735}
       \strng{authorfullhashraw}{277f5a9e7e265abf49e8e178b581c735}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{langid}{english}
@@ -1484,8 +1016,8 @@
       \strng{authorfullhash}{e7daa78b85b7870c8d987e78f1464680}
       \strng{authorfullhashraw}{e7daa78b85b7870c8d987e78f1464680}
       \field{extraname}{1}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.AI}
@@ -1542,8 +1074,8 @@
       \strng{authornamehash}{7a30ed8602125a14f114e00e43f6cfb5}
       \strng{authorfullhash}{c1704fe44658edb60668dce62c3e34f3}
       \strng{authorfullhashraw}{c1704fe44658edb60668dce62c3e34f3}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.AI}
@@ -1596,8 +1128,8 @@
       \strng{authorfullhash}{ed7ffcd227fe330b58a57a68df96cd93}
       \strng{authorfullhashraw}{ed7ffcd227fe330b58a57a68df96cd93}
       \field{extraname}{1}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{arXiv preprint arXiv:2411.18564}
@@ -1684,8 +1216,8 @@
       \strng{editornamehash}{c0f71bf98493a021e0ad741a5193b2ff}
       \strng{editorfullhash}{67cc341797d15e0b10b5e05c259573e8}
       \strng{editorfullhashraw}{67cc341797d15e0b10b5e05c259573e8}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{The integration of learning and reasoning is high on the research agenda in AI. Nevertheless, there is only a little attention to using existing background knowledge for reasoning about partially observed scenes to answer questions about the scene. Yet, we as humans use such knowledge frequently to infer plausible answers to visual questions (by eliminating all inconsistent ones). Such knowledge often comes in the form of constraints about objects and it tends to be highly domain or environment specific. We contribute a novel benchmark called CLEVR-POC for reasoning-intensive visual question answering (VQA) in partially observable environments under constraints. In CLEVR-POC, knowledge in the form of logical constraints needs to be leveraged in order to generate plausible answers to questions about a hidden object in a given partial scene. For instance, if one has the knowledge that all cups are colored either red, green or blue and that there is only one green cup, it becomes possible to deduce the color of an occluded cup as either red or blue, provided that all other cups, including the green one, are observed. Through experiments we observe that the performance of pre-trained vision language models like CLIP (approx. 22{\%}) and a large language model (LLM) like GPT-4 (approx. 46{\%}) on CLEVR-POC are not satisfactory, ascertaining the necessity for frameworks that can handle reasoning-intensive tasks where environment-specific background knowledge is available and crucial. Furthermore, our demonstration illustrates that a neuro-symbolic model, which integrates an LLM like GPT-4 with a visual perception network and a formal logical reasoner, exhibits exceptional performance on CLEVR-POC.}
@@ -1708,145 +1240,6 @@
       \verb https://aclanthology.org/2024.lrec-main.293/
       \endverb
       \keyw{sam-abraham-etal-2024-clevr}
-    \endentry
-    \entry{10.5555/3073924}{book}{}{}
-      \name{author}{3}{}{%
-        {{hash=d4b01a4cf3a9690cd8e7bb1a53071daf}{%
-           family={Ghallab},
-           familyi={G\bibinitperiod},
-           given={Malik},
-           giveni={M\bibinitperiod}}}%
-        {{hash=7912a8c46c9c7673b1551e899b294808}{%
-           family={Nau},
-           familyi={N\bibinitperiod},
-           given={Dana},
-           giveni={D\bibinitperiod}}}%
-        {{hash=112648ef53b14383bba68454cac128ef}{%
-           family={Traverso},
-           familyi={T\bibinitperiod},
-           given={Paolo},
-           giveni={P\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \list{location}{1}{%
-        {USA}%
-      }
-      \list{publisher}{1}{%
-        {Cambridge University Press}%
-      }
-      \strng{namehash}{391f69ca49373b5e0aee090616188436}
-      \strng{fullhash}{2ae5ec486a9c4db85b1f28c4a48fd047}
-      \strng{fullhashraw}{2ae5ec486a9c4db85b1f28c4a48fd047}
-      \strng{bibnamehash}{2ae5ec486a9c4db85b1f28c4a48fd047}
-      \strng{authorbibnamehash}{2ae5ec486a9c4db85b1f28c4a48fd047}
-      \strng{authornamehash}{391f69ca49373b5e0aee090616188436}
-      \strng{authorfullhash}{2ae5ec486a9c4db85b1f28c4a48fd047}
-      \strng{authorfullhashraw}{2ae5ec486a9c4db85b1f28c4a48fd047}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{Autonomous AI systems need complex computational techniques for planning and performing actions. Planning and acting require significant deliberation because an intelligent system must coordinate and integrate these activities in order to act effectively in the real world. This book presents a comprehensive paradigm of planning and acting using the most recent and advanced automated-planning techniques. It explains the computational deliberation capabilities that allow an actor, whether physical or virtual, to reason about its actions, choose them, organize them purposefully, and act deliberately to achieve an objective. Useful for students, practitioners, and researchers, this book covers state-of-the-art planning techniques, acting techniques, and their integration which will allow readers to design intelligent systems that are able to act effectively in the real world.}
-      \field{edition}{1st}
-      \field{isbn}{1107037271}
-      \field{langid}{english}
-      \field{title}{Automated Planning and Acting}
-      \field{usera}{M}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{year}{2016}
-      \field{dateera}{ce}
-      \keyw{10.5555/3073924}
-    \endentry
-    \entry{gao2025multimodalagenttuningbuilding}{online}{}{}
-      \name{author}{10}{}{%
-        {{hash=136aab75d8b21bc6934cbfe9423a5856}{%
-           family={Gao},
-           familyi={G\bibinitperiod},
-           given={Zhi},
-           giveni={Z\bibinitperiod}}}%
-        {{hash=7bb2844bdbbae29d1f2d4b5641491d0a}{%
-           family={Zhang},
-           familyi={Z\bibinitperiod},
-           given={Bofei},
-           giveni={B\bibinitperiod}}}%
-        {{hash=459c345c3ec9ccd61ea86fb5b095046a}{%
-           family={Li},
-           familyi={L\bibinitperiod},
-           given={Pengxiang},
-           giveni={P\bibinitperiod}}}%
-        {{hash=557401f59248fd925007bb00c18f1abe}{%
-           family={Ma},
-           familyi={M\bibinitperiod},
-           given={Xiaojian},
-           giveni={X\bibinitperiod}}}%
-        {{hash=dd02c263476b26cf6663ebaf822a827f}{%
-           family={Yuan},
-           familyi={Y\bibinitperiod},
-           given={Tao},
-           giveni={T\bibinitperiod}}}%
-        {{hash=f6e77dcd934bbace465439a20db575ec}{%
-           family={Fan},
-           familyi={F\bibinitperiod},
-           given={Yue},
-           giveni={Y\bibinitperiod}}}%
-        {{hash=e64a6f8bcb34673f8f76ad3e689a895e}{%
-           family={Wu},
-           familyi={W\bibinitperiod},
-           given={Yuwei},
-           giveni={Y\bibinitperiod}}}%
-        {{hash=3d289786cb39f229d409a397c99f4944}{%
-           family={Jia},
-           familyi={J\bibinitperiod},
-           given={Yunde},
-           giveni={Y\bibinitperiod}}}%
-        {{hash=9b4356508155ef61bbcbb2e10e2c918b}{%
-           family={Zhu},
-           familyi={Z\bibinitperiod},
-           given={Song-Chun},
-           giveni={S\bibinithyphendelim C\bibinitperiod}}}%
-        {{hash=16a77262afb7cc9b0229c21f168bd098}{%
-           family={Li},
-           familyi={L\bibinitperiod},
-           given={Qing},
-           giveni={Q\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \strng{namehash}{48c6c2af44b5bca2dced710a6d20179b}
-      \strng{fullhash}{2a323ac50ada5bb05a6ca196dab14439}
-      \strng{fullhashraw}{2a323ac50ada5bb05a6ca196dab14439}
-      \strng{bibnamehash}{c4aedf1eb4a3ff7ea443d3b2f7062278}
-      \strng{authorbibnamehash}{c4aedf1eb4a3ff7ea443d3b2f7062278}
-      \strng{authornamehash}{48c6c2af44b5bca2dced710a6d20179b}
-      \strng{authorfullhash}{2a323ac50ada5bb05a6ca196dab14439}
-      \strng{authorfullhashraw}{2a323ac50ada5bb05a6ca196dab14439}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{eprintclass}{cs.AI}
-      \field{eprinttype}{arXiv}
-      \field{langid}{english}
-      \field{title}{Multi-modal Agent Tuning: Building a VLM-Driven Agent for Efficient Tool Usage}
-      \field{usera}{EB}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{year}{2025}
-      \field{dateera}{ce}
-      \verb{eprint}
-      \verb 2412.15606
-      \endverb
-      \verb{urlraw}
-      \verb https://arxiv.org/abs/2412.15606
-      \endverb
-      \verb{url}
-      \verb https://arxiv.org/abs/2412.15606
-      \endverb
-      \keyw{gao2025multimodalagenttuningbuilding}
     \endentry
     \entry{Antol2015VQA}{article}{}{}
       \name{author}{7}{}{%
@@ -1897,8 +1290,8 @@
       \strng{authornamehash}{a5990e3185624e19728f142f3a8589ae}
       \strng{authorfullhash}{83fb6061418024ae3adebce54b69d7b7}
       \strng{authorfullhashraw}{83fb6061418024ae3adebce54b69d7b7}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Proceedings of the IEEE International Conference on Computer Vision (ICCV)}
@@ -1962,8 +1355,8 @@
       \strng{authornamehash}{1c6424238424627553d58e0ce02a68ea}
       \strng{authorfullhash}{5a512287423351e20665619d4f7d36e0}
       \strng{authorfullhashraw}{5a512287423351e20665619d4f7d36e0}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the IEEE conference on computer vision and pattern recognition}
@@ -2013,8 +1406,8 @@
       \strng{authorfullhash}{10395aef0c84e468bf3d487502d86ab4}
       \strng{authorfullhashraw}{10395aef0c84e468bf3d487502d86ab4}
       \field{extraname}{1}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Advances in neural information processing systems}
@@ -2064,8 +1457,8 @@
       \strng{authorfullhash}{088828edca29375790531e7516b2899d}
       \strng{authorfullhashraw}{088828edca29375790531e7516b2899d}
       \field{extraname}{2}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Advances in neural information processing systems}
@@ -2104,8 +1497,8 @@
       \strng{authornamehash}{24b94fa42e8739453c9e913f92bef3f1}
       \strng{authorfullhash}{2cf1901f830bd8af8251d2bc2fa625df}
       \strng{authorfullhashraw}{2cf1901f830bd8af8251d2bc2fa625df}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the 2019 conference on empirical methods in natural language processing and the 9th international joint conference on natural language processing (EMNLP-IJCNLP)}
@@ -2169,8 +1562,8 @@
       \strng{authornamehash}{c42ffc5f6e326408483b98d9309b282d}
       \strng{authorfullhash}{10cd053ee0fa62289ca6480a5b84ed5a}
       \strng{authorfullhashraw}{10cd053ee0fa62289ca6480a5b84ed5a}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{International Conference on Learning Representations}
@@ -2266,8 +1659,8 @@
       \strng{authorfullhash}{3e94778880a2e9d7c24a72498df08096}
       \strng{authorfullhashraw}{3e94778880a2e9d7c24a72498df08096}
       \field{extraname}{1}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{European Conference on Computer Vision}
@@ -2299,8 +1692,8 @@
       \strng{authornamehash}{0523b13262b12c215d8009938f5c14f1}
       \strng{authorfullhash}{0523b13262b12c215d8009938f5c14f1}
       \strng{authorfullhashraw}{0523b13262b12c215d8009938f5c14f1}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://cdn.openai.com/papers/GPTV_System_Card.pdf}}
@@ -2373,8 +1766,8 @@
       \strng{authornamehash}{3b7e00bc88d7aca4d4d5ddb8c252e36c}
       \strng{authorfullhash}{efa664e154982dfbb2d86b95a77d1448}
       \strng{authorfullhashraw}{efa664e154982dfbb2d86b95a77d1448}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{European Conference on Computer Vision (ECCV)}
@@ -2439,8 +1832,8 @@
       \strng{authornamehash}{990420f755e01028377fcad1464c9706}
       \strng{authorfullhash}{a16fdd05c52c264b99fe98f4a5e24c60}
       \strng{authorfullhashraw}{a16fdd05c52c264b99fe98f4a5e24c60}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{2009 IEEE conference on computer vision and pattern recognition}
@@ -2532,8 +1925,8 @@
       \strng{authornamehash}{6e123636292d5acb3e59a2dea095df77}
       \strng{authorfullhash}{d88292d711d29fae7152180f34a925ad}
       \strng{authorfullhashraw}{d88292d711d29fae7152180f34a925ad}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{International Journal of Computer Vision}
@@ -2596,8 +1989,8 @@
       \strng{authornamehash}{abd154245b8f10c81399b395d5309db7}
       \strng{authorfullhash}{5f2d2493835e2bc16bd9537cb2f58e2b}
       \strng{authorfullhashraw}{5f2d2493835e2bc16bd9537cb2f58e2b}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)}
@@ -2639,8 +2032,8 @@
       \strng{authornamehash}{fb3072447f4b1250e7f582639508a8a8}
       \strng{authorfullhash}{3062a65f0d8a6f47873b69b838bbe52d}
       \strng{authorfullhashraw}{3062a65f0d8a6f47873b69b838bbe52d}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the IEEE international conference on computer vision}
@@ -2682,8 +2075,8 @@
       \strng{authornamehash}{c0d81eed7c8d4d2b93b3779f2a250f07}
       \strng{authorfullhash}{c9ae87a11d6a30b9a79e23702c90ec9e}
       \strng{authorfullhashraw}{c9ae87a11d6a30b9a79e23702c90ec9e}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}
@@ -2700,6 +2093,72 @@
       \verb 10.1109/CVPR.2019.00686
       \endverb
       \keyw{hudson2019gqa}
+    \endentry
+    \entry{johnson2017clevr}{inproceedings}{}{}
+      \name{author}{6}{}{%
+        {{hash=90edc587e1d523d4e173b1fe6e733445}{%
+           family={Johnson},
+           familyi={J\bibinitperiod},
+           given={Justin},
+           giveni={J\bibinitperiod}}}%
+        {{hash=9cadf8ca1dd9b5f5a830ba2059b2517f}{%
+           family={Hariharan},
+           familyi={H\bibinitperiod},
+           given={Bharath},
+           giveni={B\bibinitperiod}}}%
+        {{hash=a33ababcca5b83a7777452957fb2eef2}{%
+           family={Van\bibnamedelimb Der\bibnamedelima Maaten},
+           familyi={V\bibinitperiod\bibinitdelim D\bibinitperiod\bibinitdelim M\bibinitperiod},
+           given={Laurens},
+           giveni={L\bibinitperiod}}}%
+        {{hash=cd00ce5bc45f687c432e52e0fa1a7aa6}{%
+           family={Fei-Fei},
+           familyi={F\bibinithyphendelim F\bibinitperiod},
+           given={Li},
+           giveni={L\bibinitperiod}}}%
+        {{hash=0eae2d56a9cbb037c64028d6573877a7}{%
+           family={Zitnick},
+           familyi={Z\bibinitperiod},
+           given={C.\bibnamedelimi Lawrence},
+           giveni={C\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=bd5dadbe57bedc5957c19a3154c4d424}{%
+           family={Girshick},
+           familyi={G\bibinitperiod},
+           given={Ross},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {english}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{703afbca586b4470d0f3fab18063c292}
+      \strng{fullhash}{4c5a881d4b879b242a071594b5887a40}
+      \strng{fullhashraw}{4c5a881d4b879b242a071594b5887a40}
+      \strng{bibnamehash}{44967f4aade097f349203fdd9ba58bd4}
+      \strng{authorbibnamehash}{44967f4aade097f349203fdd9ba58bd4}
+      \strng{authornamehash}{703afbca586b4470d0f3fab18063c292}
+      \strng{authorfullhash}{4c5a881d4b879b242a071594b5887a40}
+      \strng{authorfullhashraw}{4c5a881d4b879b242a071594b5887a40}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)}
+      \field{langid}{english}
+      \field{title}{{CLEVR}: A Diagnostic Dataset for Compositional Language and Elementary Visual Reasoning}
+      \field{usera}{C}
+      \field{userd}{english}
+      \field{userf}{english}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \field{pages}{2901\bibrangedash 2910}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1109/CVPR.2017.322
+      \endverb
+      \keyw{johnson2017clevr}
     \endentry
     \entry{andreas2016neural}{inproceedings}{}{}
       \name{author}{4}{}{%
@@ -2736,8 +2195,8 @@
       \strng{authorfullhash}{b973265fcf18ea9db0467bbd1382f258}
       \strng{authorfullhashraw}{b973265fcf18ea9db0467bbd1382f258}
       \field{extraname}{2}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the IEEE conference on computer vision and pattern recognition}
@@ -2787,8 +2246,8 @@
       \strng{authorfullhash}{cee9a5a6cda252a09eaede25650cde4a}
       \strng{authorfullhashraw}{cee9a5a6cda252a09eaede25650cde4a}
       \field{extraname}{1}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{arXiv preprint arXiv:1704.08243}
@@ -2836,8 +2295,8 @@
       \strng{authorfullhash}{4c15e89108e33efab79b1853dc73d553}
       \strng{authorfullhashraw}{4c15e89108e33efab79b1853dc73d553}
       \field{extraname}{2}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the IEEE conference on computer vision and pattern recognition}
@@ -2892,8 +2351,8 @@
       \strng{authorfullhash}{9b3c2be77757f4e7b4899a25f4852fcb}
       \strng{authorfullhashraw}{9b3c2be77757f4e7b4899a25f4852fcb}
       \field{extraname}{2}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the European Conference on Computer Vision (ECCV)}
@@ -2957,8 +2416,8 @@
       \strng{authornamehash}{dbf01df8d5034b0040bb5af9170c6ee5}
       \strng{authorfullhash}{afaf087ec31fb8ea621b5fc793c9cd6d}
       \strng{authorfullhashraw}{afaf087ec31fb8ea621b5fc793c9cd6d}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the IEEE conference on computer vision and pattern recognition}
@@ -3015,8 +2474,8 @@
       \strng{authornamehash}{5f94defeb842da5783d34a166677f56e}
       \strng{authorfullhash}{d8ff525ef5ed6ad6d815e188aeca1fc1}
       \strng{authorfullhashraw}{d8ff525ef5ed6ad6d815e188aeca1fc1}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Computer Vision and Image Understanding}
@@ -3066,8 +2525,8 @@
       \strng{authornamehash}{e47a2d79cf54093c9f06ba61f3584215}
       \strng{authorfullhash}{4db7fe5a8dea87f90d5ff7bfcbd75609}
       \strng{authorfullhashraw}{4db7fe5a8dea87f90d5ff7bfcbd75609}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}
@@ -3131,8 +2590,8 @@
       \strng{authornamehash}{b0058e7ec5e8f862c5d605fb459253ab}
       \strng{authorfullhash}{f210693436fc0dbccbc0a0754a494b42}
       \strng{authorfullhashraw}{f210693436fc0dbccbc0a0754a494b42}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{European Conference on Computer Vision (ECCV), Workshops}
@@ -3174,8 +2633,8 @@
       \strng{authornamehash}{fb0172ec5590266cf2419580fb3d1911}
       \strng{authorfullhash}{d7e4be9199b1d0c80bf8efd748ce3880}
       \strng{authorfullhashraw}{d7e4be9199b1d0c80bf8efd748ce3880}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{arXiv preprint arXiv:1712.08697}
@@ -3217,8 +2676,8 @@
       \strng{authornamehash}{abc08a33e75b7303faeb3dec9817b5d7}
       \strng{authorfullhash}{2b08363e646e72e51ea45c4f9597d0c4}
       \strng{authorfullhashraw}{2b08363e646e72e51ea45c4f9597d0c4}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the AAAI conference on artificial intelligence}
@@ -3289,8 +2748,8 @@
       \strng{authornamehash}{8c8ad204fb74cb55f1f8befc387bc743}
       \strng{authorfullhash}{cda8a52aac49d49c7b1be26c0253a44c}
       \strng{authorfullhashraw}{cda8a52aac49d49c7b1be26c0253a44c}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the IEEE/CVF conference on computer vision and pattern recognition}
@@ -3359,8 +2818,8 @@
       \strng{authornamehash}{c4f6271ad65cc0b40f8b61f3711dc807}
       \strng{authorfullhash}{760686f1e824261ffa07085a06c84f36}
       \strng{authorfullhashraw}{760686f1e824261ffa07085a06c84f36}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the IEEE/CVF international conference on computer vision}
@@ -3418,8 +2877,8 @@
       \strng{authorfullhash}{b29c9a4d7b407296c4bea5f623b5aa64}
       \strng{authorfullhashraw}{b29c9a4d7b407296c4bea5f623b5aa64}
       \field{extraname}{2}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{IEEE transactions on pattern analysis and machine intelligence}
@@ -3476,8 +2935,8 @@
       \strng{authorfullhash}{0258840be886ec93b8b1bdfb1440f087}
       \strng{authorfullhashraw}{0258840be886ec93b8b1bdfb1440f087}
       \field{extraname}{3}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{arXiv preprint arXiv:1511.02570}
@@ -3524,8 +2983,8 @@
       \strng{authornamehash}{2ed52c3f5fde010b686a483eb6b47aa0}
       \strng{authorfullhash}{015b42af589b91aa68ed0f9b485d8e76}
       \strng{authorfullhashraw}{015b42af589b91aa68ed0f9b485d8e76}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the IEEE/cvf conference on computer vision and pattern recognition}
@@ -3567,8 +3026,8 @@
       \strng{authornamehash}{18aa93d3f4a3678f48eae1c8c7a96413}
       \strng{authorfullhash}{17618facb11f90690398fc35546eeb75}
       \strng{authorfullhashraw}{17618facb11f90690398fc35546eeb75}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{IEEE Software}
@@ -3619,8 +3078,8 @@
       \strng{authornamehash}{d4ef2548433d417ed0a08049928b3fc1}
       \strng{authorfullhash}{6af98bcfb7fccfb9ca88b04097c016fa}
       \strng{authorfullhashraw}{6af98bcfb7fccfb9ca88b04097c016fa}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{arXiv preprint arXiv:2302.06590}
@@ -3680,8 +3139,8 @@
       \strng{authornamehash}{1bd77a0626f47e23621f88804b74b6fd}
       \strng{authorfullhash}{460503ede3c9c779fbd6d30fb0c059bf}
       \strng{authorfullhashraw}{460503ede3c9c779fbd6d30fb0c059bf}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of Systems and Software}
@@ -3764,8 +3223,8 @@
       \strng{authorfullhash}{be2bbf013ebbf8f46df72faed3a32e32}
       \strng{authorfullhashraw}{be2bbf013ebbf8f46df72faed3a32e32}
       \field{extraname}{2}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{arXiv preprint arXiv:2107.03374}
@@ -3813,8 +3272,8 @@
       \strng{authorfullhash}{bda39ef926f010c6db71f3f046aeb341}
       \strng{authorfullhashraw}{bda39ef926f010c6db71f3f046aeb341}
       \field{extraname}{1}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the 6th ACM SIGPLAN international symposium on machine programming}
@@ -3874,8 +3333,8 @@
       \strng{authorfullhash}{7b17458487e3751670de20341c4413c1}
       \strng{authorfullhashraw}{7b17458487e3751670de20341c4413c1}
       \field{extraname}{4}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{arXiv preprint arXiv:2305.07922}
@@ -3937,8 +3396,8 @@
       \strng{authornamehash}{98300bfccb6bf85ab2af6b205386f321}
       \strng{authorfullhash}{f90e4a07a56a78716f1ac8b8bb78d448}
       \strng{authorfullhashraw}{f90e4a07a56a78716f1ac8b8bb78d448}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{arXiv preprint arXiv:2403.01131}
@@ -3975,8 +3434,8 @@
       \strng{authornamehash}{443da8ee4261fe26712a51ca4833dd1a}
       \strng{authorfullhash}{82ae4981544753de282567368f2a5ff2}
       \strng{authorfullhashraw}{82ae4981544753de282567368f2a5ff2}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the BioNLP 2009 Workshop}
@@ -4018,8 +3477,8 @@
       \strng{authornamehash}{3c47c8f46329c4f919ffd1364610285a}
       \strng{authorfullhash}{403126eae47f93ecc60b958dc05e16c4}
       \strng{authorfullhashraw}{403126eae47f93ecc60b958dc05e16c4}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{International Workshop on Functional and Constraint Logic Programming}
@@ -4056,8 +3515,8 @@
       \strng{authornamehash}{ef7984b8b1acfae8d46bba0b67ee5bf1}
       \strng{authorfullhash}{ef7984b8b1acfae8d46bba0b67ee5bf1}
       \strng{authorfullhashraw}{ef7984b8b1acfae8d46bba0b67ee5bf1}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Theory and Practice of Logic Programming}
@@ -4116,8 +3575,8 @@
       \strng{authornamehash}{0fd0fbd50d4a0b6ec9d4c4c7893049bf}
       \strng{authorfullhash}{556d7c7158a4a956c26881b1172bf9d9}
       \strng{authorfullhashraw}{556d7c7158a4a956c26881b1172bf9d9}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Theory and Practice of Logic Programming}
@@ -4158,8 +3617,8 @@
       \strng{authornamehash}{73e92a052512e23e8e1b808470de6bfe}
       \strng{authorfullhash}{49892dc82cf49b0c5a7feda525dd2813}
       \strng{authorfullhashraw}{49892dc82cf49b0c5a7feda525dd2813}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{KR}
@@ -4194,8 +3653,8 @@
       \strng{authornamehash}{74d3522e91542051f26a4f98e94e2dc2}
       \strng{authorfullhash}{74d3522e91542051f26a4f98e94e2dc2}
       \strng{authorfullhashraw}{74d3522e91542051f26a4f98e94e2dc2}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Computational linguistics}
@@ -4246,8 +3705,8 @@
       \strng{authornamehash}{2d680eaffddc5a1a3b82c633830a2730}
       \strng{authorfullhash}{98fc6d45007aba946c9490074951dbf2}
       \strng{authorfullhashraw}{98fc6d45007aba946c9490074951dbf2}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Advances in Neural Information Processing Systems}
@@ -4293,8 +3752,8 @@
       \strng{authorfullhash}{e7daa78b85b7870c8d987e78f1464680}
       \strng{authorfullhashraw}{e7daa78b85b7870c8d987e78f1464680}
       \field{extraname}{2}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{arXiv preprint arXiv:2307.07696}
@@ -4331,8 +3790,8 @@
       \strng{authornamehash}{0bfbaea31e99b7df39a070c70e5259d3}
       \strng{authorfullhash}{e68c028f52f41f363062e4c53ea2a703}
       \strng{authorfullhashraw}{e68c028f52f41f363062e4c53ea2a703}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the AAAI Conference on Artificial Intelligence}
@@ -4381,8 +3840,8 @@
       \strng{authornamehash}{46c9cd50466fd20df8e2871b5f74c234}
       \strng{authorfullhash}{229fc6fe4279e667f69fd749d8b7798c}
       \strng{authorfullhashraw}{229fc6fe4279e667f69fd749d8b7798c}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{arXiv preprint arXiv:2302.03780}
@@ -4424,8 +3883,8 @@
       \strng{authornamehash}{d8ad6a6e974e3dec9ec94445656eb08d}
       \strng{authorfullhash}{b30ff344098007e5a25f5629ff53abfe}
       \strng{authorfullhashraw}{b30ff344098007e5a25f5629ff53abfe}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.AI}
@@ -4483,8 +3942,8 @@
       \strng{authorfullhash}{39efdd7d1aba1485aaba713c56a5591a}
       \strng{authorfullhashraw}{39efdd7d1aba1485aaba713c56a5591a}
       \field{extraname}{2}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)}
@@ -4562,8 +4021,8 @@
       \strng{authornamehash}{aa9eac20cfe2a473211410321e86a388}
       \strng{authorfullhash}{f0d84fadcceb1681e1c4d78aa0050539}
       \strng{authorfullhashraw}{f0d84fadcceb1681e1c4d78aa0050539}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.CV}
@@ -4630,8 +4089,8 @@
       \strng{authornamehash}{aa689ad0a02a9ccb4e335686852c60c2}
       \strng{authorfullhash}{e30cdd382f18d4785a5ca7de5f5912ed}
       \strng{authorfullhashraw}{e30cdd382f18d4785a5ca7de5f5912ed}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.AI}
@@ -4684,8 +4143,8 @@
       \strng{authorfullhash}{2ade867ae3ef0be7ef5755284d4a2b07}
       \strng{authorfullhashraw}{2ade867ae3ef0be7ef5755284d4a2b07}
       \field{extraname}{3}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the 29th International Joint Conference on Artificial Intelligence (IJCAI)}
@@ -4735,8 +4194,8 @@
       \strng{authornamehash}{2902922493808dd5d0eb94f506f24b46}
       \strng{authorfullhash}{f8e6b18adb008492d69797fbfd03be37}
       \strng{authorfullhashraw}{f8e6b18adb008492d69797fbfd03be37}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Theory and Practice of Logic Programming}
@@ -4790,8 +4249,8 @@
       \strng{authornamehash}{7e2acdbe12c7a226aa23d86bb64070ce}
       \strng{authorfullhash}{f4ec2f93d9716ed9ab1b24aa5a3317bb}
       \strng{authorfullhashraw}{f4ec2f93d9716ed9ab1b24aa5a3317bb}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Workshop on Trends and Applications of Answer Set Programming (TAASP 2023)}
@@ -4821,8 +4280,8 @@
       \strng{authornamehash}{2b031fe0f29fedfa13b0c48bd3bceeea}
       \strng{authorfullhash}{2b031fe0f29fedfa13b0c48bd3bceeea}
       \strng{authorfullhashraw}{2b031fe0f29fedfa13b0c48bd3bceeea}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{langid}{english}
@@ -4887,8 +4346,8 @@
       \strng{authorfullhash}{2f081036ea989ee5c4cb63633614dab4}
       \strng{authorfullhashraw}{2f081036ea989ee5c4cb63633614dab4}
       \field{extraname}{3}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}
@@ -4902,69 +4361,6 @@
       \field{pages}{10965\bibrangedash 10975}
       \range{pages}{11}
       \keyw{li2022grounded}
-    \endentry
-    \entry{fandinno2021planningincompleteinformationquantified}{online}{}{}
-      \name{author}{5}{}{%
-        {{hash=ff0cc9e7122367357b3186495ab0f058}{%
-           family={Fandinno},
-           familyi={F\bibinitperiod},
-           given={Jorge},
-           giveni={J\bibinitperiod}}}%
-        {{hash=a43c9333f32b74907720538af7308c5c}{%
-           family={Laferrière},
-           familyi={L\bibinitperiod},
-           given={François},
-           giveni={F\bibinitperiod}}}%
-        {{hash=586007140096e6d78832f56de1edf859}{%
-           family={Romero},
-           familyi={R\bibinitperiod},
-           given={Javier},
-           giveni={J\bibinitperiod}}}%
-        {{hash=3c55d70c19bd5f5a654a6ad7ae64450c}{%
-           family={Schaub},
-           familyi={S\bibinitperiod},
-           given={Torsten},
-           giveni={T\bibinitperiod}}}%
-        {{hash=fa9d149ca8966d751c3d8d9a2201aa8e}{%
-           family={Son},
-           familyi={S\bibinitperiod},
-           given={Tran\bibnamedelima Cao},
-           giveni={T\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \strng{namehash}{4c2cf4fdd700a0a9b3d65ff247f99ced}
-      \strng{fullhash}{dd62c7efc7fe20e6a30e5034843836c9}
-      \strng{fullhashraw}{dd62c7efc7fe20e6a30e5034843836c9}
-      \strng{bibnamehash}{3d4c54e334e83947e9c9670af4eccf4a}
-      \strng{authorbibnamehash}{3d4c54e334e83947e9c9670af4eccf4a}
-      \strng{authornamehash}{4c2cf4fdd700a0a9b3d65ff247f99ced}
-      \strng{authorfullhash}{dd62c7efc7fe20e6a30e5034843836c9}
-      \strng{authorfullhashraw}{dd62c7efc7fe20e6a30e5034843836c9}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{eprintclass}{cs.AI}
-      \field{eprinttype}{arXiv}
-      \field{langid}{english}
-      \field{title}{Planning with Incomplete Information in Quantified Answer Set Programming}
-      \field{usera}{EB}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{year}{2021}
-      \field{dateera}{ce}
-      \verb{eprint}
-      \verb 2108.06405
-      \endverb
-      \verb{urlraw}
-      \verb https://arxiv.org/abs/2108.06405
-      \endverb
-      \verb{url}
-      \verb https://arxiv.org/abs/2108.06405
-      \endverb
-      \keyw{fandinno2021planningincompleteinformationquantified}
     \endentry
     \entry{ge2021selfdistillationbatchknowledgeensembling}{online}{}{}
       \name{author}{9}{}{%
@@ -5025,8 +4421,8 @@
       \strng{authornamehash}{466c0473f81d59340cc425244665ac6c}
       \strng{authorfullhash}{bd5acc519f854979d1e951c45a21f9d3}
       \strng{authorfullhashraw}{bd5acc519f854979d1e951c45a21f9d3}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.CV}
@@ -5093,8 +4489,8 @@
       \strng{authornamehash}{4683c1b2e86a7ec4563fd45b42271fe9}
       \strng{authorfullhash}{4156a3397a3934a7695327c022f186a5}
       \strng{authorfullhashraw}{4156a3397a3934a7695327c022f186a5}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.CL}
