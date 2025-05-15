@@ -348,10 +348,14 @@ occlusion字段中，每个三元组都表示一对遮挡关系。其中第一�
 3种LLM中，既包含DeepSeek-Coder这类轻量级专用模型，也涵盖ChatGPT-4o这类
 通用型先进系统，而LLaMA3性能和效率之间取得了平衡，属于居中水平的模型，选取的都是有代表性的LLM，增强实验说服力和可信度。
 
-实验结果如表\ref{tab:asp-based-constraint-construction}所示，可以看到在三种LLM上，
-方法二相比方法一在语法正确率和语义正确率上均有较大程度的提升，分别平均提升了8.9\%和11.4\%，证明了
-经过本文设计的预定义约束模板和提示策略能够有效提升LLM将自然语言的积木世界生成指令转化为对应约束的准确率，并且印证了
-该方法在多种LLM上具有较好的泛化能力。
+实验结果如表\ref{tab:asp-based-constraint-construction}所示，经过分析可以得出如下实验结论：
+\begin{enumerate}[nosep]
+\item 提示学习显著提升准确率：方法二在三种模型上平均提升了语法正确率8.9\%，语义正确率11.4\%，验证了模板与提示策略的有效性。
+\item LLM能力对生成质量影响明显：ChatGPT-4o在没有预先提示的情况下就已具备较高性能（82.7\%语法正确率，75.6\%语义正确率），
+揭示其对自然语言理解能力更强；DeepSeek-Coder基于代码训练，但在未引导时表现较差，说明自然语言到ASP的转换仍需适当加以提示和引导；
+LLaMA3虽然参数量较大，但需要有效提示才能激发其潜能。
+\item 提示策略的泛化能力强：方法二在三种模型中都有效，说明该提示学习策略具有良好的迁移性。
+\end{enumerate}
 \begin{table}[h]
     \centering
     \begin{tabular}{lcc}
@@ -389,9 +393,12 @@ occlusion字段中，每个三元组都表示一对遮挡关系。其中第一�
 因本实验主要目的为评估生成部分可见积木世界图像的生成耗时，故只在一种LLM上进行测试即可，本文在此处选择的LLM为ChatGPT-4o。
 实验环境的配置方面，CPU为Intel Core i9 12900K，内存为128GB，显卡为2张Nvidia RTX4090。
 
-表\ref{tab:time-for-asp-based-image-generation}中汇总了不同复杂度下部分可见积木世界生成的时间开销，三类不同复杂度下生成
-积木世界图像的平均总时间为6.6秒。根据实验结果可见随着场景复杂度不断上升，
-ASP生成耗时和ASP求解耗时明显上升，而渲染时间相较之下变化幅度并不大，说明LLM进行ASP约束规则的生成以及ASP求解为主要的耗时瓶颈。
+表\ref{tab:time-for-asp-based-image-generation}中汇总了不同复杂度下部分可见积木世界生成的时间开销，经过分析可得出如下结论：
+\begin{enumerate}[nosep]
+\item 总耗时随复杂度上升：从低复杂度的3.9秒增长到高复杂度的9.2秒，说明系统对复杂场景存在一定处理成本。
+\item 主要瓶颈在ASP生成与求解：ASP生成耗时占总时间60\%以上，说明LLM处理自然语言与符号转换比较耗时；ASP求解器尽管高效，但在高复杂度下仍有明显上升（+60\%）。
+\item 渲染耗时稳定：说明Blender对复杂场景的可视化处理较为稳定，非主要瓶颈。
+\end{enumerate}
 \begin{table}[h]
   \centering
   \begin{tabular}{ccccc}
@@ -408,6 +415,9 @@ ASP生成耗时和ASP求解耗时明显上升，而渲染时间相较之下变�
   \caption{不同复杂度下图像生成的时间开销}
   \label{tab:time-for-asp-based-image-generation}
 \end{table}
+
+另外，三类不同复杂度下生成积木世界图像的平均总时间为6.6秒，高复杂度时的生成耗时仍能控制在10秒的合理范围以内，符合实际课堂的现实需要，
+说明本方法具备投入应用的现实性。
 \section{POVQAD数据集构建}
 POVQAD的构建目标为：在部分可见积木世界场景下，通过遮挡、隐藏等设置，考察模型结合背景知识和空间逻辑进行多步推理的能力。
 围绕这一目标，下面本节从数据集定义、构建过程及数据集质量评估四个方面展开介绍。
@@ -419,9 +429,9 @@ $$D = \{ (I_i,S_i,Q_i,\Pi_i ,A_i) | i=1,2,...,N \}$$
 \item \textbf{$I_i$}为图像，是通过 Blender 渲染的基于场景生成的 3D 图像。
 每张图像表示一个三维积木世界场景，所有可见物体均按预定义属性摆放。每个图像中都刻意隐藏了一个物体或者一个物体遮挡了另一个物体的一部分，以模拟部分可见条件。
 图像示例如图\ref{POVQAD-figure}。
-\begin{figure}
+\begin{figure}[H]
 \centering
-\includegraphics[scale=0.6]{figures/POVQAD中图像示例.png}
+\includegraphics[scale=0.35]{figures/POVQAD中图像示例.png}
 \caption{POVQAD中图像示例}
 \label{POVQAD-figure}
 \end{figure}
@@ -713,7 +723,7 @@ Is the <Z1> <C1> <M1> <S1> <R> the <Z2> <C2> <M2> <S2>?
 }
 \end{lstlisting}
 \subsection{数据集质量评估}
-为验证构造的POVQAD数据集的可靠性与研究价值，本节从POVQAD的可执行性与一致性、统计分析、对比实验方面进行研究。
+为验证构造的POVQAD数据集的可靠性与应用价值，本节从POVQAD的可执行性与一致性、统计分析、对比实验方面进行研究。
 \subsubsection{可执行性与一致性评估}
 可执行性指的是POVQAD中每个样例的问题对应的ASP程序能够经Clingo求解器执行，不出现语法错误。
 一致性指的是对POVQAD中每个样例的问题对应的ASP程序，Clingo对其的求解结果与样例中给出的该问题的标准答案一致。
