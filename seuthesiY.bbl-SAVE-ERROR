@@ -1098,7 +1098,7 @@
       \endverb
       \keyw{cunnington2024neurosymboliclearninganswerset}
     \endentry
-    \entry{wang2024dspy}{article}{}{}
+    \entry{wang2024DSPy}{article}{}{}
       \name{author}{3}{}{%
         {{hash=87cb0cf10631e7a96744b1a0767961c1}{%
            family={Wang},
@@ -1134,13 +1134,13 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{arXiv preprint arXiv:2411.18564}
       \field{langid}{english}
-      \field{title}{Dspy-based Neural-Symbolic Pipeline to Enhance Spatial Reasoning in LLMs}
+      \field{title}{DSPy-based Neural-Symbolic Pipeline to Enhance Spatial Reasoning in LLMs}
       \field{usera}{J}
       \field{userd}{english}
       \field{userf}{english}
       \field{year}{2024}
       \field{dateera}{ce}
-      \keyw{wang2024dspy}
+      \keyw{wang2024DSPy}
     \endentry
     \entry{sam-abraham-etal-2024-clevr}{inproceedings}{}{}
       \name{author}{3}{}{%
@@ -4489,8 +4489,8 @@
       \strng{authornamehash}{4683c1b2e86a7ec4563fd45b42271fe9}
       \strng{authorfullhash}{4156a3397a3934a7695327c022f186a5}
       \strng{authorfullhashraw}{4156a3397a3934a7695327c022f186a5}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.CL}

@@ -2,7 +2,7 @@
 本章介绍规则自动补全的神经符号VQA框架（Rule Complement Neuro-Symbolic Pipeline, RCNSP），
 下面分别从RCNSP设计方案、RCNSP核心技术及实现、实验分析三个方面进行详细阐述。
 \section{RCNSP设计方案}
-RCNSP框架的架构设计方案如图\ref{fig:pipeline}所示。框架的整体设计思路是：
+RCNSP框架的架构设计如图\ref{fig:pipeline}所示。框架的整体设计思路是：
 在框架初始化阶段，规则蒸馏模块依据LLM中蕴含的大量知识生成ASP规则，进而获得较为完整的ASP知识库。
 在框架运行阶段，视觉场景理解模块从输入的图像中抽取
 物体所在区域、物体属性等信息，并以ASP形式进行表示。
@@ -15,28 +15,30 @@ RCNSP框架的架构设计方案如图\ref{fig:pipeline}所示。框架的整体
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{figures/pipeline-crop.pdf}
-    \caption{面向空间推理领域的神经符号框架示意图}
+    \caption{RCNSP架构图}
     \label{fig:pipeline}
 \end{figure}
-\subsection{视觉场景理解模块}
+下面将分别对RCNSP中所涉及的各个模块展开介绍。
+\begin{enumerate}[nosep]
+\item \textbf{视觉场景理解模块}：
 本模块的任务是从输入的积木世界图像中检测积木物体并提取其属性（颜色、形状、大小、材质）、位置以及相互之间的空间关系，并把
 这些视觉信息转换为符号化的ASP事实（如\texttt{color(obj1,red)}、\texttt{shape(obj1, cube)}、\texttt{left(obj1,obj2)}等）。
 
 技术方法上，本文使用GLIP作为目标检测模型，GLIP完成目标检测后，经空间位置提取、空间关系提取后，生成该图像对应使用ASP表示的场景。
 
-现有的空间推理领域的神经符号框架\cite{wang2024dspy}是面向纯文本空间推理数据集的，不支持图像输入，不能完成积木世界VQA任务，本文引入视觉场景理解模块，使RCNSP具备现有空间推理神经符号框架所不支持
+现有的空间推理领域的神经符号框架\cite{wang2024DSPy}是面向纯文本空间推理数据集的，不支持图像输入，不能完成积木世界VQA任务，本文引入视觉场景理解模块，使RCNSP具备现有空间推理神经符号框架所不支持
 的处理多模态输入的能力。
-\subsection{语义解析模块}
-语义解析模块的目标是将用户的自然语言问题转化为能够准确反映积木世界VQA问题且语法和语义均正确的ASP查询，以支持后续推理。
+\item \textbf{语义解析模块}：
+本模块的目标是将用户的自然语言问题转化为能够准确反映积木世界VQA问题且语法和语义均正确的ASP查询，以支持后续推理。
 本模块的研究中的难点在于，如何在训练LLM生成ASP程序的相关数据集较少的情况下，指导LLM准确生成ASP程序。
 
 技术方法上，本模块采用提示词优化的方法对LLMs进行优化，并引入DSPy作为提示管理的框架，
-针对POVQAD中积木世界VQA的4类属性查询问题设计了共28种提示词以训练LLMs准确生成对应的ASP程序，此外设计了
+针对POVQAD中积木世界VQA的3类空间推理问题设计了共一系列提示词以训练LLMs准确生成对应的ASP程序，此外使用了本文第三章中
 同时考察语法正确和语义正确两方面的自定义评价函数\texttt{ValidScore}，用以指导DSPy的 FewShotPromptOptimizer 优化器对提示词进行优化。
 
-相较于通用的LLMs生成ASP程序的方法，本模块的方法更专注于POVQAD中4类问题的语言特性，
+相较于通用的LLMs生成ASP程序的方法，本模块的方法更专注于POVQAD中3类空间推理问题的语言特性，
 能够更准确高效地处理涉及物体属性和空间关系的问题，减少歧义解析的错误率。
-\subsection{规则修正模块}
+\item \textbf{规则修正模块}：
 本模块的任务是在通过语义解析模块得到ASP查询之后，进行多轮迭代检查与修正，确保ASP查询正确无误，可以顺利通过Clingo执行。
 本模块研究中的难点在于，LLM在生成ASP规则时容易出错，且目前学术界和工业界很少有针对积木世界VQA相关的ASP程序进行修正的微调数据集，
 难以采用微调的方法对生成ASP规则进行优化。
@@ -46,73 +48,62 @@ RCNSP框架的架构设计方案如图\ref{fig:pipeline}所示。框架的整体
 
 本方法相比已有工作的创新点在于，已有工作中的ASP代码修正依赖于预先定义的ASP错误类型和修正策略。而本方法通过引入Clingo的执行反馈提示，
 指导提示词的动态变化，在保持模型参数不变的前提下，显著提高了ASP程序的可执行性和准确率。
-\subsection{规则蒸馏模块}
+\item \textbf{规则蒸馏模块}：
 本模块旨在从LLMs中提取简洁且准确的ASP规则，用于积木世界的推理任务。
 具体应用主要包括两方面：一是在RCNSP初始化阶段，利用“LLMs基于海量语料预训练，包含
 丰富的知识”这一特性，将LLMs中蕴含的知识转换为可执行、可解释的ASP规则的，用于完善初始ASP知识库。
 二是在RCNSP运行阶段，当出现对某个问题无法求解出正确答案的情况时，
 规则蒸馏模块会尝试进行生成新规则，实现ASP知识库的动态更新。
 
-本模块研究的难点在于，在RCNSP初始化阶段对积木世界VQA数据集进行蒸馏的过程中，当样本的数量过多时，进行全量蒸馏
+本模块研究的难点在于，在RCNSP初始化阶段使用积木世界VQA数据集进行蒸馏的过程中，当样本的数量过多时，进行全量蒸馏
 可能会耗时过长，同时也能会引入一些对解决积木世界VQA问题无关的冗余知识。这些冗余知识在每次ASP推理时，都要输入到Clingo中，
 当RCNSP处理用户VQA请求数量逐步增加时，因冗余知识而导致的累计性能损耗也将逐步增大。
 
-技术方法上，本模块通过构建初始ASP知识库，并以本文构建的积木世界数据集POVQA\-D为样本进行蒸馏，生成积木世界空间推理所需的ASP规则并完善ASP知识库。
+技术方法上，本模块通过构建初始ASP知识库，并以本文构建的积木世界数据集POVQ\-AD为样本进行蒸馏，生成积木世界空间推理所需的ASP规则并完善ASP知识库。
 另外在RCNSP运行过程中，当出现知识不足，无法求解的情况时，规则蒸馏模块将会引导LLM生成新的ASP规则以补充ASP知识库。
 同时，本模块在蒸馏过程中采用了样例选择策略，减少无关数据的干扰，避免全量蒸馏，实现了蒸馏性能优化，解决了本模块研究中的难点。
 
-与已有工作中传统的模型压缩式蒸馏不同，本方法强调将LLM中“隐式的知识”显式地提取为ASP规则。
-而规则蒸馏的本质是将大语言模型中蕴含的知识，转换为可执行、可解释的逻辑规则，用于扩展已有的推理系统。
-\begin{enumerate}[nosep]
-\item \textbf{启发式拓展}：以经规则修正后得到的ASP规则和视觉场景理解模块生成的ASP规则为基础，当发现这些ASP规则无法解答某个问题时，引导LLM生成新的规则。
-\item \textbf{以数据为指导而非训练为导向}：不训练模型，而是以示例为提示，向LLM提出规则生成任务。
-\end{enumerate}
-\subsection{ASP推理模块}
-ASP推理模块的功能是：根据输入图像的ASP表示、ASP知识库中的ASP规则、经过修正后自然语言问题对应的ASP查询以及图像对应的环境约束，
-共同输入到Clingo，生成答案集。部分可见的图像及问题是由环境约束生成完整图像后，移除被查询物体所得的，相关问题仍遵循环境约束。
-通过环境约束、图像以及必要的其它知识，Clingo可以对问题进行回答。
-\subsection{求解结果翻译模块}
-求解结果翻译模块的功能是：将ASP推理模块输出的答案集，经LLM处理将其转换为自然语言形式的答案。由于Clingo求解后得到的为ASP谓词，对普通用户
+与已有工作中传统的模型压缩式蒸馏不同，本方法强调将LLM中“隐式的知识”显式地提取为ASP规则，因而规则蒸馏的本质是将大语言模型中蕴含的知识，转换为可执行、可解释的逻辑规则，用于扩展已有的推理系统。
+\item \textbf{ASP推理模块}：
+本模块的功能是：根据输入图像的ASP表示、ASP知识库中的ASP规则、经过修正后自然语言问题对应的ASP查询以及图像对应的环境约束，
+共同输入到Clingo，生成答案集。
+通过环境约束、图像以及ASP知识库中包含的积木世界空间推理的相关知识，Clingo可以对问题进行回答。
+\item \textbf{求解结果翻译模块}：
+本模块的功能是：将ASP推理模块输出的答案集，经LLM处理将其转换为自然语言形式的答案。由于Clingo求解后得到的为ASP谓词，对普通用户
 并不友好，难以直接理解求解结果，故采用LLM对其进行翻译，转换成对普通用户更为友好的答案。
+\end{enumerate}
 \section{RCNSP核心技术及实现}
 \subsection{视觉场景理解}
 本节主要围绕视觉场景理解的流程展开详细阐述，具体包括目标检测、空间位置提取、空间关系提取以及场景生成这四个环节。
 最后，给出一个完整的视觉场景理解演示案例，并讨论在实现过程中遇到的关键技术挑战及相应解决方案。
-\subsubsection{目标检测}
-本文采用了GLIP模型作为目标检测的核心工具，其主要优势体现在：
+
+关于目标检测的技术选型，本文采用了GLIP模型作为目标检测的核心工具，其主要优势体现在：
 \begin{enumerate}[nosep] 
 \item \textbf{语言-视觉预训练能力：}GLIP在大规模图文对数据上进行预训练，能够根据自然语言描述（例如“红色立方体”）直接定位图像中的对应物体，从而实现图像内容与问题描述的高效对齐； 
 \item \textbf{高效性与鲁棒性：}模型在处理多样化场景时具有较高的检测准确率，适合构造后续依赖视觉信息的场景图。 
 \end{enumerate}
 
-具体实现流程如下：
+目标检测的具体实现流程如下：
 \begin{enumerate}[nosep] 
-\item \textbf{图像预处理：}将原始图像调整至GLIP模型要求的输入分辨率（例如800$\times$1333像素），
+\item \textbf{图像预处理：}将原始图像调整至GLIP模型要求的输入分辨率（例如800$\times$600像素），
 以保证检测精度； 
 \item \textbf{文本提示构造：}根据POVQAD数据集，设计一组覆盖目标类别及属性的自然语言提示。
 本文选取的提示短语包括描述物体大小（如“大物体”、“小物体”）以及颜色与形状组合（如“红色立方体”、“蓝色球体”、“绿色圆柱体”等）； 
 \item \textbf{目标检测与属性解析：}将图像和文本提示输入GLIP，获得每个检测物体的边界框和类别标签。随后对类别标签进行解析，将复合描述（如“红色立方体”）拆解为单独属性（color=red, shape=cube）。同时，通过计算边界框面积（$(x_2 - x_1)\times(y_2 - y_1)$），结合预设阈值进一步推断物体的大小属性。 
 \end{enumerate}
 
-例如，对于一张包含“红色立方体”和“蓝色球体”的图像，GLIP可能检测出如下信息： 
-\begin{enumerate}[nosep] 
-\item 物体1：类别为“红色立方体”，边界框坐标为$(x_1, y_1, x_2, y_2)$； 
-\item 物体2：类别为“蓝色球体”，边界框坐标为$(x_3, y_3, x_4, y_4)$。 
-\end{enumerate}
-\subsubsection{空间位置提取}
-在完成目标检测后，接下来的任务是为每个物体确定其精确的空间位置，这对于后续空间关系的推理至关重要。
+在完成目标检测后，进行的是空间位置提取。空间位置提取的目的是为每个物体确定其精确的空间位置，这对于后续空间关系的推理至关重要。
 本文采用以下两种方式提取物体位置信息：
 \begin{enumerate}[nosep]
 \item \textbf{二维中心点计算}：利用目标检测得到的边界框信息，计算物体在图像平面内的中心点坐标。公式如下：
 $$x_c = \frac{x_1+x_2}{2}, y_c = \frac{y_1 + y_2}{2}$$
-该中心点坐标用于描述物体在二维图像中的位置；
-\item \textbf{三维位置信息获取}：若图像同时包含深度信息（例如通过Blender渲染生成的场景），则可直接从深度图中提取物体的z值，从而获得物体在三维空间中的位置，
+该中心点坐标用于描述物体在二维图像中的位置，其中$(x_1,y_1)$和$(x_2,y_2)$分别为边界框的左上顶点坐标和右下顶点坐标。
+\item \textbf{三维位置信息获取}：图像同时包含深度信息，则可直接从深度图中提取物体的z值，从而获得物体在三维空间中的位置，
 表示为$(x, y, z)$。
 \end{enumerate}
-
 提取出的位置信息将以ASP事实的形式进行存储，例如：position(obj1, x1c, y1c, z1) 表示物体1的中心点位置。
-\subsubsection{空间关系提取}
-空间关系的提取是实现复杂场景理解与多步逻辑推理的关键。本文从以下几个角度对空间关系进行提取：
+
+在空间位置提取之后，需要进行空间关系提取。空间关系提取是实现复杂场景理解与多步逻辑推理的关键。本文从以下几个角度对空间关系进行提取：
 \begin{enumerate}[nosep]
 \item \textbf{二维空间关系：}基于物体的中心点坐标计算物体之间的相对位置。例如： 
     \begin{itemize}[leftmargin=2em] 
@@ -120,22 +111,20 @@ $$x_c = \frac{x_1+x_2}{2}, y_c = \frac{y_1 + y_2}{2}$$
         \item 类似地，通过比较$y_c$坐标可判定上下关系（例如，若物体A的$y_c$小于B，则A在B之上，记作\texttt{above(objA, objB)}）。 
     \end{itemize} 
 \item \textbf{三维空间关系：}利用深度信息，对物体间的前后关系进行判断。
-例如，若物体A的z值小于物体B的z值，则判定A位于B的前面，记作\texttt{in\_front\_of(objA, objB)}。 
+例如，若物体A的z值小于物体B的z值，则判定A位于B的前面，记作\texttt{front(objA, objB)}。 
 \end{enumerate}
 所有提取到的空间关系均转换为ASP事实，如：
-left(obj1, obj2) 表示物体1在物体2的左边，in\_front\_of(obj1, obj2) 表示物体1在物体2的前面。
-\subsubsection{场景图生成}
+left(obj1, obj2) 表示物体1在物体2的左边，front(obj1, obj2) 表示物体1在物体2的前面。
+
 场景图是将目标检测、空间位置与空间关系综合融合成的统一结构化表示，使用ASP作为表示形式，其主要构成如下： 
 \begin{enumerate}[nosep] 
     \item \textbf{节点表示：}每个节点对应图像中的一个物体，并附有相应的属性（如color, shape, size, material）以及位置信息； 
-    \item \textbf{边的构建：}节点之间的边用于表示物体间的空间关系，如left\_of、in\_front\_of等。 
+    \item \textbf{边的构建：}节点之间的边用于表示物体间的空间关系，如left、front等。 
 \end{enumerate}
 
-在构建过程中，首先为每个检测到的物体创建一个节点，并记录其属性及位置；
-随后，依据前述空间关系，将相应的有向边添加到图中。
-最终，整个场景图将被转化为ASP事实，以支持后续符号推理任务。
-\subsubsection{实现细节与实例}
-为便于说明，下面给出一个具体示例。假设输入图像包含如下场景： 
+在构建过程中，首先为每个检测到的物体创建一个节点，并记录其属性及位置；随后，依据前述空间关系，将相应的有向边添加到图中。最终，整个场景图将被转化为ASP事实，以支持后续符号推理任务。
+
+为便于理解整个视觉场景理解的工作流程，下面给出一个具体示例。假设输入图像包含如下场景： 
 \begin{enumerate}[nosep] 
     \item 一个红色大立方体位于图像左侧； 
     \item 一个蓝色小球体位于图像右侧，且位于红色立方体的前方。 
@@ -155,9 +144,9 @@ left(obj1, obj2) 表示物体1在物体2的左边，in\_front\_of(obj1, obj2) �
 
 假设深度信息显示：物体1的z值为50，物体2的z值为75，则可提取以下空间关系： 
 \begin{itemize}[itemsep=0pt,parsep=0pt] 
-    \item \texttt{left\_of(obj1, obj2)}（因为100 $<$ 300）； 
+    \item \texttt{left(obj1, obj2)}（因为100 $<$ 300）； 
     \item \texttt{above(obj2, obj1)}（因为100 $<$ 150）； 
-    \item \texttt{in\_front\_of(obj2, obj1)}（因为75 $>$ 50，在三维空间中深度值较大的物体更靠后，需根据具体定义调整）。 
+    \item \texttt{front(obj2, obj1)}（因为75 $>$ 50，在三维空间中深度值较大的物体更靠后，需根据具体定义调整）。 
 \end{itemize}
 
 最终生成的ASP事实示例如下： 
@@ -174,26 +163,25 @@ position(obj2, 300, 100, 75).
 
 left(obj1, obj2). 
 above(obj2, obj1). 
-in_front_of(obj2, obj1). 
+front(obj2, obj1). 
 \end{lstlisting}
 \subsection{语义解析}
 为了让LLM更准确地生成积木世界VQA任务中的ASP程序，本文在此对通用LLM进行提示词优化，
 并且引入DSPy作为提示管理与语义生成框架，以构建结构化、模块化、可优化的语义解析流程。
 本节按照任务定义、提示词设计、提示词优化、输出的顺序进行介绍。
-\subsubsection{任务定义}
-DSPy是一个面向语言任务的程序性提示框架，能够在具备结构化的输入输出约束的前提下，
+\begin{enumerate}[nosep]
+\item \textbf{任务定义}：DSPy是一个面向语言任务的程序性提示框架，能够在具备结构化的输入输出约束的前提下，
 调用LLM完成特定子任务。在语义解析模块中，将“问题$\rightarrow$ASP程序”建模为一个标准的DSPy模块，
 定义其输入为英文问题，输出为符合ASP语法的逻辑规则字符串。
 
-在实现上，通过DSPy的\texttt{Signature}定义任务结构，其中明确了模块的目标，即
+在实现上，本文通过DSPy的\texttt{Signature}进行任务定义，明确了模块的目标，即
 根据输入问句生成问题所对应的ASP逻辑表示。
 \begin{lstlisting}
 class ParseQuestionToASP(Signature):
-    question = dspy.InputField(desc="问题")
-    asp_code = dspy.OutputField(desc="ASP程序片段")
+    question = DSPy.InputField(desc="问题")
+    asp_code = DSPy.OutputField(desc="ASP程序片段")
 \end{lstlisting}
-\subsubsection{提示词设计}
-本文对第三章中构建的积木世界VQA数据集POVQAD的问题进行分析，对4种问题（分别提问物体的颜色、形状、大小、材质）分别设计提示词。
+\item \textbf{提示词设计}：本文对第三章中构建的积木世界VQA数据集POVQAD的问题进行分析，对3种空间推理问题分别设计提示词。
 考虑到POVQAD中问题表述的多样性，每种问题的提示模板均有多种形式。以下对3种问题分别展示一种提示词。所有提示词在附录\ref{appendix:semantics-parsing-prompts}中予以展示。
 \begin{enumerate}[nosep]
 \item \textbf{位置类问题}：问题对物体所在的位置进行提问或者对参照物的某个随机选中的方向上的物体的属性进行提问。
@@ -228,9 +216,8 @@ query(count(X)) :-
 \end{enumerate}
 
 最终在\texttt{PromptModule}中设定统一提示模板，引导模型按照所示结构生成ASP程序。
-\subsubsection{提示词优化}
-为进一步提升提示学习的效果，本文引入验证集驱动的提示优化策略。本文随机选取POVQAD中部分问题及对应ASP表示，组成验证集，通过
-语法准确率和语义准确率，对few-shot示例顺序与提示模板进行自动调整。
+\item \textbf{提示词优化}：为进一步提升提示学习的效果，本文引入验证集驱动的提示优化策略。本文随机选取POVQAD中部分问题及对应ASP表示，组成验证集，通过
+语法准确率和语义准确率，对少样本示例顺序与提示模板进行自动调整。
 
 此处采用DSPy提供的 FewShotPromptOptimizer 优化器，以ASP程序的语法正确率和语义正确率作为评价指标，训练优化提示内容：
 \begin{lstlisting}
@@ -244,7 +231,7 @@ FewShotPromptOptimizer主要基于以下几点考量：
 \item 积木世界VQA的语义解析任务，也即根据自然语言问题生成其对应的ASP查询程序，本质上“结构化映射”而非“多轮推理”，属于结构预测任务。
 并不需要模型生成复杂的思维链条或搜索多个中间步骤，因此并不适合使用 ReActPromptOptimizer 或 ChainOfThoughtOptimizer 这类用于逐步思考与规划的优化器。
 \item 在任务定义中，已经确定了清晰的输入输出结构，并且已经根据POVQAD中3类问题的特点构造了“问题-ASP程序”示例对。
-FewShotPromptOptimizer 正是专门用于自动选择、排列、剪枝、重组这些示例对以提升提示效果的优化器，它能用验证集度量“哪组few-shot示例组合效果最好”，无需引入额外监督。
+FewShotPromptOptimizer 正是专门用于自动选择、排列、剪枝、重组这些示例对以提升提示效果的优化器，它能用验证集度量“哪组少样本示例组合效果最好”，无需引入额外监督。
 \item FewShotPromptOptimizer完全不依赖 LLM 微调，也不需要多轮推理轨迹采集，训练稳定、开销小，适合结构化语言映射任务。
 此外，相比 ReActPromptOptimizer，它不需要考虑中间推理路径，因此构造门槛更低。
 \item FewShotPromptOptimizer 的核心机制是“提供格式完好的示例”，它能有效帮助LLM学到一致的生成模式，
@@ -252,61 +239,45 @@ FewShotPromptOptimizer 正是专门用于自动选择、排列、剪枝、重组
 可能导致输出的ASP程序在格式、句法上出现错误。
 \end{enumerate}
 
-上述优化器中的参数\texttt{asp\_valid\_score}为自定义评价函数，用于判断LLM输出的ASP程序是否满足语法正确和语义正确。下面对如何定义并计算自定义评价
-函数的值给出相关解释：
-
-对于一个程序$P$，Clingo用于计算该程序的答案集。
-进而该过程可以等价于：定义一个函数$f(P) = AS(P)$，其中$AS(P)$表示程序P的所有回答集（可能为空）。
-LLM根据提示$x$生成的ASP程序，记为$y ~ P_L(|x)$。与$x$对应的能够真实表示问题的标准ASP程序，记为$y^*$。按照以下步骤来进行验证：
-首先基于$x$构建一个表示具体实例的事实集$F_{y^*}$。接着，构造两个完整的ASP程序：
-\begin{enumerate}[nosep]
-\item $P = y \cup F_{y^*}$：由模型生成程序与事实集合成的程序。
-\item $P^* = y^* \cup F_{y^*}$：由标准程序与事实集合成的程序。
-\end{enumerate}
-
-此后，执行以下评估步骤：
-\begin{enumerate}[nosep]
-\item 语法检查。该步骤的执行结果记作$syntax$。调用Clingo运行程序$P$，若未发生解析错误，则认为模型生成的程序 $y$ 在语法上是正确的，则判定为语法命中，记$syntax = 1$。否则，则判定为不命中，记$syntax = 0$。
-\item 语义检查。该步骤的执行结果记作$semantic$。分别用 Clingo 计算$f(P)$与$f(P^*)$，分别得到各自的答案集$AS(P)$与$AS(P^*)$。若$AS(P)$与$AS(P^*)$完全匹配，则判定为语义命中，记$semantic = 1$。
-否则，则判定为不命中，记$semantic = 0$。
-\end{enumerate}
-
-则根据上述评估步骤，可给出自定义评价函数的数学定义：
-$$ValidScore = syntax \land semantic $$
-\subsubsection{输出}
-经过优化后的提示模块，能够将输入的问题稳定地转换为标准ASP规则，输出示例如下：
+上述优化器中的参数\texttt{asp\_valid\_score}为自定义评价函数，用于判断LLM输出的ASP程序是否满足语法正确和语义正确。
+该函数的定义同\ref{self-define-func}节中定义的自定义评价函数相同，也是通过语法正确和语义正确来判断，故此处不再赘述。
+\item \textbf{输出}：经过优化后的提示模块，能够将输入的问题稳定地转换为标准ASP规则，输出示例如下：
 \begin{lstlisting}
 query(Q):-hasProperty(X,size,Q),hasProperty(X,color,brown).
 \end{lstlisting}
 
 生成的程序将作为RCNSP神经符号推理流程中的一部分，结合视觉场景理解模块生成的ASP事实以及ASP知识库中的规则，共同组成可执行程序，
 并提交至Clingo求解器进行推理。
+\end{enumerate}
 \subsection{规则修正}
-\subsubsection{流程概述}
-整个规则修正的流程图如\ref{figure:rule-fix}所示。
-\begin{figure}[h]
-\centering
-\includegraphics{figures/rule-fix-crop.pdf}
-\caption{规则修正流程图}
-\label{figure:rule-fix}
-\end{figure}
+整个规则修正的流程图如\ref{figure:rule-fix}所示，工作流程可分为以下几步：
 \begin{enumerate}[nosep]
 \item 使用Clingo求解器对语义解析模块生成的ASP程序尝试执行。
 \item 如果执行成功，没有提示错误，则无需进行进一步修正，直接将ASP程序流转到框架的下一模块。
 \item 如果执行失败，则将错误的ASP程序和Clingo求解器提示的错误信息，一起输入LLM，由LLM尝试进行修正。
 \item 将修正后的ASP程序再次输入到Clingo求解器中，尝试执行。如此循环最多3次，最终输出经过优化后的ASP程序，流转到框架的下一模块。
 \end{enumerate}
-\subsubsection{任务定义}
-本模块的任务建模为：给定错误的ASP程序和Clingo错误信息，生成一个修正后的ASP程序。采用DSPy的Signature结构表示如下：
-\begin{lstlisting}
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1.5]{figures/rule-fix-crop.pdf}
+\caption{规则修正流程图}
+\label{figure:rule-fix}
+\end{figure}
+
+下面将按照任务定义、提示词设计、提示词优化的顺序对规则修正模块展开介绍。
+\begin{enumerate}[nosep]
+\item \textbf{任务定义}：
+规则修正的任务为：输入错误的ASP程序和Clingo错误的类型、具体提示信息，输出一个修正后的ASP程序。对应使用DSPy的Signature结构表示如下：
+\begin{lstlisting}[language=python]
 class FixASPProgram(Signature):
-    error_code = dspy.InputField(desc="Clingo返回的错误的ASP代码")
-    error_type = dspy.InputField(desc="Clingo报错的类型")
-    error_message = dspy.InputField(desc="Clingo报错的提示信息")
-    corrected_code = dspy.OutputField(desc="修正后的ASP程序")
+    error_code = DSPy.InputField(desc="Clingo返回的错误的ASP代码")
+    error_type = DSPy.InputField(desc="Clingo报错的类型")
+    error_message = DSPy.InputField(desc="Clingo报错的提示信息")
+    corrected_code = DSPy.OutputField(desc="修正后的ASP程序")
 \end{lstlisting}
-\subsubsection{提示词设计}
-针对常见的ASP程序错误类型，本文设计了多组提示模板，包括以下几类：
+\item \textbf{提示词设计}：
+针对常见的ASP程序错误类型，本文设计了多组提示模板，如表\ref{tab:asp-fix-templates}所示。
+每类错误对应一个标准化任务描述、错误信息段、以及格式规范的修复输出示例。如下为语法错误的提示示例，其它类型的提示词在附录\ref{appendix:rule-fix}中展示，此处不再赘述。
 \begin{table}[H]
 \centering
 \caption{常见ASP程序错误类型与修正策略}
@@ -325,30 +296,26 @@ class FixASPProgram(Signature):
 负循环依赖 & 循环依赖中含有否定项 & 拆解规则结构，引入新谓词或添加约束 \\
 \hline
 \end{tabular}
+\label{tab:asp-fix-templates}
 \end{table}
-每类错误对应一个标准化任务描述、错误信息段、以及格式规范的修复输出示例。如下为语法错误的提示示例，其它类型的提示词在附录\ref{appendix:rule-fix}中展示，此处不再赘述。
 \begin{lstlisting}
 任务描述：请根据提供的 ASP 程序和 Clingo 错误信息，对程序进行修正。
-
 错误类型：语法错误（Syntax Error）—— 缺少句点。
-
 Clingo错误信息：
 <stdin>:3:1: error: syntax error, unexpected IDENTIFIER, expecting '.' or ':
   node(b)
-
 错误程序：
 node(a).
 node(b)  % <- 缺少句号
 edge(a,b).
-
 修正后程序：
 node(a).
 node(b).
 edge(a,b).
 \end{lstlisting}
-使用DSPy的\texttt{Example}对这一类few-shot结构进行封装，结构如下所示，以供后续提示词优化中的优化器使用。
-\begin{lstlisting}
-from dspy import example
+使用DSPy的\texttt{Example}对这一类少样本结构进行封装，结构如下所示，以供后续提示词优化中的优化器使用。
+\begin{lstlisting}[language=python]
+from DSPy import example
 
 examples = [
     Example(
@@ -364,22 +331,22 @@ examples = [
     ...
 ]
 \end{lstlisting}
-\subsubsection{提示词优化}
+\item \textbf{提示词优化}：
 在构建示例后，使用DSPy的 FewShotPromptOptimizer 对提示词结构进行自动优化：
-\begin{lstlisting}
-from dspy.optimize import FewShotPromptOptimizer
+\begin{lstlisting}[language=python]
+from DSPy.optimize import FewShotPromptOptimizer
 
 optimizer = FewShotPromptOptimizer(devset=validation_set, metric=syntax_semantic_match_score)
 optimized_module = optimizer(FixASPProgram)
 \end{lstlisting}
 此处选择FewShotPromptOptimizer的理由与“语义解析”模块中选择FewShotPromptOptimizer的理由类似，
-该优化器会对 few-shot 示例进行排序、筛选与重组合，并根据验证集的“语法/语义正确率”反馈来自动调整提示组合，从而获得最优提示配置。
+该优化器会对 少样本 示例进行排序、筛选与重组合，并根据验证集的“语法/语义正确率”反馈来自动调整提示组合，从而获得最优提示配置。
 
 此处的评价指标与“语义解析”模块中同样，选择语法正确率与语义正确率，自定义评价函数\texttt{syntax\_semantic\_match\_score}的定义
 自然同样与“语义解析”模块中的自定义评价函数类似，此处不再赘述。
 
 这种方式相比手工设计提示更为稳定、系统性强，且不依赖参数更新，能更好适应不同LLM（如GPT-4、LLaMA3等） 。
-
+\end{enumerate}
 \subsection{规则蒸馏}
 规则蒸馏的流程如图\ref{distill-process}所示，分为RCNSP运行前构建ASP知识库的规则蒸馏，以及处理VQA请求时补充ASP知识库的规则蒸馏。
 本节将依次对这两种情形的规则蒸馏进行介绍，并介绍蒸馏过程中的性能优化方法。
@@ -404,20 +371,20 @@ RCNSP运行前构建ASP知识库的规则蒸馏的目的是：在RCNSP运行前�
 \begin{enumerate}[nosep]
 \item 基本推理操作规则，包括属性过滤（如\texttt{filter\_color}、\texttt{filter\_shape}）、
 对象选择（\texttt{select}）、合取与析取（\texttt{and}、\texttt{or}）、数量计算（\texttt{count}）、
-布尔值判断（\texttt{exist}、\texttt{verify\_attr}、\texttt{verify\_rel}）等等。例如：
+布尔值判断（\texttt{exist}、\texttt{verify\_property}）等等。例如：
 \begin{lstlisting}
-state(TO,ID) :- scene(TO), object(ID).  % 初始状态：每个object都在scene中
-state(TO,ID) :- select(TO, TI, CLASS), state(TI, ID), has_attr(ID, class, CLASS).
+state(TO,ID) :- scene(TO), object(ID).  % 初始状态：每个object都在场景中
+state(TO,ID) :- select(TO, TI, CLASS), state(TI, ID), has_property(ID, class).
 bool(TO,yes) :- or(TO, TI0, TI1), bool(TI0,yes).
-ans(V) :- end(TO), attr(TO,V).
+ans(V) :- end(TO), property(TO,V).
 :- not ans(_).  % 强制必须产生答案
 \end{lstlisting}
 以上这些规则都使用变量表达，而非常量，以保持泛化能力。
-\item 根据数据集中常见问题需求构建规则。POVQAD中，问题均围绕物体的属性、物体的区域位置进行提问。
-可以根据数据集中的问题类型，构建一些常见的规则，例如针对提问目标物体的颜色的问题，可能要用到物体的
-其它属性、所在的区域等信息来间接推理，可以构建\texttt{filter\_shape}、\texttt{fiter\_region}、
-\texttt{filter\_material}、\texttt{filter\_size}规则，
-其作用是根据物体的形状、区域、材质、大小等属性进行过滤，从而帮助找出目标物体。
+\item 根据数据集中常见问题需求构建规则。POVQAD中，问题均围绕物体的空间位置关系或者所在区域等进行提问。
+可以根据数据集中的问题类型，构建一些常见的规则，例如针对提问目标物体的所在区域的问题，可能要用到物体的
+其它属性、相对方向关系等信息来间接推理，可以构建\texttt{filter\_shape}、\texttt{fiter\_region}、
+\texttt{filter\_material}、\texttt{filter\_size}、\texttt{filter\_relation}等规则，
+其作用是根据物体的形状、区域、材质、大小、等属性以及相对位置关系进行过滤，从而帮助找出目标物体。
 \end{enumerate}
 
 通过构建初始ASP知识库，一方面保证了系统可以运行并进行基本验证，另一方面也为LLM提供了清晰、结构化的理论框架，
@@ -425,15 +392,14 @@ ans(V) :- end(TO), attr(TO,V).
 
 在初始ASP知识库构建完成后，使用本文构建的POVQAD中的训练集来引导LLM进行规则蒸馏，利用LLM自身知识生成扩展规则以补充初始ASP知识库。
 对POVQAD训练集中所有样例的场景、问题的ASP表示、问题对应的答案集抽取出来，形成数据集$D$，作为引导LLM进行规则蒸馏的数据源。
-随后，对数据集$D$中的第$i$条样例，将其场景$S_i$、问题的ASP表示$QA_i$，与ASP知识库中的所有ASP规则，一同输入Clingo进行求解，
+随后，对数据集$D$中的第$i$条样例，将其场景$S_i$、问题的ASP查询，与ASP知识库中的所有ASP规则，一同输入Clingo进行求解，
 获得答案集$A^*_i$。
 
 如果Clingo求解获得的答案集$A^*_i$与数据集$D$中的答案集$A_i$完全相同，则说明ASP知识库中已经涵盖了足以解决该问题的所有规则，
 此时无需再使用LLM进行规则蒸馏。若求解过程中报错或者$A^*_i$与$A_i$并不完全相同，则可认为当前ASP知识库中并不包含解决该问题
 所需的全部规则，需要进行规则蒸馏。
 
-规则蒸馏算法的核心包括以下三个环节：预提示、规则生成、规则验证。
-预提示在LLM生成新规则之前进行，作用是为LLM提供背景信息和任务说明。
+规则蒸馏算法的核心包括以下三个环节：预提示、规则生成、规则验证，下面分别展开介绍。
 
 预提示的作用是，为LLM开展后续的规则生成提供背景信息和任务说明，是一组提示词的集合，其包括以下几个方面：
 \begin{enumerate}[nosep]
@@ -453,7 +419,7 @@ ans(V) :- end(TO), attr(TO,V).
 更广泛的情况。在生成时，可以向LLM直接指明要求其生成尽可能一般化的规则。
 一种例如，如果问题是“这只杯子是什么颜色？”，LLM可能会生成以下ASP规则：
 \begin{lstlisting}
-color_of_cup(Color) :- object(Cup), has_property(Cup, color, Color), class(Cup,cup).
+color_of_cup(Color) :- object(Cup), has_color(Cup, Color), class(Cup,cup).
 \end{lstlisting}
 这条规则表示：“如果某个物体是杯子，并且它有颜色属性，那么可以推理出它的颜色”。
 
@@ -469,7 +435,7 @@ color_of_cup(Color) :- object(Cup), has_property(Cup, color, Color), class(Cup,c
 提供给LLM，并且新的提示词中会明确告知LLM“你之前生成的规则未能得到正确答案，请你根据下面的输入修改规则。”，
 LLM会基于原问题、场景、当前规则结果与目标答案的对比，尝试修复逻辑错误或补全缺失的中间推理步骤。
 对同一个示例最多允许修正尝试的次数设为m，其默认值为1，表示失败一次就修正一次，防止过多LLM调用。
-若修正后仍失败，说明当前LLM无法处理该示例，跳过或保留当前状态。
+若修正后仍失败，说明当前LLM无法处理该示例，采取跳过的方法。
 
 语法检查和语义检查都是涉及LLM对ASP程序进行修正，故采用规则修正中经过训练的LLM来完成此处的
 语法检查和语义检查任务。
@@ -522,15 +488,6 @@ LLM 在训练过程中逐步学习，从处理简单问题（谓词数量少）�
 特定谓词的问题时的表现。
 \end{enumerate}
 
-谓词计数策略的设计借鉴了课程学习的思想。课程学习是一种训
-练策略，强调按照从易到难的顺序逐步引入训练样本，以提高模型的学习效果。谓词计数策
-略通过问题复杂度的分层，体现了课程学习的理念，使模型能够在逐步增加的复杂度中稳定
-学习。
-
-在自然语言处理和知识表示领域，基于谓词的特征选择方法被广泛应用于文本分类和信
-息检索等任务。谓词相关性策略吸取了这一方法的经验，通过关注问题中涉及的具体谓词，利
-用领域知识进行特征选择，确保模型关注于最相关的信息，提高推理的准确性。
-
 为了进一步提高效率，本文还提出了批量优化策略，即一次性给 LLM 多个示例，而不是
 逐个示例地生成规则。这一策略借鉴自 Ge\cite{ge2021selfdistillationbatchknowledgeensembling} 等人提出的批量知识集成的自蒸馏方法。 在知
 识蒸馏领域，批量知识集成方法通过在同一小批量内传播和整合样本间的知识，生成更精确
@@ -546,8 +503,7 @@ LLM 在训练过程中逐步学习，从处理简单问题（谓词数量少）�
 \item \textbf{优化资源利用}：通过批量处理，能够更有效地利用计算资源，减少训练过程中的开销。
 \end{enumerate}
 
-综合来看，批量优化策略通过借鉴批量知识集成和自蒸馏等方法，旨在提升知识蒸馏过
-程中的训练效率和模型性能。
+综合来看，批量优化策略通过借鉴批量知识集成和自蒸馏等方法，实现了提升知识蒸馏过程中的训练效率和模型性能。
 \subsection{ASP推理}
 ASP推理阶段中，ASP求解器接收经过优化后的ASP查询语句、视觉场景理解模块提取的ASP事实、环境约束以及自动拓展的ASP规则，
 进行逻辑推理，最终获得答案。
@@ -572,23 +528,23 @@ $a(X) :- b(X), not c(X).$，其将被展开为所有可能的值为X的实例。
 （4）预测可能发生的冲突，选择可能导致冲突的原子优先分配，减少搜索空间。
 \subsection{求解结果翻译}
 经过Clingo得到的输出结果，以形式化的ASP谓词表示，难以直接为最终用户所理解，对用户而言并不友好，需要将其转为自然语言。
-Clingo输出的是由逻辑谓词构成的答案集，例如谓词\textbf{left(A,B)}表示“A位于B的左侧”。
+Clingo输出的是由逻辑谓词构成的答案集，例如谓词\texttt{left(A,B)}表示“A位于B的左侧”。
 由于正常情况下，Clingo输出的都是预先定义的谓词，故采用构造同义词字典的方案，将ASP中的逻辑谓词与自然语言
 表述对应起来，作为模板对LLM进行提示。LLM可基于这些模板对解析后的逻辑结果进行填充和修正，生成标准化且易于理解的描述。
 本文分析了POVQAD的问题和场景中所用到的谓词，设计了同义词字典，具体见附录\ref{appendix:result-translate}。
 \section{实验分析}
 本节对4.2节中语义解析、规则修正、规则蒸馏这三个环节分别进行实验，验证各部分的性能。
 \subsection{语义解析}
-本实验目的包括两方面：（1）评估提示词优化策略在积木世界场景下的语义解析任务中的有效性，比较优化前后对LLM输出ASP程序质量的影响；
+本实验目的包括两方面：（1）评估针对语义解析模块设计的提示词优化策略在积木世界场景下的语义解析任务中的有效性，比较优化前后对LLM输出ASP程序质量的影响；
 （2）验证语义解析模块在不同LLMs上的泛化能力。
 
 实验所用的数据集为POVQAD中的验证集，记为$D$。由于语义解析模块接收的输入为自然语言问题，输出为ASP程序，故只需选用
-POVQAD中第$i$条样例的以自然语言形式表示的问题$Q_i$以及其对应的使用ASP表示的问题$QA_i$。
+POVQAD中第$i$条样例的$Q_i$中的自然语言问题和问题的ASP查询。
 
 在实验中，本文如下设计了3组提示策略：
 \begin{table}[H]
 \centering
-\caption{常见ASP程序错误类型与修正策略}
+\caption{语义解析实验的3组提示策略}
 \begin{tabular}{|l|p{5.5cm}|p{5.5cm}|}
 \hline
 \textbf{组别} & \textbf{提示策略} & \textbf{描述} \\
@@ -597,7 +553,7 @@ POVQAD中第$i$条样例的以自然语言形式表示的问题$Q_i$以及其对
 \hline
 人工少样本方法 & 人工构造少样本示例 & 直接提供设计的所有提示词，由LLMs自主学习 \\
 \hline
-优化提示词方法 & DSPy FewShotPromptOptimizer优化提示 & 在验证集监督下自动优化Few-shot组合 \\
+优化提示词方法 & DSPy的FewShotPromptOptimizer优化提示 & 在验证集监督下自动优化少样本组合 \\
 \hline
 \end{tabular}
 \end{table}
@@ -609,7 +565,7 @@ POVQAD中第$i$条样例的以自然语言形式表示的问题$Q_i$以及其对
 通用型先进系统，而LLaMA3性能和效率之间取得了平衡，属于居中水平的模型，选取的都是有代表性的LLM，增强实验说服力和可信度。
 
 考核指标选用语法正确率以及语义正确率，在前文中已经有过定义，此处不再赘述。
-实验环境的配置方面，CPU为Intel Core i9 12900K，内存为128GB，显卡为2张Nvidia RTX4090。
+实验环境的配置方面，CPU为Intel Core i9 12900K，内存为128GB，显卡为2张Nvidia RTX 4090。
 另外在实验过程中，对实验重复进行5次，以降低LLM采样过程的随机性带来的影响。
 
 实验结果如表\ref{tab:semantic-result}所示，可以看到在3种LLM上，人工少样本方法相比基线方法在语法正确率和语义正确率上均有很大提升，分别平均提升11.3\%和
@@ -648,12 +604,12 @@ POVQAD中第$i$条样例的以自然语言形式表示的问题$Q_i$以及其对
 \item 自动提示优化优于人工经验构造。手动构造少样本示例往往依赖设计者的直觉和经验，而DSPy中的FewShotPromptOptimizer通过实际性能反馈（如验证集精度、程序可执行性）自动搜索、选择和排列示例，能够系统性地找到更优的组合。
 这一显著提升表明提示词设计是一个可学习的搜索问题，而非完全凭经验决策的问题。
 \item 提示顺序与上下文协同性影响模型输出质量。LLMs对上下文顺序高度敏感。DSPy通过提示顺序搜索，可能隐式发现了能激发正确结构生成的上下文组合模式。而手动构造示例未必能掌握这一“顺序敏感性”。
-不仅是什么示例，更重要的是如何排列示例。
+与示例的内容相比，如何排列示例也显得尤为关键。
 \item 提示优化在结构化输出任务中尤为有效。相较于开放式文本生成任务（如摘要、回答），逻辑程序生成任务（如ASP）对输出的结构、格式要求严格，容错性低。优化后的提示提供了更清晰、更统一的模式，引导模型在“格式敏感”任务中更少出错。
 提示优化为结构性任务带来的收益非常显著，尤其是语法和语义正确率的提升。
 \end{enumerate}
 \subsection{规则修正}
-本实验目的包括两方面：（1）评估提示词优化策略在积木世界场景下的规则修正任务中的有效性，比较优化前后对LLM修正ASP程序质量的影响；
+本实验目的包括两方面：（1）评估针对规则修正模块的提示词优化策略在积木世界场景下的规则修正任务中的有效性，比较优化前后对LLM修正ASP程序质量的影响；
 （2）验证规则修正模块在不同LLMs上的泛化能力。
 
 实验所用的数据集为人工构造的ASP错误程序集，记为$E$。该数据集的构造目标是：构造一组三元组数据\texttt{（错误的ASP程序，问题文本，修正后的ASP程序）}。
@@ -661,8 +617,8 @@ POVQAD中第$i$条样例的以自然语言形式表示的问题$Q_i$以及其对
 
 $E$的构造按照如下步骤进行：
 \begin{enumerate}[nosep]
-\item 从POVQAD中采样一批VQA问题及其标准ASP程序，对POVQAD中第$i$条样例，选取
-自然语言表述的问题$Q_i$以及该问题对应的ASP表示形式$QA_i$，组合构成$E$中某条样例数据$e_i$，形式如下：
+\item 从POVQAD中采样一批VQA问题及其标准ASP程序，对POVQAD中第$i$条样例，选取$Q_i$的自然语言问题以及该问题对应的ASP查询
+，组合构成$E$中某条样例数据$e_i$，形式如下：
 \begin{lstlisting}
 问题: What color is the red cube on the left?
 正确程序ₜ:
@@ -692,7 +648,7 @@ $E$的构造按照如下步骤进行：
 在实验中，本文如下设计了3组提示策略：
 \begin{table}[H]
 \centering
-\caption{常见ASP程序错误类型与修正策略}
+\caption{规则修正实验的3组提示策略}
 \begin{tabular}{|l|p{5.5cm}|p{5.5cm}|}
 \hline
 \textbf{组别} & \textbf{提示策略} & \textbf{描述} \\
@@ -701,7 +657,7 @@ $E$的构造按照如下步骤进行：
 \hline
 人工少样本方法 & 人工构造少样本示例 & 直接提供设计的所有提示词，由LLMs自主学习 \\
 \hline
-优化提示词方法 & DSPy FewShotPromptOptimizer优化提示 & 在验证集监督下自动优化Few-shot组合 \\
+优化提示词方法 & DSPy的FewShotPromptOptimizer优化提示 & 在验证集监督下自动优化少样本组合 \\
 \hline
 \end{tabular}
 \end{table}
@@ -717,7 +673,7 @@ $E$的构造按照如下步骤进行：
 实验结果如表\ref{tab:rule-fix-result}所示，可以看到人工少样本方法相比基线方法在三轮以内修复成功率和修复后语义正确率上均有很大提升
 ，分别平均提升11.6\%和7.1\%，证明本文设计的提示词在提升积木世界VQA的任务背景下，能够显著提升LLMs修正ASP规则的成功率。
 另外，优化提示词方法又在人工少样本方法的基础上实现了三轮以内修复成功率和修复后语义正确率的较大提升，分别平均提升4.7\%和7.4\%，证明
-在积木世界VQA的任务背景下，本文采用的DSPy优化提示词方法能够显著增强LLMs学习提示词的效果。
+在积木世界VQA的任务背景下，本文使用DSPy优化提示词的方法能够显著增强LLMs学习提示词的效果。
 \begin{table}[h]
     \centering
     \begin{tabular}{lcc}
@@ -752,13 +708,13 @@ $E$的构造按照如下步骤进行：
 也涵盖ChatGPT-4o这类通用型先进系统，而LLaMA3性能和效率之间取得了平衡，属于居中水平的模型。
 在多个基座上进行实验，可以有效证明RCNSP对不同LLM的泛化能力。
 实验数据集选取本文第三章构建的POVQAD，将每条样本的图像、自然语言问题输入RCNSP，与每条样本的答案进行对比，计算
-回答正确率。实验环境的配置方面，CPU为Intel Core i9 12900K，内存为128GB，显卡为2张Nvidia RTX4090。
+回答正确率。实验环境的配置方面，CPU为Intel Core i9 12900K，内存为128GB，显卡为2张Nvidia RTX 4090。
 
 模型一采用直接向 VLM 提问的方式，即将自然语言问题与图像一同输入 VLM，并不给予任何的额外提示。
 直接提示VLM的方式虽然简单，却是评估模型的关键基准，因为直接提示方法能够反映模型在没有任何
 外部推理辅助机制的情况下，自身对空间问题的处理能力。
 
-模型二为原始框架方法，实际上相当于去除规则蒸馏模块的RCNSP。Wang等人设计的原始框架，是对StepGame、SparQA这种纯文本空间推理数据集
+模型二为原始框架方法，实际上相当于去除规则蒸馏模块的RCNSP。Wang等人设计的原始框架\cite{wang2024DSPy}，是对StepGame、SparQA这种纯文本空间推理数据集
 中的问题进行推理解答，不包括视觉场景理解，不支持多模态的输入。故去除规则蒸馏模块的RCNSP实际上相当于Wang等人设计的
 框架的支持多模态输入的版本，使其能够顺利在第\ref{dataset}章设计的空间推理数据集上进行实验，
 进而与本文添加规则蒸馏模块后的RCNSP框架形成对比。
@@ -766,7 +722,7 @@ $E$的构造按照如下步骤进行：
 实验结果见表\ref{tab:overall_comparison}。根据实验结果，RCNSP在三种LLM上均取得了较高的正确率，可以证明
 RCNSP在不同的LLMs上具有泛化能力。RCNSP相比原始框架方法，在DeepSeek-Coder 1.3B、LLaMA3 70B、ChatGPT-4o三种模型上的回答问题
 正确率分别高出9.3\%、9.4\%、8.2\%，平均高出8.96\%，足以证明本文设计的规则蒸馏方法对提升部分可见积木世界场景下空间推理问答准确率
-具有显著效果。RCNSP在三种LLM的问答正确率均超过了直接提问方法，证明支持多模态输入后的神经符号VQA框架对部分可见积木世界场景下
+具有显著效果。RCNSP在三种LLM的问答正确率均超过了直接提问方法，证明神经符号VQA框架对部分可见积木世界场景下
 的空间推理问答具有有效性。
 \begin{table}[h]
     \centering
@@ -802,10 +758,10 @@ RCNSP在不同的LLMs上具有泛化能力。RCNSP相比原始框架方法，在
 其次，介绍了RCNSP核心技术及实现。针对RCNSP中视觉场景理解、语义解析、规则修正、规则蒸馏、ASP推理、求解结果翻译
 这六个核心模块进行了详细阐述。特别是对于语义解析、规则修正和规则蒸馏这三个模块进行了重点描述。
 
-最后，进行了实验分析。在第三小节中，本文对语义解析、规则修正与规则蒸馏三个模块进行实验，
+最后，进行了实验分析。在第三小节中，本文对语义解析、规则修正与规则蒸馏三个核心模块进行实验，
 从实验目的、实验数据、实验方法、实验环境及实验结果分析上进行了阐述。
 实验结果表明，本文针对部分可见积木世界场景下的空间推理任务的特点设计的提示词优化方案对ASP规则生成、规则修正的准确率上
-具有显著提升，也证明了本文设计的规则蒸馏方法可以显著提升部分可见积木世界场景下空间推理问答准确率，
+具有显著提升作用，也证明了本文设计的规则蒸馏方法可以显著提升部分可见积木世界场景下空间推理问答准确率，
 同时也验证了RCNSP在不同LLMs上的泛化能力。
 
-本章的RCNSP为后续开发积木世界VQA系统奠定了坚实基础。
+本章的RCNSP为后续开发面向自动规划教学的积木世界VQA演示原型系统奠定了坚实基础。

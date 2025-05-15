@@ -1,9 +1,9 @@
 %===============================================================================
-\categorynumber{000} % 分类采用《中国图书资料分类法》
-\UDC{000}            %《国际十进分类法UDC》的类号
+\categorynumber{TP31} % 分类采用《中国图书资料分类法》
+\UDC{004.8}            %《国际十进分类法UDC》的类号
 \secretlevel{公开}    %学位论文密级分为"公开"、"内部"、"秘密"和"机密"四种
 \studentid{222171}   %学号要完整，前面的零不能省略。
-\title{积木世界VQA中的}{积木世界VQA中的}{空间推理问答技术研究与实现}{空间推理问答技术研究与实现}{Research and Implementation of Spatial Reasoning Questioning Answering Techniques }{in the Block World VQA}
+\title{面向自动规划教学的}{面向自动规划教学的积木世界V Q A技术研究}{积木世界VQA技术研究}{}{Research and Implementation of Spatial Reasoning Questioning Answering Techniques }{in the Block World VQA}
 \author{贾梁}{Jia Liang}
 \advisor{张志政}{}{Zhang Zhizheng}{}
 % \coadvisor{张志政}{副教授}{Zhang Zhizheng}{Associate Prof.} % 没有% 可以不填
@@ -19,61 +19,59 @@
 \makebigcover
 \makecover
 \begin{abstract}{回答集编程，视觉问答，空间推理，神经符号方法}
-积木世界作为人工智能领域的重要场景，广泛应用于相关算法的研究、教学、实验与评估，
-能够低成本地有效模拟现实中的空间关系问题，因此在自动规划课程中被广泛用于教学。规划算法的泛化能力是其核心目标之一，
-为了测试和展示规划Agent采用不同算法的适用不同规划场景的能力，教学过程中常常需要通过直接生成
-积木间具有不同的空间关系的积木世界的图像，从而能够临机生成可控的规划任务的初始状态，
-而非依赖于预先准备的场景。这要求系统能够根据用户输入的自然语言描述，
-实时生成符合语义约束的积木世界图像。同时，为了展示并能将规划Agent执行规划任务中对环境初始状态的识别能力和规划算法
-分开评价，需要系统能针对具体的积木世界图像进行视觉问答（Visual Question Answering，VQA），
-其中尤其主要的是对空间推理问题的问答，以表明规划Agent对规划任务初始状态是否有准确的理解。
-在积木世界上的VQA目前已得到了广泛研究。已有研究表明，当视觉语言模型（Visual Language Model，VLM）面对“部分可见”的场景时，其准确率大幅下降。
-为解决该问题，近年来出现的神经符号方法通过将深度学习与符号推理相结合，
-将图像信息转换为逻辑符号，并借助逻辑程序进行推理与问答，表现出优于传统VLM的性能。
-尤其是具有声明性建模能力、约束表达能力强和支持非单调推理的回答集程序设计（Answer Set Programming, ASP）语言
-，在空间关系建模中展现出极大优势，成为构建神经符号VQA系统的有效工具。然而，现有神经符号方法普遍依赖人工扩展 ASP 规则，
-难以适应复杂及部分可见场景下的空间推理任务。
+自动规划是人工智能领域的核心研究方向之一，旨在根据初始状态和目标状态，自动生成可行的操作序列以达成任务目标。
+在算法研究中，如何提升规划算法在不同场景下的适用性与泛化能力，成为衡量其性能的重要指标。在教学实践中，积木世界因其低成本、
+直观、且允许物体灵活组合的特点，被广泛用于自动规划的演示与实验。教学过程中，为了展示不同规划算法在多样任务条件下的表现，
+通常需要临机生成满足特定空间关系约束的积木世界图像，以构建多样化初始状态的任务场景。教师还可以围绕这些图像设计视觉问答
+（Visual Question Answering, VQA）任务，用以评估规划Agent对任务初始状态的理解能力。进一步地，在积木世界基础上引入物体遮挡、
+视角限制等方式构建的部分可见积木世界，能够更真实地模拟现实中常见的“感知不完全”情境，从而具有更强的代表性与现实关联性。
+基于此构建的VQA任务，有助于深入考察智能体在信息不完备环境下的任务建模与理解能力，为规划算法的实用性与泛化性能提供更具挑战性的评估依据。
+在积木VQA任务研究中，高质量的数据集与有效的推理算法被视为推动该方向发展的基础性支撑，长期以来备受研究者关注。
+然而，现有的积木世界VQA数据集存在缺乏部分可见性、不包含空间关系类问题、缺少背景知识约束等问题。
+此外，已有研究表明，当视觉语言模型（Visual Language Model, VLM）面对“部分可见”的场景时，其准确率明显下降。
+为解决这一问题，近年来兴起的神经符号方法将深度学习与符号推理相结合，能够将图像信息转化为逻辑符号，并借助逻辑程序进行问答与推理，
+在结构理解任务中展现出优于传统VLM的性能。尤其是具备强约束表达能力和非单调推理机制的回答集程序设计（Answer Set Programming, ASP），
+在空间关系建模中显示出独特优势。尽管如此，现有神经符号方法仍普遍依赖人工构建ASP规则，
+难以有效适应结构复杂、信息不完备的部分可见积木世界场景。
 
 面向上述需求和存在的问题，本文开展了以下三方面的研究工作：
 \begin{enumerate}[nosep]
 \item 提出一种基于ASP的部分可见积木世界构建方法ABWG（ASP Based Block World Generation）。
-针对临机生成空间关系可控的积木世界的需要，基于ASP定义了XXX约束，
-通过利用大语言模型将自然语言的积木世界生成指令转化为对应的约束，形成了积木完全遮挡和不完全遮挡的构建方法。
-使用该方法构建了POVQAD（XXX）数据集，与现有的CLEVR相比，XXXXXX。
-实验表明，在常见的XXX配置下，能在XXX时长内按要求生成一类积木世界场景；指令到约束的正确转化率可达到XXX。
+针对临机生成空间关系可控的积木世界的需要，基于ASP定义了部分可见积木世界在物体属性、空间关系、遮挡等方面的约束，
+通过利用大语言模型将自然语言的积木世界生成指令转化为对应的约束，形成了积木部分遮挡和完全遮挡的构建方法。
+同时使用ABWG方法构建了POVQAD数据集，与现有的CLEVR相比，POVQAD在图像上引入了部分可见性，在问题上围绕积木间的空间关系展开提问，
+能够更好地评估模型在部分可见积木世界中的推理能力。实验表明，
+在CPU为Intel Core i9 12900K，内存为128GB，显卡为2张Nvidia RTX 4090的配置下
+，ABWG能在平均6.6秒的时长内按要求生成积木世界场景；在ChatGPT-4o这类最新的通用LLM上指令到约束的正确转化率可达到88.5\%。
 \item 设计了一种规则自动补充的神经符号VQA框架（Rule Complement Neuro-Symbolic Pipe\-line, RCNSP）设计。
 RCNSP借鉴现有神经符号VQA框架的工作，对LLM进行提示词优化以提高ASP规则生成、规则修正的语法及语义准确率，
-并新增规则蒸馏模块以实现ASP规则自动拓展。
-实验表明，在DeepSeek、LLaMA3、ChatGPT-4o三种大语言模型上，使用RCNSP比直接向VLM提问的准确率平均提升16.5\%，
+并新增规则蒸馏模块以实现ASP规则自动拓展。实验表明，在DeepSeek、LLaMA3、ChatGPT-4o三种大语言模型上，
+使用RCNSP比直接向VLM提问的准确率平均提升16.5\%，
 比现有的神经符号VQA框架的准确率平均提升8.9\%，
 表明通过规则蒸馏能有效提升神经符号方法在部分可见积木世界场景下空间推理问答的准确率。
-\item 面向自动规划教学的积木世界VQA演示原型系统实现。
-该系统基于RCNSP框架和POVQAD数据集开发，模拟了在自动规划课程的授课场景下，支持教师提出积木世界的空间推理问题，系统进行解答并展示推理的中间步骤和逻辑链条，
-同时基于ABWG方法允许用户根据对不同的空间关系需求，自定义生成复杂度不同的积木世界VQA演示数据，
-为教师向学生展示智能体如何理解外部环境信息并进行规划提供了便利。
-初步测试表明该系统在CPU为Intel Core i9-12900K，内存128G，显卡为3张RTX 3090并联的硬件环境下，并发量为38，
-90\%响应时间为6.9秒，能够满足自动规划课程教学场景下的用户需要。
+\item 面向自动规划教学的积木世界VQA演示原型系统实现。该系统基于ABWG方法RCNSP框架开发，
+模拟了在自动规划课程的授课场景下，支持教师提出积木世界的空间推理问题，系统进行解答并展示推理的中间步骤和逻辑链条，
+同时基于ABWG方法允许用户根据对不同的空间关系需求，自定义生成部分可见积木世界图像以及复杂度不同的积木世界VQA演示数据，
+为教师向学生展示智能体如何理解外部环境信息并进行规划提供了便利。初步测试表明该系统在CPU为Intel Core i9-12900K，
+内存为128G，显卡为2张Nvidia RTX 4090并联的硬件环境下进行积木世界VQA时，并发量为38，90\%响应时间为6.9秒，
+能够满足自动规划课程教学场景下的用户需要。
 \end{enumerate}
 \end{abstract}
 
 \begin{englishabstract}{Answer Set Programming, Visual Question Answering, Spatial Reasoning, Neuro-symbolic Method}
-The block world, as an important scenario in the field of artificial intelligence, is widely used in the research, teaching, experimentation, and evaluation of related algorithms. It can effectively simulate spatial relationships in the real world and is therefore frequently adopted in automated planning courses. Generalization capability is a core objective of planning algorithms. To test this capability, it is often necessary during teaching to dynamically generate controllable task instances based on specific spatial relationships, rather than relying on a large number of pre-annotated training samples. This requires the system to generate semantically constrained block world images in real time based on natural language descriptions provided by users.
+Automated planning is one of the core research directions in the field of artificial intelligence. It aims to automatically generate feasible action sequences based on the initial state and goal state to accomplish a given task. In algorithm research, improving the adaptability and generalization ability of planning algorithms across diverse scenarios has become a key metric for evaluating their performance. In educational practice, the block world is widely used in the demonstration and experimentation of automated planning due to its low cost, intuitiveness, and flexibility in object combinations. During teaching, in order to showcase the performance of different planning algorithms under various task conditions, it is often necessary to dynamically generate block world images that satisfy specific spatial relationship constraints to construct diversified initial task states. Teachers can further design Visual Question Answering (VQA) tasks around these images to assess the planning agent's understanding of the initial state.
 
-Meanwhile, the Visual Question Answering (VQA) task, as an important method to evaluate the spatial reasoning ability of Vision-Language Models (VLMs), has been extensively studied in block world scenarios. However, existing research shows that the accuracy of these models significantly declines in partially observable scenarios. To address this issue, recent neuro-symbolic methods combine deep learning with symbolic reasoning by converting image information into logical symbols and performing inference and question answering using logic programs. These methods have demonstrated superior performance compared to traditional VLMs. In particular, Answer Set Programming (ASP), which supports declarative modeling, strong constraint expression, and non-monotonic reasoning, shows great advantages in modeling spatial relationships and has become an effective tool for building neuro-symbolic VQA systems.
+Furthermore, the partially observable block world—constructed by introducing object occlusion and viewpoint limitations on top of the traditional block world—can more realistically simulate the commonly encountered issue of "incomplete perception" in the real world. This makes it more representative and closely aligned with real-world environments. VQA tasks based on such settings help to deeply evaluate an agent's ability to model and understand tasks under incomplete information, thereby providing more challenging benchmarks for assessing the practicality and generalization performance of planning algorithms.
 
-However, there is still a lack of VQA systems for block world scenarios that both support teaching in automated planning courses and allow users to define and generate controllable environments reflecting spatial relationships. Moreover, existing neuro-symbolic methods generally rely on manual expansion of ASP rules, making it difficult to adapt to complex and partially observable spatial reasoning tasks.
+In block world VQA research, high-quality datasets and effective reasoning algorithms are regarded as fundamental to advancing the field and have long attracted the attention of researchers. However, existing block world VQA datasets lack partial visibility, do not include spatial relationship questions, and are limited in background knowledge constraints. Moreover, existing studies have shown that Visual Language Models (VLMs) experience a significant drop in accuracy when facing partially observable scenarios. To address this issue, recent neuro-symbolic approaches combine deep learning with symbolic reasoning by converting visual information into logical symbols and performing reasoning and question answering via logic programs, achieving better performance than traditional VLMs in structured understanding tasks. Among them, Answer Set Programming (ASP), with its strong declarative modeling capability, expressive constraint representation, and support for non-monotonic reasoning, demonstrates unique advantages in spatial relation modeling. However, current neuro-symbolic methods largely rely on manually constructed ASP rules, making them less suitable for complex and partially observable block world scenarios.
 
-To address these issues, this thesis conducts the following three studies:
-
+To address the above needs and challenges, this paper conducts the following three aspects of research:
 \begin{enumerate}[nosep]
-\item \textbf{Construction of the Partial Observation VQA Dataset (POVQAD).}  
-By using ASP to define and generate controllable block world images and questions, a VQA dataset named POVQAD is constructed, which covers spatial reasoning problems under both partially and fully occluded conditions. POVQAD requires models to reason based on background constraints and partially observable scenes, thereby better evaluating model performance on spatial reasoning tasks in such scenarios.
+\item We propose an ASP-based Partially Observable Block World Generation method (ABWG). To enable the on-the-fly generation of block worlds with controllable spatial relations, ABWG defines constraints in terms of object attributes, spatial relationships, and occlusion within a partially observable block world using ASP. By utilizing large language models (LLMs) to translate natural language generation instructions into corresponding ASP constraints, we develop methods for generating partially and fully occluded block scenes. Using ABWG, we construct the POVQAD dataset, which, compared to CLEVR, introduces partial observability in images and focuses on spatial relationship questions. This allows for better evaluation of reasoning abilities in partially observable environments. Experiments show that under a hardware setup of an Intel Core i9-12900K CPU, 128GB RAM, and two Nvidia RTX 4090 GPUs, ABWG can generate block world scenes in an average of 6.6 seconds. The instruction-to-constraint translation accuracy using ChatGPT-4o reaches 88.5\%.
 
-\item \textbf{Design of the Rule-Complement Neuro-Symbolic Pipeline (RCNSP).}  
-Inspired by existing neuro-symbolic frameworks, RCNSP introduces prompt optimization for Large Language Models (LLMs) to improve the syntactic and semantic accuracy of ASP rule generation and correction. A rule distillation module is also proposed to enable automatic ASP rule expansion. Experimental results on three LLMs—DeepSeek, LLaMA3, and ChatGPT-4o—show that RCNSP achieves an average accuracy improvement of 16.5\% over direct VLM-based methods, and 8.9\% over existing neuro-symbolic frameworks. These results demonstrate the effectiveness of rule distillation in improving spatial reasoning accuracy under partially observable block world scenarios.
+\item We design a Rule Complement Neuro-Symbolic Pipeline (RCNSP). Inspired by existing neuro-symbolic VQA frameworks, RCNSP enhances prompt engineering for LLMs to improve the syntactic and semantic correctness of ASP rule generation and refinement. In addition, we introduce a rule distillation module to enable automatic extension of ASP rules. Experimental results show that RCNSP improves the accuracy of VQA in partially observable block worlds by an average of 16.5\% compared to directly querying VLMs, and by 8.9\% compared to existing neuro-symbolic VQA frameworks. This demonstrates the effectiveness of rule distillation in enhancing neuro-symbolic methods for spatial reasoning tasks.
 
-\item \textbf{Implementation of a Block World VQA Demonstration System for Automated Planning Education.}  
-Based on the RCNSP framework and the POVQAD dataset, a prototype system for teaching automated planning is developed. This system allows instructors to pose spatial reasoning questions in the block world domain, provides answers, and visualizes the reasoning process and logical chains. It also supports the generation of VQA demonstration data with customizable complexity based on user-defined spatial relationships, thus helping instructors illustrate how agents perceive the environment and make plans. Preliminary tests show that the system can support 38 concurrent requests on a server equipped with an Intel Core i9-12900K CPU, 128GB RAM, and three RTX 3090 GPUs, with 90\% of responses returned within 6.9 seconds, meeting the performance requirements for educational use in automated planning courses.
+\item We implement a prototype system for block world VQA demonstration targeting automated planning education. Built upon the ABWG method and RCNSP framework, the system simulates classroom teaching scenarios in automated planning courses. It allows instructors to pose spatial reasoning questions based on block worlds, and the system provides answers along with intermediate reasoning steps and logic chains. Based on ABWG, users can also customize the generation of partially observable block world images and VQA data with different complexities according to specific spatial relation needs. This provides educators with an effective tool to demonstrate how intelligent agents perceive and plan in complex environments. Preliminary testing shows that under a hardware configuration of Intel Core i9-12900K CPU, 128GB RAM, and dual Nvidia RTX 4090 GPUs, the system achieves a concurrent user capacity of 38, with a 90th percentile response time of 6.9 seconds, meeting the needs of classroom teaching for automated planning.
 \end{enumerate}
 \end{englishabstract}
 
